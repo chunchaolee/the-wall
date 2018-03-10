@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310062758) do
+ActiveRecord::Schema.define(version: 20180310064031) do
+
+  create_table "events", force: :cascade do |t|
+    t.string "artist_name"
+    t.string "title"
+    t.date "date"
+    t.string "time"
+    t.string "img"
+    t.string "video"
+    t.string "url"
+    t.text "detail"
+    t.text "city"
+    t.text "stage"
+    t.integer "views_count"
+    t.integer "intersets_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
