@@ -9,4 +9,7 @@ class User < ApplicationRecord
   # 一個user可以interest很多event
   has_many :interested_events, through: :interests, source: :event
 
+  # 一個user可以有很多筆view資料
+  has_many :views, dependent: :destroy
+
 end
