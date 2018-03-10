@@ -11,5 +11,7 @@ class User < ApplicationRecord
 
   # 一個user可以有很多筆view資料
   has_many :views, dependent: :destroy
+  # 一個user可以view很多event
+  has_many :viewed_events, through: :views, source: :event
 
 end
