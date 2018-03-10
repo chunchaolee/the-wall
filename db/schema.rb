@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310072938) do
+ActiveRecord::Schema.define(version: 20180310082141) do
 
   create_table "events", force: :cascade do |t|
     t.string "artist_name"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20180310072938) do
     t.text "city"
     t.text "stage"
     t.integer "views_count"
-    t.integer "intersets_count"
+    t.integer "interests_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
