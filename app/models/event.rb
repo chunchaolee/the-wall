@@ -11,5 +11,7 @@ class Event < ApplicationRecord
 
   # 一個event可以有很多筆要notification的資料
   has_many :notifications, dependent: :destroy
+  # 一個event可以對很多user送出notification
+  has_many :notified_users, through: :notifications, source: :user
 
 end

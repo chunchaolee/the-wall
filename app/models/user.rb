@@ -16,5 +16,7 @@ class User < ApplicationRecord
 
   # 一個user可以有很多筆notification資料
   has_many :notifications, dependent: :destroy
+  # 一個user可以收到很多notification來自不同的event
+  has_many :notified_events, through: :notifications, source: :event
 
 end
