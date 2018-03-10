@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   # 一個user可以有很多筆interest資料
-  has_many :interests
+  has_many :interests, dependent: :destroy
+  # 一個user可以interest很多event
+  has_many :interested_events, through: :interests, source: :event
 
 end
