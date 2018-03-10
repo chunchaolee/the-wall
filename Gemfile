@@ -38,6 +38,8 @@ gem 'devise'
 gem 'omniauth-facebook'
 # Bootstrap 4.0.0
 gem 'bootstrap', '~> 4.0.0'
+# Bootstrap JavaScript depends on jQuery
+gem 'jquery-rails'
 
 
 group :development, :test do
