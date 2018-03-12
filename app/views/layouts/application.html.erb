@@ -2,13 +2,56 @@
 <html>
   <head>
     <title>TheWall</title>
+    <!-- viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
-
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    
+    <!-- the wall header //start-->
+    <header>
+      <!-- navbar ; NEED TO setup color: navbar-light bg-light -->
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <!-- navbar brand and toggle //start -->
+        <%= link_to('The Wall - Indie Music', root_path, class: "navbar-brand") %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- navbar Brand and toggle //end -->
+
+        <!-- nav links and toggle //start -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <% if current_user %>
+              
+              <li><%= link_to('表演動態', posts_events_path, class: "nav-link") %></li>
+              <li><%= link_to('活動總覽', events_path, class: "nav-link") %></li>
+              
+              <!-- NOTE: admin 後台 .admin? method need to be defined -->
+              <% if current_user&.admin? %>
+                <li><%= link_to('後台', admin_root_path, class: "nav-link") %></li>
+              <% end %>
+              
+              <li><%= link_to('會員中心', ​​user_path(current_user), class: "nav-link") %></li>
+              <li><%= link_to('登出', destroy_user_session_path, class: "nav-link", method: :delete) %></li>
+
+            <% else %>
+              <li><%= link_to('表演動態', posts_events_path, class: "nav-link") %></li>
+              <li><%= link_to('活動總覽', events_path, class: "nav-link") %></li>
+              <li><%= link_to('註冊', new_user_registration_path, class: "nav-link") %></li>
+              <li><%= link_to('登入', new_user_session_path, class: "nav-link") %></li>
+            <% end %>
+          </ul>
+        </div>
+        <!-- nav links and toggle //end -->
+      </nav>
+    </header>
+    <!-- the wall header //end-->
+
     <%= yield %>
   </body>
 </html>
