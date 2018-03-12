@@ -36,7 +36,7 @@
                 <li><%= link_to('後台', admin_root_path, class: "nav-link") %></li>
               <% end %>
               
-              <li><%= link_to('會員中心', ​​user_path(current_user), class: "nav-link") %></li>
+              <li><%= link_to('會員中心', user_path(current_user), class: "nav-link") %></li>
               <li><%= link_to('登出', destroy_user_session_path, class: "nav-link", method: :delete) %></li>
 
             <% else %>
@@ -51,6 +51,23 @@
       </nav>
     </header>
     <!-- the wall header //end-->
+    
+    <!-- flash & dismissable notice/alert -->
+    <% if notice.present? %>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p><%= notice %></p>
+      </div>
+    <% elsif alert.present? %>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p><%= alert %></p>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>

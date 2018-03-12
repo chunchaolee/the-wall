@@ -1,5 +1,4 @@
 /*------ basic ------*/
-
 #header_nav {
   margin-bottom: 80px;
 }
@@ -41,4 +40,27 @@
 .event .place span, .event .time span {
   color: #79a6d2;
   margin-left: 10px;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+
+/*------ user login ------*/
+.userform {
+  max-width: 60%;
+  margin: auto;
+}
+
+
+/*------ viewport ------*/
+
+@media (max-width: 767px) {
+
+  .userform {
+    max-width: 100%;
+    margin: auto;
+  }
+
 }
