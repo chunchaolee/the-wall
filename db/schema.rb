@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310085751) do
+ActiveRecord::Schema.define(version: 20180312141143) do
 
   create_table "events", force: :cascade do |t|
     t.string "artist_name"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180310085751) do
     t.string "fb_connect"
     t.string "spotify_connect"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["fb_uid"], name: "index_users_on_fb_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
