@@ -1,1 +1,24 @@
 /*------ basic ------*/
+
+body {
+  padding-top: 70px;
+}
+
+
+/*------ user login ------*/
+#userlogin {
+  max-width: 60%;
+  margin: auto;
+}
+
+
+/*------ viewport ------*/
+
+@media (max-width: 767px) {
+
+  #userlogin {
+    max-width: 100%;
+    margin: auto;
+  }
+
+}
