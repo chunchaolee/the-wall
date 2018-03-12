@@ -6,7 +6,7 @@ body {
 
 
 /*------ user login ------*/
-#userlogin {
+.userform {
   max-width: 60%;
   margin: auto;
 }
@@ -16,7 +16,7 @@ body {
 
 @media (max-width: 767px) {
 
-  #userlogin {
+  .userform {
     max-width: 100%;
     margin: auto;
   }
