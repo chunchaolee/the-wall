@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_presence_of :name
+
   # 一個user可以有很多筆interest資料
   has_many :interests, dependent: :destroy
   # 一個user可以interest很多event
@@ -18,5 +20,9 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
   # 一個user可以收到很多notification來自不同的event
   has_many :notified_events, through: :notifications, source: :event
+
+  def admin?
+    self.is_admin == true
+  end
 
 end
