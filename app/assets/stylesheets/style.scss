@@ -1,1 +1,66 @@
 /*------ basic ------*/
+#header_nav {
+  margin-bottom: 80px;
+}
+
+/*------ event index ------*/
+
+#event-filter {
+  margin-bottom: 40px;
+  width: 200px;
+}
+
+.event {
+  margin-bottom: 30px;
+}
+
+.event .date {
+  color: #538cc6;
+  font-weight: bold;
+}
+
+.event .date .like-btn {
+  color: #ff1a75;
+  margin-left: 80px;
+}
+
+.event img {
+  width: 200px;
+  height: 200px;
+}
+
+.event h5 {
+  color: orange;
+}
+
+.event .place, .event .time {
+  color: gray;
+}
+
+.event .place span, .event .time span {
+  color: #79a6d2;
+  margin-left: 10px;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+
+/*------ user login ------*/
+.userform {
+  max-width: 60%;
+  margin: auto;
+}
+
+
+/*------ viewport ------*/
+
+@media (max-width: 767px) {
+
+  .userform {
+    max-width: 100%;
+    margin: auto;
+  }
+
+}
