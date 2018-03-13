@@ -29,6 +29,11 @@
   height: 200px;
 }
 
+.event h5 a {
+  color: orange;
+}
+
+/* 爬蟲資料進來後刪掉 (用上面的即可) */
 .event h5 {
   color: orange;
 }
@@ -44,6 +49,60 @@
 
 p {
   margin-bottom: 0;
+}
+
+
+/*------ event show ------*/
+
+.event-img img {
+  width: 400px;
+  height: 300px;
+}
+
+.event-date {
+  color: #538cc6;
+  margin-top: 30px;
+}
+
+.event-date span, .event-date span a {
+  color: #ff1a75;
+  font-size: 20px;
+  margin-left: 90px;
+}
+
+.event-title {
+  color: orange;
+}
+
+.event-info {
+  color: gray;
+  line-height: 40px;
+}
+
+.event-info span {
+  color: #79a6d2;
+  margin-left: 10px;
+}
+
+#event-hr {
+  margin: 30px 0;
+}
+
+.event-artist {
+  color: #538cc6;
+}
+
+.subtitle {
+  color: gray;
+  margin: 35px 0;
+}
+
+.event-detail {
+  color: #8585ad;
+}
+
+.piece {
+  margin-bottom: 10px;  
 }
 
 
