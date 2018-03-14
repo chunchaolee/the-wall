@@ -256,8 +256,7 @@ Devise.setup do |config|
 
   config.omniauth :facebook,
   ENV['FACEBOOK_APP_ID'],
-  ENV['FACEBOOK_APP_SECRET'],
-  callback_url:  "the-wall-test.herokuapp.com/users/auth/facebook/callback"
+  ENV['FACEBOOK_APP_SECRET']
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
