@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="col-md-10 offset-md-1">
+    <div class="row">
+      
+      <div class="col-lg-6 col-md-12 event-img">
+        <img src="http://via.placeholder.com/400x300">
+      </div>
+
+      <div class="col-lg-6 col-md-12">
+        <h4 class="event-date">
+          <%= Event.first.date %>
+          <span>
+            <%= link_to "♡" %>
+            <%= Event.first.interests_count %>
+          </span>
+        </h4>
+        <h4 class="event-title"><%= Event.first.title %></h4>
+        <div class="event-info">演出者 <span><%= Event.first.artist_name %></span></div>
+        <div class="event-info">票價 <span>預售票 NT.500 / 現場票 NT.700</span></div>
+        <div class="event-info">地點 <span><%= Event.first.city %></span></div>
+        <div class="event-info">開始 <span><%= Event.first.time %></span></div>
+      </div>
+
+      <div class="col-md-12"><hr id="event-hr"></div>
+      
+      <div class="col-md-12">
+        <h3 class="event-artist"><%= Event.first.artist_name %></h3>
+        <div class="subtitle"><i>樂團/表演介紹</i></div>
+        <p class="event-detail"><%= Event.first.detail %></p>
+      </div>
+
+      <div class="col-md-12">
+        <div class="subtitle"><i>作品欣賞</i></div>
+        <div class="row">
+          <div class="col-lg-7 col-md-12">
+            <div class="piece">【Youtube】</div>
+            <iframe id="existing-iframe-example"
+                    width="500" height="360"
+                    src="https://www.youtube.com/embed/2cCligRwFoI?enablejsapi=1"
+                    frameborder="0"
+                    style="border: none"
+            ></iframe>
+          </div>
+          <div class="col-lg-5 col-md-12">
+            <div class="piece">【Spotify】</div>
+            <iframe src="https://open.spotify.com/embed?uri=spotify%3Atrack%3A33Q6ldVXuJyQmqs8BmAa0k" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
