@@ -131,19 +131,19 @@ p {
 
 
 /*------ fb login ------*/
-&, &:hover, &:active {
-  background-image: image-url("social-sign-in/facebook.svg");
-  color: #fff;
-}
+  &, &:hover, &:active {
+    background-image: image-url("social-sign-in/facebook.svg");
+    color: #fff;
+  }
 
-&:hover {
-  background-color: lighten(#3B5998, 10%);
-}
+  &:hover {
+    background-color: lighten(#3B5998, 10%);
+  }
 
-&:active {
-  background-color: darken(#3B5998, 10%);
+  &:active {
+    background-color: darken(#3B5998, 10%);
+  }
 }
-
 
 .btn-si {
   background-position: 1em;
@@ -165,7 +165,7 @@ p {
   font-family: arial;
 }
 
-.smaller .btn-si-a{
+.smaller .btn-si-a {
   padding-left: 40px !important;
   font-size: 12px;
 }
