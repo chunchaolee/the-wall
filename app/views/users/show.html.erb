@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <div class="row">
+
+  <!-- user name & email //start -->
+  <div class="container">
+    <table class="table table-responsive profile borderless">
+      <tr>
+        <td><h5><span class="badge badge-primary">使用者名稱</span></h5></td>
+        <td><h6><span><%= @user.name %></span></h6></td>
+      </tr>
+      <tr>
+        <td><h5><span class="badge badge-primary">Email</span></h5></td>
+        <td><h6><%= @user.email %></h6></td>
+      </tr>
+      <tr>
+        <td><%= link_to("Edit Profile",edit_user_path(params[:id]), class: "btn btn-outline-primary") %></td>
+      </tr>
+    </table>
+    <hr><br />
+  </div>
+  <!-- user name & email //end -->
+
+  <!-- user interesrted events// start -->
+  <div class="container">
+
+    <div class="col-md-12">
+      <span class="text-muted"><strong>已收藏</strong></span> <span class="badge badge-primary"><%= @user.interested_events.size%></span>  
+    </div><br />
+    
+    <div class="d-flex flex-container flex-wrap">
+      <% for i in 0..3 do %> <!-- 之後改成 @events.each -->
+        <div class="col-lg-3 col-md-4 col-sm-12 p-2 d-flex justify-content-center">
+          <div class="event">
+            <img src="http://via.placeholder.com/200x200">
+            <div class="date">
+              2018-03-12
+              <span class="like-btn">♡</span> <!-- 條件判斷切換 like 狀態 -->
+            </div>
+            <h5>表演名稱</h5>
+            <div class="place">地點 <span>西門紅樓</span></div>
+            <div class="time">時間 <span>19:30</span></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+  <!-- user interesrted events// end -->
+
+  <!-- user viewed recently// start -->
+  <div class="container">
+
+    <div class="col-md-12">
+      <span class="text-muted"><strong>最近瀏覽</strong></span>  
+    </div><br />
+    
+    <div class="d-flex flex-container flex-wrap">
+      <% for i in 0..3 do %> <!-- 之後改成 @events.each -->
+        <div class="col-lg-3 col-md-4 col-sm-12 p-2 d-flex justify-content-center">
+          <div class="event">
+            <img src="http://via.placeholder.com/200x200">
+            <div class="date">
+              2018-03-12
+              <span class="like-btn">♡</span> <!-- 條件判斷切換 like 狀態 -->
+            </div>
+            <h5>表演名稱</h5>
+            <div class="place">地點 <span>西門紅樓</span></div>
+            <div class="time">時間 <span>19:30</span></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+  <!-- user viewed recently// end -->
+
+
+  </div> <!-- .row //end -->
+</div>
