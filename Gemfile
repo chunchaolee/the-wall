@@ -40,6 +40,7 @@ gem 'omniauth-facebook'
 gem 'bootstrap', '~> 4.0.0'
 # Bootstrap JavaScript depends on jQuery
 gem 'jquery-rails'
+gem 'rest-client'
 
 
 group :production do

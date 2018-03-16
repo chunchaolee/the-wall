@@ -21,3 +21,6 @@
 /yarn-error.log
 
 .byebug_history
+
+/config/facebook.yml
+/config/youtube.yml
