@@ -42,6 +42,8 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'rest-client'
 
+# connect Facebook API
+gem 'koala'
 
 group :production do
   gem 'pg', '~> 0.20'
