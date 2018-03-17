@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
+         :omniauthable, :omniauth_providers => [:facebook, :spotify]
 
   validates_presence_of :name
 
@@ -27,14 +27,16 @@ class User < ApplicationRecord
     super.tap do |user|
       if data = session["devise.facebook_data"] &&  session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
+      elsif data = session["devise.spotify_data"] &&  session["devise.spotify_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
       end
     end
   end
   
   def self.from_omniauth(auth)
-    where(fb_uid: auth.uid).first_or_create do |user|      
+    where(uid: auth.uid).first_or_create do |user|      
       # user.provider = auth.provider
-      user.fb_uid      = auth.uid
+      user.uid      = auth.uid
       user.email    = auth.info.email
       user.name     = auth.info.name
       # user.facebook = auth.info.urls.Facebook
