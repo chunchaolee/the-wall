@@ -257,15 +257,19 @@ Devise.setup do |config|
   fb_config = Rails.application.config_for(:facebook)
   
   config.omniauth :facebook,
-  fb_config["app_id"],
-  fb_config["secret"]
+  ENV['FACEBOOK_APP_ID'],
+  ENV['FACEBOOK_APP_SECRET']
+  # fb_config["app_id"],
+  # fb_config["secret"]
 
   # spotify
   spotify_config = Rails.application.config_for(:spotify)
 
   config.omniauth :spotify,
-  spotify_config["client_id"], 
-  spotify_config["client_secret"],
+  ENV['SPOTIFY_CLIENT_ID'],
+  ENV['SPOTIFY_CLIENT__SECRET']
+  # spotify_config["client_id"], 
+  # spotify_config["client_secret"],
   scope: 'user-read-private playlist-read-private user-read-email user-follow-modify user-library-modify'
 
   # ==> Warden configuration
