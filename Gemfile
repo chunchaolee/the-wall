@@ -41,6 +41,8 @@ gem 'bootstrap', '~> 4.0.0'
 # Bootstrap JavaScript depends on jQuery
 gem 'jquery-rails'
 gem 'rest-client'
+# spotify login
+gem 'omniauth-spotify'
 
 
 group :production do
