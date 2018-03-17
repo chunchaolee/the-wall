@@ -26,5 +26,5 @@ Rails.application.routes.draw do
     resources :events, except: [:show, :new, :create]
     resources :users, only: [:index, :destroy]
   end
-
+  
 end
