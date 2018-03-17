@@ -267,7 +267,7 @@ Devise.setup do |config|
 
   config.omniauth :spotify,
   ENV['SPOTIFY_CLIENT_ID'],
-  ENV['SPOTIFY_CLIENT__SECRET']
+  ENV['SPOTIFY_CLIENT__SECRET'],
   # spotify_config["client_id"], 
   # spotify_config["client_secret"],
   scope: 'user-read-private playlist-read-private user-read-email user-follow-modify user-library-modify'
