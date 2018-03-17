@@ -259,6 +259,15 @@ Devise.setup do |config|
   config.omniauth :facebook,
   fb_config["app_id"],
   fb_config["secret"]
+
+  # spotify
+  spotify_config = Rails.application.config_for(:spotify)
+
+  config.omniauth :spotify,
+  spotify_config["client_id"], 
+  spotify_config["client_secret"],
+  scope: 'user-read-private playlist-read-private user-read-email user-follow-modify user-library-modify'
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
