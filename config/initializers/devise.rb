@@ -254,7 +254,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  fb_config = Rails.application.config_for(:facebook)
+  # fb_config = Rails.application.config_for(:facebook)
   
   config.omniauth :facebook,
   ENV['FACEBOOK_APP_ID'],
@@ -263,7 +263,7 @@ Devise.setup do |config|
   # fb_config["secret"]
 
   # spotify
-  spotify_config = Rails.application.config_for(:spotify)
+  # spotify_config = Rails.application.config_for(:spotify)
 
   config.omniauth :spotify,
   ENV['SPOTIFY_CLIENT_ID'],
