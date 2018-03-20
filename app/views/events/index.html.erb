@@ -13,22 +13,6 @@
       </div>
 
       <div class="col-md-12"></div>
-      
-      <!-- 此段為測試 show 用，爬蟲資料進來後這段整併至 @events.each -->
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="event">         
-          <%= link_to event_path(Event.first) do %>
-            <img src="http://via.placeholder.com/200x200">
-          <% end %>
-          <div class="date">
-            <%= Event.first.date %>
-            <span class="like-btn">♡</span> <!-- 條件判斷切換 like 狀態 -->
-          </div>
-          <h5><%= link_to Event.first.title, event_path(Event.first) %></h5>
-          <div class="place">地點 <span>台東</span></div>
-          <div class="time">時間 <span>18:30</span></div>
-        </div>
-      </div>
 
       <% @events.each do |event| %>
         <div class="col-lg-3 col-md-4 col-sm-6">
