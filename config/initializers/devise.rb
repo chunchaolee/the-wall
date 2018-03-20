@@ -256,32 +256,32 @@ Devise.setup do |config|
 
   # facebook
   # ----- this block only uses for fb login in local development environmnet // start -----
-  # fb_config = Rails.application.config_for(:facebook)
-  # config.omniauth :facebook,
-  # fb_config["app_id"],
-  # fb_config["secret"]
+  fb_config = Rails.application.config_for(:facebook)
+  config.omniauth :facebook,
+  fb_config["app_id"],
+  fb_config["secret"]
   # ----- this block only uses for fb login in local development environmnet // end -----
 
   # ----- this block only uses for fb login in production environmnet // start -----
-  config.omniauth :facebook,
-  ENV['FACEBOOK_APP_ID'],
-  ENV['FACEBOOK_APP_SECRET']
+  # config.omniauth :facebook,
+  # ENV['FACEBOOK_APP_ID'],
+  # ENV['FACEBOOK_APP_SECRET']
   # ----- this block only uses for fb login in production development environmnet // end -----
 
   # spotify
   # ----- this block only uses for spotify login in local development environmnet // start -----
-  # spotify_config = Rails.application.config_for(:spotify)
-  # config.omniauth :spotify,
-  # spotify_config["client_id"], 
-  # spotify_config["client_secret"],
-  # scope: 'user-read-private playlist-read-private user-read-email user-follow-modify user-library-modify'
+  spotify_config = Rails.application.config_for(:spotify)
+  config.omniauth :spotify,
+  spotify_config["client_id"], 
+  spotify_config["client_secret"],
+  scope: 'user-read-private playlist-read-private user-read-email user-follow-modify user-library-modify'
   # ----- this block only uses for spotify login in local development environmnet // end -----
 
   # ----- this block only uses for spotify login in production development environmnet // start -----
-  config.omniauth :spotify,
-  ENV['SPOTIFY_CLIENT_ID'],
-  ENV['SPOTIFY_CLIENT__SECRET'],
-  scope: 'user-read-private playlist-read-private user-read-email user-follow-modify user-library-modify'
+  # config.omniauth :spotify,
+  # ENV['SPOTIFY_CLIENT_ID'],
+  # ENV['SPOTIFY_CLIENT__SECRET'],
+  # scope: 'user-read-private playlist-read-private user-read-email user-follow-modify user-library-modify'
   # ----- this block only uses for spotify login in production development environmnet // end -----
   
 
