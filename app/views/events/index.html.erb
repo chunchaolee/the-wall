@@ -26,7 +26,13 @@
             </div>
             <h5><%= link_to event.title, event_path(event) %></h5>
             <div class="place">地點 <span><%= event.stage %></span></div>
-            <div class="time">時間 <span><%= event.time.slice(0..4) %></span></div>
+            <div class="time">時間 
+              <% if event.time == nil %>
+                <span><%= event.time %></span>
+              <% elsif %>
+                <span><%= event.time.slice(0..4) %></span>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>

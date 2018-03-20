@@ -18,7 +18,13 @@
         <div class="event-info">演出者 <span><%= @event.artist_name %></span></div>
         <div class="event-info">票價 <span></span></div>
         <div class="event-info">地點 <span><%= @event.city %></span></div>
-        <div class="event-info">開始 <span><%= @event.time.slice(0..4) %></span></div>
+        <div class="time">時間 
+          <% if @event.time == nil %>
+            <span><%= @event.time %></span>
+          <% elsif %>
+            <span><%= @event.time.slice(0..4) %></span>
+          <% end %>
+        </div>
       </div>
 
       <div class="col-md-12"><hr id="event-hr"></div>

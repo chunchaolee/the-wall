@@ -6,12 +6,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-  end
-
-  def show
-    @event = Event.find(params[:id])
     artist_name = @event.artist_name
-
+    
     if @event.spotify_artist_id == nil
       @spotify_data = Event.get_spotify_data(artist_name)
       if @spotify_data == nil
