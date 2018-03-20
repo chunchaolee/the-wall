@@ -8,25 +8,25 @@
 
       <div class="col-lg-6 col-md-12">
         <h4 class="event-date">
-          <%= Event.first.date %>
+          <%= @event.date %>
           <span>
             <%= link_to "♡" %>
-            <%= Event.first.interests_count %>
+            <%= @event.interests_count %>
           </span>
         </h4>
-        <h4 class="event-title"><%= Event.first.title %></h4>
-        <div class="event-info">演出者 <span><%= Event.first.artist_name %></span></div>
-        <div class="event-info">票價 <span>預售票 NT.500 / 現場票 NT.700</span></div>
-        <div class="event-info">地點 <span><%= Event.first.city %></span></div>
-        <div class="event-info">開始 <span><%= Event.first.time %></span></div>
+        <h4 class="event-title"><%= @event.title %></h4>
+        <div class="event-info">演出者 <span><%= @event.artist_name %></span></div>
+        <div class="event-info">票價 <span></span></div>
+        <div class="event-info">地點 <span><%= @event.city %></span></div>
+        <div class="event-info">開始 <span><%= @event.time.slice(0..4) %></span></div>
       </div>
 
       <div class="col-md-12"><hr id="event-hr"></div>
       
       <div class="col-md-12">
-        <h3 class="event-artist"><%= Event.first.artist_name %></h3>
+        <h3 class="event-artist"><%= @event.artist_name %></h3>
         <div class="subtitle"><i>樂團/表演介紹</i></div>
-        <p class="event-detail"><%= Event.first.detail %></p>
+        <p class="event-detail"><%= @event.detail %></p>
       </div>
 
       <div class="col-md-12">
@@ -36,7 +36,7 @@
             <div class="piece">【Youtube】</div>
             <iframe id="existing-iframe-example"
                     width="500" height="360"
-                    src="<%= Event.first.video %>"
+                    src="<%= @event.video %>"
                     frameborder="0"
                     style="border: none"
             ></iframe>
