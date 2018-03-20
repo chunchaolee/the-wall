@@ -13,34 +13,20 @@
       </div>
 
       <div class="col-md-12"></div>
-      
-      <!-- 此段為測試 show 用，爬蟲資料進來後這段整併至 @events.each -->
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="event">         
-          <%= link_to event_path(Event.last) do %>
-            <img src="http://via.placeholder.com/200x200">
-          <% end %>
-          <div class="date">
-            <%= Event.last.date %>
-            <span class="like-btn">♡</span> <!-- 條件判斷切換 like 狀態 -->
-          </div>
-          <h5><%= link_to Event.last.title, event_path(Event.last) %></h5>
-          <div class="place">地點 <span>台東</span></div>
-          <div class="time">時間 <span>18:30</span></div>
-        </div>
-      </div>
 
-      <% for i in 0..19 do %> <!-- 之後改成 @events.each -->
+      <% @events.each do |event| %>
         <div class="col-lg-3 col-md-4 col-sm-6">
           <div class="event">
-            <img src="http://via.placeholder.com/200x200">
+            <%= link_to event_path(event) do %>
+              <img src="http://via.placeholder.com/200x200">
+            <% end %>
             <div class="date">
-              2018-03-12
+              <%= event.date %>
               <span class="like-btn">♡</span> <!-- 條件判斷切換 like 狀態 -->
             </div>
-            <h5>表演名稱</h5>
-            <div class="place">地點 <span>西門紅樓</span></div>
-            <div class="time">時間 <span>19:30</span></div>
+            <h5><%= link_to event.title, event_path(event) %></h5>
+            <div class="place">地點 <span><%= event.stage %></span></div>
+            <div class="time">時間 <span><%= event.time.slice(0..4) %></span></div>
           </div>
         </div>
       <% end %>

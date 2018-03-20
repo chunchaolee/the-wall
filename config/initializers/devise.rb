@@ -262,11 +262,12 @@ Devise.setup do |config|
   # fb_config["secret"]
   # ----- this block only uses for fb login in local development environmnet // end -----
 
-  # # ----- this block only uses for fb login in production environmnet // start -----
+
+  # ----- this block only uses for fb login in production environmnet // start -----
   config.omniauth :facebook,
   ENV['FACEBOOK_APP_ID'],
   ENV['FACEBOOK_APP_SECRET']
-  # # ----- this block only uses for fb login in production development environmnet // end -----
+  # ----- this block only uses for fb login in production development environmnet // end -----
 
   # spotify
   # ----- this block only uses for spotify login in local development environmnet // start -----
