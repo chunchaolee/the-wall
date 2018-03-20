@@ -43,6 +43,8 @@ gem 'jquery-rails'
 gem 'rest-client'
 # spotify login
 gem 'omniauth-spotify'
+# spotify web api wrapper
+gem 'rspotify'
 
 # connect Facebook API
 gem 'koala'
