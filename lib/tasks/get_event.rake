@@ -20,8 +20,8 @@ namespace :get_event do
     # get posts with standard content
     page_array.each do |page_name|
       # 限制筆數 limit: 1
-      # posts_standard = @graph.get_connections(page_name, node_type, limit:1)
-      posts_standard = @graph.get_connections(page_name, node_type)
+      posts_standard = @graph.get_connections(page_name, node_type, limit:1)
+      # posts_standard = @graph.get_connections(page_name, node_type)
 
       posts_standard.each do |list|
         temp = JSON.parse(list.to_json)
