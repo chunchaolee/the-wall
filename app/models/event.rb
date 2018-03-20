@@ -14,4 +14,13 @@ class Event < ApplicationRecord
   # 一個event可以對很多user送出notification
   has_many :notified_users, through: :notifications, source: :user
 
+  def self.get_spotify_data(artist_name)
+
+    require 'rspotify'
+    RSpotify.authenticate("54168cbe8372462f9c62d4e58576f6bc", "c92d63e9f81542c1b65a888cfbb55d70")
+    artist = RSpotify::Artist.search(artist_name)
+    artist_data = artist.first
+
+  end
+
 end
