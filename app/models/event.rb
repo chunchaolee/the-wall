@@ -14,6 +14,15 @@ class Event < ApplicationRecord
   # 一個event可以對很多user送出notification
   has_many :notified_users, through: :notifications, source: :user
 
+  # ransck
+  STAGE = {
+    'The Wall Live House': 'The Wall Live House',
+    'Korner': 'KORNER',
+    'Revolver': 'Revolver',
+    'PIPE Live Music': 'PIPE Live Music',
+    'Legacy': 'Legacy'
+  }
+
   def self.get_spotify_data(artist_name)
 
     require 'rspotify'
