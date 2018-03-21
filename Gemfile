@@ -49,6 +49,9 @@ gem 'rspotify'
 # connect Facebook API
 gem 'koala'
 
+# ransack for search & filter
+gem 'ransack'
+
 group :production do
   gem 'pg', '~> 0.20'
 end
