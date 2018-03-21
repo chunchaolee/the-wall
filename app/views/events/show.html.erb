@@ -18,7 +18,7 @@
         <div class="event-info">演出者 <span><%= @event.artist_name %></span></div>
         <div class="event-info">票價 <span></span></div>
         <div class="event-info">地點 <span><%= @event.city %></span></div>
-        <div class="time">時間 
+        <div class="event-info time">時間 
           <% if @event.time == nil %>
             <span><%= @event.time %></span>
           <% elsif %>
