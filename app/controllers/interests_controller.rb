@@ -11,4 +11,10 @@ class InterestsController < ApplicationController
     end
   end
 
+  def destroy
+    @interest = current_user.interests.where(event_id: params[:id]).first
+    @interest.destroy
+    redirect_back(fallback_location: root_path)
+  end
+  
 end
