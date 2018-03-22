@@ -10,7 +10,7 @@
         <h4 class="event-date">
           <%= @event.date %>
           <span>
-            <%= link_to "♡" %>
+            <%= render partial: "shared/interest", locals: {object: @event} %>
             <%= @event.interests_count %>
           </span>
         </h4>
