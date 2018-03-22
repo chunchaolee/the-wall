@@ -1,0 +1,5 @@
+<% if current_user.interested?(object) %>
+  <span class="unlike-btn"><%= link_to '♥', interest_path(object), method: :delete %></span>
+<% else %>
+  <span class="like-btn"><%= link_to '♥', interests_path(event_id: object), method: :post %></span>
+<% end %>
