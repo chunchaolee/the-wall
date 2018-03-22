@@ -58,7 +58,8 @@
             <% end %>
             <div class="date">
               <%= event.date %>
-              <span class="like-btn">♡</span> <!-- 條件判斷切換 like 狀態 -->
+              <span class="like-btn"><%= link_to '♡', interests_path(event_id: event), method: :post %></span>
+              <span class="unlike-btn"><%= link_to '♡', interest_path(event), method: :delete %></span>
             </div>
             <h5><%= link_to event.title, event_path(event) %></h5>
             <div class="place">地點 <span><%= event.stage %></span></div>

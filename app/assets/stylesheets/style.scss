@@ -23,7 +23,12 @@ h5, h6 {
   font-weight: bold;
 }
 
-.event .date .like-btn {
+.event .date .like-btn a {
+  color: gray;
+  margin-left: 80px;
+}
+
+.event .date .unlike-btn a {
   color: #ff1a75;
   margin-left: 80px;
 }
