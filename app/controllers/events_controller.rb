@@ -12,6 +12,18 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+
+    # views count
+    @event.count_views
+    if current_user
+      if current_user.viewed_events.include?(@event)
+        @view = current_user.views.where(event_id: @event)
+        @view.destroy_all
+      end
+      current_user.views.create(event_id: params[:id])
+    end
+
+    # spotify
     artist_name = @event.artist_name
     
     if @event.spotify_artist_id == nil

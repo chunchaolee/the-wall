@@ -32,4 +32,9 @@ class Event < ApplicationRecord
 
   end
 
+  def count_views
+    self.views_count += 1
+    self.save
+  end
+
 end
