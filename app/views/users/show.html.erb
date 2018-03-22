@@ -30,22 +30,7 @@
     <div class="d-flex flex-container flex-wrap">
       <% @interested_events.each do |event| %> <!-- 之後改成 @events.each --> 
         <div class="col-lg-3 col-md-4 col-sm-12 p-2 d-flex justify-content-center">
-          <div class="event">
-            <img src="http://via.placeholder.com/200x200">
-            <div class="date">
-              <%= event.date %>
-              <%= render partial: "shared/interest", locals: {object: event} %>
-            </div>
-            <h5><%= link_to event.title, event_path(event) %></h5>
-            <div class="place">地點 <span><%= event.stage %></span></div>
-            <div class="time">時間 
-              <% if event.time == nil %>
-                <span><%= event.time %></span>
-              <% elsif %>
-                <span><%= event.time.slice(0..4) %></span>
-              <% end %>
-            </div>
-          </div>
+          <%= render partial: "shared/event_list", locals: {object: event} %>
         </div>
       <% end %>
     </div>
