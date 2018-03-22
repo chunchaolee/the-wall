@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show]
 
   def show
-    @interested_events = @user.interested_events.all
+    @interested_events = @user.interested_events.order("interests.created_at DESC")
+    @viewed_events = @user.viewed_events.order("views.created_at DESC")
   end
 
   def update
