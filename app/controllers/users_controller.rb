@@ -2,6 +2,10 @@ class UsersController < ApplicationController
 
   before_action :set_user, only: [:edit, :update, :show]
 
+  def show
+    @interested_events = @user.interested_events.all
+  end
+
   def update
     # user validates
     if current_user == @user
