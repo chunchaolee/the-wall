@@ -28,18 +28,9 @@
     </div><br />
     
     <div class="d-flex flex-container flex-wrap">
-      <% for i in 0..3 do %> <!-- 之後改成 @events.each -->
+      <% @interested_events.each do |event| %> <!-- 之後改成 @events.each --> 
         <div class="col-lg-3 col-md-4 col-sm-12 p-2 d-flex justify-content-center">
-          <div class="event">
-            <img src="http://via.placeholder.com/200x200">
-            <div class="date">
-              2018-03-12
-              <span class="like-btn">♡</span> <!-- 條件判斷切換 like 狀態 -->
-            </div>
-            <h5>表演名稱</h5>
-            <div class="place">地點 <span>西門紅樓</span></div>
-            <div class="time">時間 <span>19:30</span></div>
-          </div>
+          <%= render partial: "shared/event_list", locals: {object: event} %>
         </div>
       <% end %>
     </div>

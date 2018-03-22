@@ -52,26 +52,7 @@
 
       <% @events.each do |event| %>
         <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="event">
-            <%= link_to event_path(event) do %>
-              <img src="http://via.placeholder.com/200x200">
-            <% end %>
-            <div class="date">
-              <%= event.date %>
-              <span class="like-btn">♡</span> <!-- 條件判斷切換 like 狀態 -->
-            </div>
-            <h5><%= link_to event.title, event_path(event) %></h5>
-            <div class="place">地點 <span><%= event.stage %></span></div>
-            <div class="time">時間 
-              <% if event.time == nil %>
-                <span><%= event.time %></span>
-              <% elsif %>
-                <span><%= event.time.slice(0..4) %></span>
-              <% end %>
-            </div>
-            <div>(測試用)Views <span><%= event.views_count %></span></div>
-            <div>(測試用)Interests <span><%= event.interests_count %></span></div>
-          </div>
+          <%= render partial: "shared/event_list", locals: {object: event} %>
         </div>
       <% end %>
 
