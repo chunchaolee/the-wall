@@ -58,8 +58,11 @@
             <% end %>
             <div class="date">
               <%= event.date %>
-              <span class="like-btn"><%= link_to '♡', interests_path(event_id: event), method: :post %></span>
-              <span class="unlike-btn"><%= link_to '♡', interest_path(event), method: :delete %></span>
+              <% if current_user.interested?(event) %>
+                <span class="unlike-btn"><%= link_to '♥', interest_path(event), method: :delete %></span>
+              <% else %>
+                <span class="like-btn"><%= link_to '♥', interests_path(event_id: event), method: :post %></span>
+              <% end %>
             </div>
             <h5><%= link_to event.title, event_path(event) %></h5>
             <div class="place">地點 <span><%= event.stage %></span></div>
