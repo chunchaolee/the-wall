@@ -23,7 +23,7 @@ class User < ApplicationRecord
   has_many :notified_events, through: :notifications, source: :event
 
 
-  def interested?(event)
+  def is_interested?(event)
     self.interested_events.include?(event)
   end
 
