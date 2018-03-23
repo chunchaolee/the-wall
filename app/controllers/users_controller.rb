@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @interested_events = @user.interested_events.order("interests.created_at DESC")
-    @viewed_events = @user.viewed_events.order("views.created_at DESC")
+    @viewed_events = @user.viewed_events.limit(8).order("views.created_at DESC")
   end
 
   def update
