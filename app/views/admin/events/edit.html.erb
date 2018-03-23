@@ -36,7 +36,7 @@
           </div><br />
 
           <div class="field">
-            <%= f.label :time %> (<em>*註- 原來時間：<%= @event.time.to_s.slice(11..15) %></em>)
+            <%= f.label :time %> (<em>*註- 原來時間：<%= @event.time.to_s.slice(0..4) %></em>)
             <%= f.time_field :time, class: "form-control" %>
           </div><br />
 

@@ -12,7 +12,7 @@
     <% if object.time == nil %>
       <span><%= object.time %></span>
     <% else %>
-      <span><%= object.time.to_s.slice(11..15) %></span>
+      <span><%= object.time.to_s.slice(0..4) %></span>
     <% end %>
   </div>
   <div>(測試用)Views <span><%= object.views_count %></span></div>
