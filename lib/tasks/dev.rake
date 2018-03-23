@@ -3,25 +3,30 @@ namespace :dev do
   # fetch youtube videos
   task fetch_video: :environment do
 
-    searching = Event.first.artist_name
-    yt_config = Rails.application.config_for(:youtube)
-    url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
+    Event.all.each do |event|
+      searching = event.artist_name
+      yt_config = Rails.application.config_for(:youtube)
+      
+      if searching != nil
+        url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
 
-    response = RestClient.get(URI::encode(url))
-    data = JSON.parse(response.body)
+        response = RestClient.get(URI::encode(url))
+        data = JSON.parse(response.body)
 
-    if data["items"] != []
-      id = data["items"][0]["id"]["videoId"]
+        if data["items"] != []
+          id = data["items"][0]["id"]["videoId"]
 
-      event = Event.first
-      event.video = "https://www.youtube.com/embed/" + id + "?enablejsapi=1"
-      event.save
+          event.video = "https://www.youtube.com/embed/" + id + "?enablejsapi=1"
+          event.save
 
-      puts "save video url"
-      puts "video: #{event.video}"
-    else
-      puts "found no video"
+          puts "save video url"
+          puts "video: #{event.video}"
+        else
+          puts "found no video"
+        end
+      end
     end
+
   end
 
   # create artists
