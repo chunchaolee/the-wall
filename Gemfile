@@ -52,6 +52,9 @@ gem 'koala'
 # ransack for search & filter
 gem 'ransack'
 
+# Fake data
+gem 'ffaker'
+
 group :production do
   gem 'pg', '~> 0.20'
 end
