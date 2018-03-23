@@ -107,6 +107,9 @@ p {
 
 .event-detail {
   color: #8585ad;
+  word-break: break-all;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .piece {

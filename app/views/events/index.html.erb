@@ -66,7 +66,7 @@
               <% if event.time == nil %>
                 <span><%= event.time %></span>
               <% elsif %>
-                <span><%= event.time.slice(0..4) %></span>
+                <span><%= event.time.localtime.to_s(:db).slice(11..15) %></span>
               <% end %>
             </div>
             <div>(測試用)Views <span><%= event.views_count %></span></div>
