@@ -10,4 +10,12 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     end
 
+    # 後台權限認證
+    def authenticate_admin
+      unless current_user.admin?
+        flash[:alert] = "Not allow!"
+        redirect_to root_path
+      end
+    end
+
 end

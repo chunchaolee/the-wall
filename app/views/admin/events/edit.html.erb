@@ -1,0 +1,83 @@
+<div class="container-fluid">
+  
+  <% if current_user.admin? %>
+    <div class="userform">
+      <h3>修改活動頁面資料</h3>
+      <hr>
+      <!-- errors msg //satrt -->
+      <% if @event.errors.present? %>
+        <% @event.errors.each do |error,message| %>
+          <div class="alert alert-danger dismissable-alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <li><strong>WARNING</strong> : <%= "#{error.capitalize} #{message}" %></li>
+          </div>
+        <% end %>
+        <hr><br />
+      <% end %>
+      <!-- errors msg //end -->
+      
+      <!-- user edit form //start-->
+      <%= form_for [:admin, @event] do |f| %>
+        <div class="form-group">
+          
+          <div class="field">
+            <%= f.label :title %>
+            <%= f.text_field :title, autofocus: true, class: "form-control", placeholder: "輸入活動名稱(必填)" %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :artist_name %>
+            <%= f.text_field :artist_name, class: "form-control", placeholder: "輸入演出者名稱(必填)" %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :date %>
+            <%= f.date_field :date, class: "form-control" %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :time %> (<em>*註- 原來時間：<%= @event.time.localtime.to_s(:db).slice(11..15) %></em>)
+            <%= f.time_field :time, class: "form-control" %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :video %>
+            <%= f.text_field :video, class: "form-control", placeholder: "輸入Youtube嵌入式影片網址" %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :detail %>
+            <%= f.text_area :detail, class: "form-control", placeholder: "輸入活動/演出介紹", rows: "12" %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :city %>
+            <%= f.text_field :city, class: "form-control", placeholder: "輸入活動所在城市" %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :stage %>
+            <%= f.text_field :stage, class: "form-control", placeholder: "輸入活動地點" %>
+          </div><br />
+          
+          <div class="action">
+            <%= f.submit "更新活動頁面", class: "btn btn-outline-primary"%>
+            <%= f.button "取消變更", type: :reset, class: "btn btn-outline-secondary" %>
+          </div>
+
+        </div>
+      <% end %>
+      <!-- user edit form //end-->
+      
+
+    </div>
+  <% else %>
+    <div class="alert alert-danger dismissable-alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h2 class="text-center">非Admin無權瀏覽頁面資料</h2>
+    </div>
+    <hr>
+  <% end %>
+
+
+</div>
