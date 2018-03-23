@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  
+  <div class="container-fluid">
+    <div class="row">
+      <!-- list //start -->
+      <div class="col-md-10 col-sm-12">
+        <!-- Tabs //start -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <%= link_to '表演活動清單', admin_events_path, class: "nav-link active" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '使用者清單', admin_users_path, class: "nav-link" %>
+          </li>
+        </ul>
+      
+        <!-- Tabs //end -->
+        
+        <!-- Event list //start -->
+        <table class="table table-responsive{sm,md}">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col"><%= sort_link(@q, :id, "#", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :date, "活動日期", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :title, "活動名稱", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :time, "活動時間", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :artist_name, "演出者", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :city, "城市", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :stage, "地點", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :views_count, "瀏覽數", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :interests_count, "收藏數", default_order: :desc)%></th>
+              <th scope="col">功能1</th>
+              <th scope="col">功能2</th>
+            </tr>
+          </thead>
+            
+          <tbody>
+            <% @events.each do |event| %>
+              <tr id="event-<%= event.id %>" >
+                <th scope="row"><%= event.id %></th>
+                <td><%= event.date %></td>
+                <td><%= link_to event.title, event_path(event) %></td>
+                <td><%= event.time.localtime.to_s(:db).slice(11..15) %></td>
+                <td><%= event.artist_name %></td>
+                <td><%= event.city %></td>
+                <td><%= event.stage %></td>
+                <td><%= event.views_count %></td>
+                <td><%= event.interests_count %></td>
+                <td><%= link_to '編輯', edit_admin_event_path(event), class: "btn btn-outline-primary" %></td>
+                <td><%= link_to '刪除', admin_event_path(event), remote: true, method: :delete, data: {confirm: "ARE YOU SURE?"},class: "btn btn-outline-danger" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <!-- Event list //end -->
+      </div>
+      <!-- list //end -->
+
+      <!-- search //start -->
+      <div class="col-md-2 col-sm-12">
+        <h5>後台搜尋</h5><hr>
+        <%= search_form_for @q, url: admin_events_path do |f| %>
+          <%= f.label :title, '活動名稱:' %>
+          <%= f.search_field :title_cont, class: "form-control" %><br />
+
+          <%= f.label :date, '日期:' %>
+          <%= f.search_field :date_cont, class: "form-control" %><br />
+
+          <%= f.label :artist_name, '演出者:' %>
+          <%= f.search_field :artist_name_cont, class: "form-control" %><br />
+
+          <%= f.label :stage, '地點:' %>
+          <%= f.search_field :stage_cont, class: "form-control" %><br />
+
+          <%= f.submit '搜尋', class: "btn btn-outline-secondary form-control"%><br /><hr>
+
+          <h5>進階搜尋</h5><hr>
+
+          <%= f.label :date, '起始日期:' %>
+          <%= f.date_field :date_gteq, placeholder: "YYYY-MM-DD", class: "form-control" %><br />
+
+          <%= f.label :date, '至:' %>
+          <%= f.date_field :date_lteq, placeholder: "YYYY-MM-DD", class: "form-control" %><br />
+
+          <%= f.label :views_count, '瀏覽數大於：' %>
+          <%= f.search_field :views_count_gteq, class: "form-control" %><br />
+
+          <%= f.label :interests_count, '收藏數大於：' %>
+          <%= f.search_field :interests_count_gteq, class: "form-control" %><br />
+
+          <%= f.submit '搜尋', class: "btn btn-outline-secondary form-control"%>
+
+        <% end %>
+      </div><!-- search //end -->
+
+    </div><!-- .row //end -->
+
+  </div><!-- .container-fluid //end -->
+  
+</div><!-- .container-fluid //end -->

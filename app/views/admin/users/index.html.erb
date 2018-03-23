@@ -1,0 +1,91 @@
+<div class="container-fluid">
+  
+  <div class="container-fluid">
+    <div class="row">
+      <!-- list //start -->
+      <div class="col-md-10 col-sm-12">
+        <!-- Tabs //start -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <%= link_to '表演活動清單', admin_events_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '使用者清單', admin_users_path, class: "nav-link active" %>
+          </li>
+        </ul>
+      
+        <!-- Tabs //end -->
+        
+        <!-- user list //start -->
+        <table class="table table-responsive{sm}">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col"><%= sort_link(@q, :id, "#", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :created_at, "註冊日期", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :provider, "登入管道", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :is_admin, "管理權限", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :name, "使用者名稱", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :email, "使用者email", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :sign_in_count, "登入次數", default_order: :desc)%></th>
+              <th scope="col">功能1</th>
+            </tr>
+          </thead>
+            
+          <tbody>
+            <% @users.each do |user| %>
+              <tr id="user-<%= user.id %>" >
+                <th scope="row"><%= user.id %></th>
+                <td><%= user.created_at.localtime.to_s(:db) %></td>
+                <td><%= user.provider%></td>
+                <td><%= user.is_admin %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.sign_in_count %></td>
+                <td><%= link_to '刪除', admin_user_path(user), remote: true, method: :delete, data: {confirm: "ARE YOU SURE?"}, class: "btn btn-outline-danger" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <!-- user list //end -->
+      </div>
+      <!-- list //end -->
+
+      <!-- search //start -->
+      <div class="col-md-2 col-sm-12">
+        <h5>後台搜尋</h5><hr>
+        <%= search_form_for @q, url: admin_users_path do |f| %>
+          <%= f.label :name, '使用者名稱:' %>
+          <%= f.search_field :name_cont, class: "form-control" %><br />
+
+          <%= f.label :email, '使用者email:' %>
+          <%= f.search_field :email_cont, class: "form-control" %><br />
+
+          <%= f.label :provider, '登入管道:' %>
+          <%= f.search_field :provider_cont, class: "form-control" %><br />
+
+          <%= f.submit '搜尋', class: "btn btn-outline-secondary form-control"%><br /><hr>
+
+          <h5>進階搜尋</h5><hr>
+
+          <%= f.label :date, '註冊日期(起始):' %>
+          <%= f.date_field :created_at_gteq, placeholder: "YYYY-MM-DD", class: "form-control" %><br />
+
+          <%= f.label :date, '至:' %>
+          <%= f.date_field :created_at_lteq, placeholder: "YYYY-MM-DD", class: "form-control" %><br />
+
+          <%= f.label :sign_in_count, '登入次數大於等於：' %>
+          <%= f.search_field :sign_in_count_gteq, class: "form-control" %><br />
+
+          <%= f.label :sign_in_count, '登入次數小於等於：' %>
+          <%= f.search_field :sign_in_count_lteq, class: "form-control" %><br />
+
+          <%= f.submit '搜尋', class: "btn btn-outline-secondary form-control"%>
+
+        <% end %>
+      </div><!-- search //end -->
+
+    </div><!-- .row //end -->
+
+  </div><!-- .container-fluid //end -->
+  
+</div><!-- .container-fluid //end -->
