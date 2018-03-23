@@ -22,7 +22,7 @@
           <% if @event.time == nil %>
             <span><%= @event.time %></span>
           <% elsif %>
-            <span><%= @event.time.to_s(:db).slice(11..15) %></span>
+            <span><%= @event.time.to_s.slice(11..15) %></span>
           <% end %>
         </div>
       </div>
