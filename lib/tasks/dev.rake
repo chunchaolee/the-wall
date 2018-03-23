@@ -4,7 +4,7 @@ namespace :dev do
   task fetch_video: :environment do
 
     Event.all.each do |event|
-      searching = event.artist_name
+      searching = event.artist_name.to_s
       yt_config = Rails.application.config_for(:youtube)
       
       if searching != nil

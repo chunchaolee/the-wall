@@ -86,10 +86,15 @@ namespace :get_event do
   task fb_event_new: :environment do
     # Event.destroy_all
     # access_token and other values aren't required if you set the defaults as described above
-    fb_config = Rails.application.config_for(:facebook)
-    fb_config["api_token"]
-    @graph = Koala::Facebook::API.new(fb_config["api_token"])
     
+    # local用
+    # fb_config = Rails.application.config_for(:facebook)
+    # fb_config["api_token"]
+    # @graph = Koala::Facebook::API.new(fb_config["api_token"])
+
+    # heroku 格式
+    @graph = Koala::Facebook::API.new(ENV['FACEBOOK_API_TOKEN'])
+
     page_array = ["LegacyHomePage",
                   "thewall.tw",
                   "pipelivemusic",
@@ -155,12 +160,18 @@ namespace :get_event do
         end
 
         # fetch youtube video
-        temp_video = nil
-        searching = temp_name
-        yt_config = Rails.application.config_for(:youtube)
-      
-        if searching != nil
-          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
+        if temp_name != nil  
+          temp_video = nil
+          searching = temp_name
+
+          # local用
+          # yt_config = Rails.application.config_for(:youtube)
+          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
+
+          # heroku用
+          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
+
+
 
           response = RestClient.get(URI::encode(url))
           data = JSON.parse(response.body)
