@@ -4,7 +4,7 @@ namespace :dev do
 
     searching = Event.first.artist_name
     yt_config = Rails.application.config_for(:youtube)
-    url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&order=viewcount&maxResults=1"
+    url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
 
     response = RestClient.get(URI::encode(url))
     data = JSON.parse(response.body)
@@ -22,5 +22,97 @@ namespace :dev do
       puts "found no video"
     end
   end
+
+  task create_artists: :environment do
+    Artist.destroy_all
+    
+    artist_array = ["大霈",
+                    "睡帽樂團",
+                    "黃宇寒",
+                    "房東的貓",
+                    "大象體操",
+                    "The Notwist",
+                    "The Wedding Present",
+                    "Hitorie",
+                    "Czecho No Republic",
+                    "OVDS",
+                    "許含光",
+                    "SE SO NEON",
+                    "Manic Sheep",
+                    "Yogee New Waves",
+                    "Noise book",
+                    "逆瓣膜",
+                    "八十八顆芭樂籽",
+                    "B Festival",
+                    "等等樂團",
+                    "To · Night",
+                    "夏寧杉",
+                    "曾立馨",
+                    "豪古雞",
+                    "勞動服務",
+                    "黃瑞豐",
+                    "徐崇育",
+                    "許郁瑛",
+                    "潮肩帶",
+                    "問題總部",
+                    "林苑",
+                    "葉翊忻",
+                    "瓦曼倫",
+                    "獨立人種",
+                    "羊與馬群",
+                    "蔡晧怡",
+                    "Nico'o & The kapiolani Boyz",
+                    "The KORS",
+                    "林后進",
+                    "Everfor",
+                    "The Fur.",
+                    "感覺莓果",
+                    "簡小豪",
+                    "Noise Book",
+                    "佬步槍",
+                    "餵飽豬",
+                    "脆弱少女組",
+                    "莉莉周她說",
+                    "海豚刑警",
+                    "JAM BOUND",
+                    "雀斑樂團",
+                    "I am Puzzle man",
+                    "Rudra's Sage",
+                    "Kenjiii",
+                    "Yngel",
+                    "冨田麗香",
+                    "Yutaro Ogida",
+                    "彩色天穹",
+                    "貳伍吸菸所 ",
+                    "知更 John Stoniae",
+                    "神經博士 Dr. Geek",
+                    "Bacon Slap 培根巴掌！",
+                    "應許之地 ha-Aretz",
+                    "Face ON",
+                    "Fifth-Newheavy",
+                    "トリコンドル",
+                    "Endtrocity 暴行終止",
+                    "vuLner",
+                    "Retch",
+                    "Begräbnis",
+                    "塞磐赦 Serpenzer",
+                    "UN AVEC DEUX",
+                    "PEOPLEJAM",
+                    "DJ TXAKO",
+                    "THE REAGGE RIDDIMS",
+                    "Dystopia",
+                    "FUTURE AFTER A SECOND",
+                    "私人視線 Private Eyesight",
+                    "FROZEN CAKE BAR",
+                    "偽造成人計画The Fake Adult Project",
+                    "SOUNDBASE"
+                  ]
+
+    artist_array.each do |artist|
+      Artist.create!(name: artist)
+    end
+    puts "create #{Artist.all.count} artists"
+
+  end 
 
 end
