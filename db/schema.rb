@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320041701) do
+ActiveRecord::Schema.define(version: 20180323102839) do
 
   create_table "events", force: :cascade do |t|
     t.string "artist_name"
     t.string "title"
     t.date "date"
-    t.string "time"
+    t.time "time"
     t.string "img"
     t.string "video"
     t.string "url"
