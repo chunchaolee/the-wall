@@ -1,5 +1,6 @@
 namespace :dev do
 
+  # fetch youtube videos
   task fetch_video: :environment do
 
     searching = Event.first.artist_name
@@ -23,9 +24,10 @@ namespace :dev do
     end
   end
 
+  # create artists
   task create_artists: :environment do
     Artist.destroy_all
-    
+
     artist_array = ["大霈",
                     "睡帽樂團",
                     "黃宇寒",
@@ -114,5 +116,22 @@ namespace :dev do
     puts "create #{Artist.all.count} artists"
 
   end 
+
+  # find artist from detail
+  task find_artist: :environment do
+
+    Event.all.each do |event|
+      Artist.all.each do |artist|
+        if event.detail.include?(artist.name)
+          event.artist_name = artist.name
+          event.save
+          break
+        end
+      end
+    end
+
+    puts "done!"
+
+  end
 
 end
