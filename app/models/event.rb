@@ -1,4 +1,8 @@
 class Event < ApplicationRecord
+
+  # 欄位驗證 :artist_name待補
+  validates_presence_of :title, :date, :time, :stage
+
   # 一個event可以有很多筆被interest的資料
   has_many :interests, dependent: :destroy
   # 一個event可以被很多user interest
@@ -20,7 +24,8 @@ class Event < ApplicationRecord
     'Korner': 'KORNER',
     'Revolver': 'Revolver',
     'PIPE Live Music': 'PIPE Live Music',
-    'Legacy': 'Legacy'
+    'Legacy 傳 音樂展演空間': 'Legacy',
+    '公館河岸留言': '公館河岸留言'
   }
 
   def self.get_spotify_data(artist_name)
