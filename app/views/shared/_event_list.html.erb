@@ -7,14 +7,16 @@
     <%= render partial: "shared/interest", locals: {object: object} %>
   </div>
   <h5><%= link_to object.title, event_path(object) %></h5>
-  <div class="place">地點 <span><%= object.stage %></span></div>
-  <div class="time">時間 
-    <% if object.time == nil %>
-      <span><%= object.time %></span>
-    <% else %>
-      <span><%= object.time.to_s.slice(0..4) %></span>
-    <% end %>
-  </div>
-  <div>(測試用)Views <span><%= object.views_count %></span></div>
-  <div>(測試用)Interests <span><%= object.interests_count %></span></div>
+  <% if flag %>
+    <div class="place">地點 <span><%= object.stage %></span></div>
+    <div class="time">時間 
+      <% if object.time == nil %>
+        <span><%= object.time %></span>
+      <% else %>
+        <span><%= object.time.to_s.slice(0..4) %></span>
+      <% end %>
+    </div>
+    <div>(測試用)Views <span><%= object.views_count %></span></div>
+    <div>(測試用)Interests <span><%= object.interests_count %></span></div>
+  <% end %>  
 </div>

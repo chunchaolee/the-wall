@@ -8,12 +8,6 @@
         <%= search_form_for @q, url: events_path do |f| %>
 
           <div class="form-row form-group">
-              
-            <div class="col-md-3 col-sm-12">
-              <div class="input-group mb-3">
-                <%= f.select :stage_eq, Event::STAGE.map(&:reverse), prompt: "選擇活動地點", include_blank: "所有活動地點" %>
-              </div>
-            </div>
 
             <div class="col-md-6 col-sm-12">
               <%= f.search_field :artist_name_or_title_or_city_or_detail_cont, placeholder: "搜尋演出的獨立音樂創作者、創作團體、活動、城市或關鍵字", class: "form-control" %>
@@ -44,19 +38,27 @@
           </div>
         <% end %>
 
-        <hr>
       </div>
       <!-- ransack //end -->
 
       <div class="col-md-12"></div>
 
-      <% @events.each do |event| %>
-        <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="col-lg-9 col-md-9 col-sm-12">
+        <% @events.each do |event| %>
+          <div class="post">
 
-          <%= render partial: "shared/event_list", locals: {object: event, flag: true} %>
+          </div>
+        <% end %>
+      </div> 
 
-        </div>
-      <% end %>
+      <div class="col-lg-3 col-md-3 col-sm-0">
+        <h4>熱門活動</h4><br>
+        <% @popular_events.each do |event| %>
+          <div class="post">
+            <%= render partial: "shared/event_list", locals: {object: event, flag: false} %>
+          </div>
+        <% end %>
+      </div>  
 
     </div>
   </div>
