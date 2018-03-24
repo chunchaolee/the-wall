@@ -16,7 +16,7 @@
             <div class="col-md-1 col-sm-12">
               <%= f.submit '搜尋', class: "btn btn-outline-secondary form-control" %>
             </div>
-            
+
             <!-- 排序 -->
             <div class="col-md-2 col-sm-12">
               <div class="dropdown show">
@@ -33,8 +33,6 @@
 
             </div>
 
-
-
           </div>
         <% end %>
 
@@ -46,7 +44,49 @@
       <div class="col-lg-9 col-md-9 col-sm-12">
         <% @events.each do |event| %>
           <div class="post">
+            <div class="row">
+              <!-- 標題 -->
+              <div class="col-md-3 pdate">
+                <%= event.date %>
+              </div>
+              <div class="col-md-7">
+                <div class="ptitle"><%= link_to event.title, event_path(event) %></div>
+              </div>
+              <div class="col-md-2 interest">
+                <%= render partial: "shared/interest", locals: {object: event} %>
+                <%= event.interests_count %>
+              </div>
 
+              <!-- 內容 -->
+              <div class="col-md-8">
+                <% if event.video != nil %>
+                  <iframe id="existing-iframe-example"
+                          width="500" height="350"
+                          src="<%= event.video %>"
+                          frameborder="0"
+                          style="border: none"
+                          class="musicpiece"
+                  ></iframe>
+                <% elsif event.spotify_artist_id != nil %>
+                  <iframe src="https://open.spotify.com/embed/artist/<%= event.spotify_artist_id %>" width="500" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media" class="musicpiece"></iframe>
+                <% else %>
+                  <img src="http://via.placeholder.com/470x330" class="musicpiece">
+                <% end %>
+              </div>
+
+              <div class="col-md-4 post-info">
+                <div class="event-info">演出者 <span><%= event.artist_name %></span></div>
+                <div class="event-info">票價 <span></span></div>
+                <div class="event-info">地點 <span><%= event.city %></span></div>
+                <div class="event-info time">時間 
+                  <% if event.time == nil %>
+                    <span><%= event.time %></span>
+                  <% elsif %>
+                    <span><%= event.time.to_s.slice(11..15) %></span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
         <% end %>
       </div> 
@@ -54,9 +94,7 @@
       <div class="col-lg-3 col-md-3 col-sm-0">
         <h4>熱門活動</h4><br>
         <% @popular_events.each do |event| %>
-          <div class="post">
-            <%= render partial: "shared/event_list", locals: {object: event, flag: false} %>
-          </div>
+          <%= render partial: "shared/event_list", locals: {object: event, flag: false} %>
         <% end %>
       </div>  
 
