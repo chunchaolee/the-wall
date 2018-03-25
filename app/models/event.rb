@@ -30,11 +30,25 @@ class Event < ApplicationRecord
 
   def self.get_spotify_data(artist_name)
 
-    require 'rspotify'
-    RSpotify.authenticate("54168cbe8372462f9c62d4e58576f6bc", "c92d63e9f81542c1b65a888cfbb55d70")
-    artist = RSpotify::Artist.search(artist_name)
-    artist_data = artist.first
+    if artist_name != nil
+      require 'rspotify'
+      RSpotify.authenticate("54168cbe8372462f9c62d4e58576f6bc", "c92d63e9f81542c1b65a888cfbb55d70")
+      artist = RSpotify::Artist.search(artist_name)
+      artist_data = artist.first
+    end
 
+  end
+
+  def load_spotify_artist_id
+    if self.spotify_artist_id == nil
+      spotify_data = Event.get_spotify_data(artist_name)
+      if spotify_data == nil
+        self.spotify_artist_id = nil
+      else
+        self.spotify_artist_id = spotify_data.id
+        self.save
+      end
+    end
   end
 
   def count_views

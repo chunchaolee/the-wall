@@ -7,7 +7,7 @@ namespace :get_event do
     # fb_config["api_token"]
     # @graph = Koala::Facebook::API.new(fb_config["api_token"])
 
-    # 遠端專用
+    # # 遠端專用
     config.omniauth :facebook
     @graph = Koala::Facebook::API.new(ENV['FACEBOOK_API_TOKEN'])
 
