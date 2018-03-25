@@ -233,3 +233,52 @@ p {
   }
 
 }
+
+/*------ event posts ------*/
+
+.post {
+  width: 730px;
+  height: 440px;
+  border: solid 1px lightgray;
+  margin-bottom: 50px;
+}
+
+.post .pdate {
+  color: #538cc6;
+  font-weight: bold;
+  font-size: 21px;
+  padding: 10px 0 0 30px;
+}
+
+.ptitle {
+  margin-top: 10px;
+}
+
+.ptitle a {
+  color: orange;
+  font-weight: bold;
+  font-size: 21px;
+}
+
+.interest {
+  margin-top: 10px;
+  font-size: 21px;
+}
+
+.post .unlike-btn {
+  color: #ff1a75;
+  font-size: 24px;
+}
+
+.post .like-btn {
+  color: gray;
+  font-size: 25px;
+}
+
+.musicpiece {
+  padding: 20px 0 0 30px;
+}
+
+.post-info {
+  padding: 20px 0 0 50px;
+}

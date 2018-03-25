@@ -30,7 +30,7 @@
     <div class="d-flex flex-container flex-wrap">
       <% @interested_events.each do |event| %> 
         <div class="col-lg-3 col-md-4 col-sm-12 p-2 d-flex justify-content-center">
-          <%= render partial: "shared/event_list", locals: {object: event} %> 
+          <%= render partial: "shared/event_list", locals: {object: event, flag: true} %> 
         </div>
       <% end %>
     </div>
@@ -48,7 +48,7 @@
     <div class="d-flex flex-container flex-wrap">
       <% @viewed_events.each do |event| %>
         <div class="col-lg-3 col-md-4 col-sm-12 p-2 d-flex justify-content-center">
-          <%= render partial: "shared/event_list", locals: {object: event} %>
+          <%= render partial: "shared/event_list", locals: {object: event, flag: true} %>
         </div>
       <% end %>
     </div>

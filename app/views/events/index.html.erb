@@ -53,7 +53,7 @@
       <% @events.each do |event| %>
         <div class="col-lg-3 col-md-4 col-sm-6">
 
-          <%= render partial: "shared/event_list", locals: {object: event} %>
+          <%= render partial: "shared/event_list", locals: {object: event, flag: true} %>
 
         </div>
       <% end %>

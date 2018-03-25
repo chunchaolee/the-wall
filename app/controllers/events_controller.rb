@@ -24,20 +24,29 @@ class EventsController < ApplicationController
     end
 
     # spotify
-    artist_name = @event.artist_name
-    
-    if @event.spotify_artist_id == nil
-      @spotify_data = Event.get_spotify_data(artist_name)
-      if @spotify_data == nil
-        @spotify_artist_id = nil
+    if @event.artist_name != nil
+      artist_name = @event.artist_name
+      
+      if @event.spotify_artist_id == nil
+        @spotify_data = Event.get_spotify_data(artist_name)
+        if @spotify_data == nil
+          @spotify_artist_id = nil
+        else
+          @spotify_artist_id = @spotify_data.id
+          @event.spotify_artist_id = @spotify_artist_id
+          @event.save
+        end
       else
-        @spotify_artist_id = @spotify_data.id
-        @event.spotify_artist_id = @spotify_artist_id
-        @event.save
+        @spotify_artist_id = @event.spotify_artist_id
       end
-    else
-      @spotify_artist_id = @event.spotify_artist_id
     end
+  end
+
+  def posts
+    # ransack
+    @q = Event.ransack(ransack_params)
+    @events = @q.result(distinct: true).order(created_at: :desc)
+    @popular_events = Event.all.order(interests_count: :desc).limit(5)
   end
 
   private 

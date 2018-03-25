@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="col-md-12 offset-md-0">
+    <div class="row">
+
+      <!-- ransack //start -->
+      <div class="col-md-12 col-sm-12" id="event-filter">
+
+        <%= search_form_for @q, url: events_path do |f| %>
+
+          <div class="form-row form-group">
+
+            <div class="col-md-6 col-sm-12">
+              <%= f.search_field :artist_name_or_title_or_city_or_detail_cont, placeholder: "搜尋演出的獨立音樂創作者、創作團體、活動、城市或關鍵字", class: "form-control" %>
+            </div>
+
+            <div class="col-md-1 col-sm-12">
+              <%= f.submit '搜尋', class: "btn btn-outline-secondary form-control" %>
+            </div>
+
+            <!-- 排序 -->
+            <div class="col-md-2 col-sm-12">
+              <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle form-control text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  排序
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item"><%= sort_link(@q, :views_count, "依瀏覽數排序", default_order: :desc)%>
+                  <a class="dropdown-item"><%= sort_link(@q, :date, "依活動日期排序", default_order: :desc) %></a>
+                  <a class="dropdown-item"><%= sort_link(@q, :interests_count, "依收藏數排序", default_order: :desc) %></a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        <% end %>
+
+      </div>
+      <!-- ransack //end -->
+
+      <div class="col-md-12"></div>
+
+      <div class="col-lg-9 col-md-9 col-sm-12">
+        <% @events.each do |event| %>
+          <div class="post">
+            <div class="row">
+              <!-- 標題 -->
+              <div class="col-md-3 pdate">
+                <%= event.date %>
+              </div>
+              <div class="col-md-7">
+                <div class="ptitle"><%= link_to event.title, event_path(event) %></div>
+              </div>
+              <div class="col-md-2 interest">
+                <%= render partial: "shared/interest", locals: {object: event} %>
+                <%= event.interests_count %>
+              </div>
+
+              <!-- 內容 -->
+              <div class="col-md-8">
+                <% if event.video != nil %>
+                  <iframe id="existing-iframe-example"
+                          width="500" height="350"
+                          src="<%= event.video %>"
+                          frameborder="0"
+                          style="border: none"
+                          class="musicpiece"
+                  ></iframe>
+                <% elsif event.spotify_artist_id != nil %>
+                  <iframe src="https://open.spotify.com/embed/artist/<%= event.spotify_artist_id %>" width="500" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media" class="musicpiece"></iframe>
+                <% else %>
+                  <img src="http://via.placeholder.com/470x330" class="musicpiece">
+                <% end %>
+              </div>
+
+              <div class="col-md-4 post-info">
+                <div class="event-info">演出者 <span><%= event.artist_name %></span></div>
+                <div class="event-info">票價 <span></span></div>
+                <div class="event-info">地點 <span><%= event.city %></span></div>
+                <div class="event-info time">時間 
+                  <% if event.time == nil %>
+                    <span><%= event.time %></span>
+                  <% elsif %>
+                    <span><%= event.time.to_s.slice(11..15) %></span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div> 
+
+      <div class="col-lg-3 col-md-3 col-sm-0">
+        <h4>熱門活動</h4><br>
+        <% @popular_events.each do |event| %>
+          <%= render partial: "shared/event_list", locals: {object: event, flag: false} %>
+        <% end %>
+      </div>  
+
+    </div>
+  </div>
+</div>
