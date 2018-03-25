@@ -78,7 +78,7 @@
                     <!-- spotify -->
                     <% if event.spotify_artist_id != nil %>
                       <div class="carousel-item <%= "active" if i == 0 %>">
-                        <iframe src="https://open.spotify.com/embed/artist/<%= Event.find(4).spotify_artist_id %>" width="500" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media" class="musicpiece d-block w-100"></iframe>
+                        <iframe src="https://open.spotify.com/embed/artist/<%= event.spotify_artist_id %>" width="500" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media" class="musicpiece d-block w-100"></iframe>
                       </div>
                       <% i += 1 %>
                     <% end %>
