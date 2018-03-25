@@ -1,22 +1,39 @@
 <div class="event">
-  <%= link_to event_path(object) do %>
-    <img src="http://via.placeholder.com/200x200">
+
+  <%= link_to event_path(object) do %> 
+    <!-- img //start -->
+    <div class="img">
+      <% if object.img %>
+        <%= image_tag(object.img, width: "250", height: "250", class: 'rounded mx-auto d-block img-fluid') %>
+      <% else %>
+        <%= image_tag("http://via.placeholder.com/250x250",class: 'rounded mx-auto d-block img-fluid') %>
+      <% end %>
+    </div>
+    <!-- img //end -->
   <% end %>
-  <div class="date">
+
+  <div class="date text-center">
     <%= object.date %>
     <%= render partial: "shared/interest", locals: {object: object} %>
   </div>
+
   <h5><%= link_to object.title, event_path(object) %></h5>
   <% if flag %>
-    <div class="place">地點 <span><%= object.stage %></span></div>
-    <div class="time">時間 
-      <% if object.time == nil %>
-        <span><%= object.time %></span>
-      <% else %>
-        <span><%= object.time.to_s.slice(0..4) %></span>
-      <% end %>
+
+    <div class="container-fluid">
+      <h5><%= link_to object.title, event_path(object) %></h5>
+      <div class="place">地點 <span><%= object.stage %></span></div>
+      <div class="time">時間 
+        <% if object.time == nil %>
+          <span><%= object.time %></span>
+        <% else %>
+          <span><%= object.time.to_s.slice(11..15) %></span>
+        <% end %>
+      </div>
+      <div>(測試用)Views <span><%= object.views_count %></span></div>
+      <div>(測試用)Interests <span><%= object.interests_count %></span></div>
     </div>
-    <div>(測試用)Views <span><%= object.views_count %></span></div>
-    <div>(測試用)Interests <span><%= object.interests_count %></span></div>
-  <% end %>  
+
+  <% end %>
+
 </div>

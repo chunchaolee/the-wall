@@ -1,28 +1,36 @@
-<div class="container">
+<div class="container-fluid">
   <div class="col-md-10 offset-md-1">
     <div class="row">
       
-      <div class="col-lg-6 col-md-12 event-img">
-        <img src="http://via.placeholder.com/400x300">
-      </div>
-
+      <!-- img //start -->
       <div class="col-lg-6 col-md-12">
-        <h4 class="event-date">
-          <%= @event.date %>
-          <span>
+        <div class="img">
+          <% if @event.img %>
+            <%= image_tag(@event.img, width: "400", height: "300", class: 'rounded mx-auto d-block img-fluid') %>
+          <% else %>
+            <%= image_tag("http://via.placeholder.com/400x300",class: 'rounded mx-auto d-block img-fluid') %>
+          <% end %>
+        </div>
+      </div> <!-- img //end -->
+
+      <div class="col-lg-6 col-md-12 text-center">
+        <span class="text-center">
+          <h5 class="event-date col-12">
+            <span class="text-left"><%= @event.date %></sapn>
             <%= render partial: "shared/interest", locals: {object: @event} %>
             <%= @event.interests_count %>
-          </span>
-        </h4>
+          </h5>
+        </span>
+        
         <h4 class="event-title"><%= @event.title %></h4>
         <div class="event-info">演出者 <span><%= @event.artist_name %></span></div>
-        <div class="event-info">票價 <span></span></div>
+        <!-- <div class="event-info">票價 <span></span></div> -->
         <div class="event-info">地點 <span><%= @event.city %></span></div>
         <div class="event-info time">時間 
           <% if @event.time == nil %>
             <span><%= @event.time %></span>
           <% elsif %>
-            <span><%= @event.time.to_s.slice(0..4) %></span>
+            <span><%= @event.time.to_s.slice(11..15) %></span>
           <% end %>
         </div>
       </div>
@@ -34,11 +42,11 @@
         <div class="subtitle"><i>樂團/表演介紹</i></div>
         <p class="event-detail"><%= @event.detail %></p>
       </div>
-
+      
       <div class="col-md-12">
-        <div class="subtitle"><i>作品欣賞</i></div>
+        <div class="subtitle"><strong><i>作品欣賞</i></strong></div>
         <div class="row">
-          <div class="col-lg-7 col-md-12">
+          <div class="col-lg-7 col-md-12 piece text-center">
             <div class="piece">【Youtube】</div>
             <iframe id="existing-iframe-example"
                     width="500" height="360"
@@ -48,7 +56,7 @@
             ></iframe>
           </div>
           <!-- spotify //start -->
-          <div class="col-lg-5 col-md-12 piece">
+          <div class="col-lg-5 col-md-12 piece text-center">
             <div class="piece">【Spotify】</div>
 
             <% if  @spotify_artist_id != nil %> <!-- 辨識有無spotify作品 //start-->
@@ -57,7 +65,7 @@
               <hr>
 
               <!-- iframe of spotify playlist -->
-              <iframe src="https://open.spotify.com/embed/artist/<%= @spotify_artist_id %>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              <iframe src="https://open.spotify.com/embed/artist/<%= @spotify_artist_id %>" width="260" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             <% else %>
               <div class="piece">-暫無Spotify作品-</div>
             <% end %><!-- 辨識有無spotify作品 //end-->

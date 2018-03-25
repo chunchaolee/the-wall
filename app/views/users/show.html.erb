@@ -5,15 +5,15 @@
   <div class="container">
     <table class="table table-responsive profile borderless">
       <tr>
-        <td><h5><span class="badge badge-primary">使用者名稱</span></h5></td>
+        <td><h5><span class="badge badge-dark">使用者名稱</span></h5></td>
         <td><h6><span><%= @user.name %></span></h6></td>
       </tr>
       <tr>
-        <td><h5><span class="badge badge-primary">Email</span></h5></td>
+        <td><h5><span class="badge badge-dark">Email</span></h5></td>
         <td><h6><%= @user.email %></h6></td>
       </tr>
       <tr>
-        <td><%= link_to("Edit Profile",edit_user_path(params[:id]), class: "btn btn-outline-primary") %></td>
+        <td><%= link_to("Edit Profile",edit_user_path(params[:id]), class: "btn btn-outline-secondary") %></td>
       </tr>
     </table>
     <hr><br />
@@ -24,7 +24,7 @@
   <div class="container">
 
     <div class="col-md-12">
-      <span class="text-muted"><strong>已收藏</strong></span> <span class="badge badge-primary"><%= @user.interested_events.size%></span>  
+      <span class="text-muted"><strong>已收藏</strong></span> <span class="badge badge-dark"><%= @user.interested_events.size%></span>  
     </div><br />
     
     <div class="d-flex flex-container flex-wrap">

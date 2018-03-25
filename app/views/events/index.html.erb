@@ -3,30 +3,30 @@
     <div class="row">
 
       <!-- ransack //start -->
-      <div class="col-md-12 col-sm-12" id="event-filter">
+      <div class="container-fluid col-12" id="event-filter">
 
         <%= search_form_for @q, url: events_path do |f| %>
 
           <div class="form-row form-group">
               
-            <div class="col-md-3 col-sm-12">
+            <div class="search-select d-flex justify-content-center col-md-3 col-sm-12">
               <div class="input-group mb-3">
                 <%= f.select :stage_eq, Event::STAGE.map(&:reverse), prompt: "選擇活動地點", include_blank: "所有活動地點" %>
               </div>
             </div>
 
-            <div class="col-md-6 col-sm-12">
+            <div class="search-search col-md-6 col-sm-12">
               <%= f.search_field :artist_name_or_title_or_city_or_detail_cont, placeholder: "搜尋演出的獨立音樂創作者、創作團體、活動、城市或關鍵字", class: "form-control" %>
             </div>
 
-            <div class="col-md-1 col-sm-12">
-              <%= f.submit '搜尋', class: "btn btn-outline-secondary form-control" %>
+            <div class="search-submit col-md-1 col-sm-12">
+              <%= f.submit '搜尋', class: "btn btn-outline-dark form-control" %>
             </div>
             
             <!-- 排序 -->
             <div class="col-md-2 col-sm-12">
               <div class="dropdown show">
-                <a class="btn btn-secondary dropdown-toggle form-control text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-dark dropdown-toggle form-control text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   排序
                 </a>
 
