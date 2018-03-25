@@ -55,6 +55,8 @@ gem 'ransack'
 # Fake data
 gem 'ffaker'
 
+gem 'kaminari'
+
 group :production do
   gem 'pg', '~> 0.20'
 end

@@ -3,11 +3,8 @@
   <%= link_to event_path(object) do %> 
     <!-- img //start -->
     <div class="img">
-      <% if object.img %>
-        <%= image_tag(object.img, width: "250", height: "250", class: 'rounded mx-auto d-block img-fluid') %>
-      <% else %>
-        <%= image_tag("http://via.placeholder.com/250x250",class: 'rounded mx-auto d-block img-fluid') %>
-      <% end %>
+      <%= image_tag object.img, width: "250", height: "250", class: "rounded mx-auto d-block img-fluid" if object.img?%>
+      <%= image_tag "http://via.placeholder.com/250x250", class: "rounded mx-auto d-block img-fluid"  unless object.img?%> 
     </div>
     <!-- img //end -->
   <% end %>
@@ -17,10 +14,9 @@
     <%= render partial: "shared/interest", locals: {object: object} %>
   </div>
 
-  <% if flag %>
-
-    <div class="container-fluid">
-      <h5><%= link_to object.title, event_path(object) %></h5>
+  <div class="container-fluid">
+    <h5><%= link_to object.title, event_path(object) %></h5>
+    <% if flag %>
       <div class="place">地點 <span><%= object.stage %></span></div>
       <div class="time">時間 
         <% if object.time == nil %>
@@ -31,8 +27,7 @@
       </div>
       <div>(測試用)Views <span><%= object.views_count %></span></div>
       <div>(測試用)Interests <span><%= object.interests_count %></span></div>
-    </div>
-
-  <% end %>
+     <% end %>
+  </div>
 
 </div>
