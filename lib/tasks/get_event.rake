@@ -3,13 +3,13 @@
 namespace :get_event do
   task fb_event: :environment do
     # access_token and other values aren't required if you set the defaults as described above
-    fb_config = Rails.application.config_for(:facebook)
-    fb_config["api_token"]
-    @graph = Koala::Facebook::API.new(fb_config["api_token"])
+    # fb_config = Rails.application.config_for(:facebook)
+    # fb_config["api_token"]
+    # @graph = Koala::Facebook::API.new(fb_config["api_token"])
 
     # 遠端專用
-    # config.omniauth :facebook
-    # @graph = Koala::Facebook::API.new(ENV['FACEBOOK_API_TOKEN'])
+    config.omniauth :facebook
+    @graph = Koala::Facebook::API.new(ENV['FACEBOOK_API_TOKEN'])
 
     page_array = ["LegacyHomePage",
                   "thewall.tw",
@@ -24,7 +24,7 @@ namespace :get_event do
     # get posts with standard content
     page_array.each do |page_name|
       # 限制筆數 limit: 1
-      posts_standard = @graph.get_connections(page_name, node_type, limit:1)
+      posts_standard = @graph.get_connections(page_name, node_type, limit:6)
       # posts_standard = @graph.get_connections(page_name, node_type)
 
       posts_standard.each do |list|
@@ -108,7 +108,7 @@ namespace :get_event do
     # get posts with standard content
     page_array.each do |page_name|
       # 限制筆數 limit: 1
-      posts_standard = @graph.get_connections(page_name, node_type, limit:3)
+      posts_standard = @graph.get_connections(page_name, node_type, limit:5)
       # posts_standard = @graph.get_connections(page_name, node_type)
 
       posts_standard.each do |list|
@@ -192,7 +192,7 @@ namespace :get_event do
         date: show_time,
         time: temp["start_time"].split('T')[1],
         city: temp["place"]["location"]["city"],
-        detail: temp["description"] ,
+        detail: temp["description"],
         stage: temp["place"]["name"],
         video: temp_video
           )

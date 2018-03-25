@@ -7,6 +7,18 @@ h5, h6 {
   margin: 0;
 }
 
+.like-btn {
+  color: gray;
+  margin-left: 70px;
+  font-size: 25px;
+}
+
+.unlike-btn {
+  color: #ff1a75;
+  margin-left: 70px;
+  font-size: 25px;
+}
+
 /*------ event index ------*/
 
 #event-filter {
@@ -24,22 +36,7 @@ h5, h6 {
   font-size: 18px;
 }
 
-.event .date .like-btn {
-  color: gray;
-  margin-left: 70px;
-  font-size: 25px;
-}
 
-.event .date .unlike-btn {
-  color: #ff1a75;
-  margin-left: 70px;
-  font-size: 25px;
-}
-
-.event img {
-  width: 200px;
-  height: 200px;
-}
 
 .event h5 {
   margin: 3px 0;
@@ -67,36 +64,22 @@ p {
   margin-bottom: 0;
 }
 
+.search-select, .search-search, .search-submit {
+  margin-bottom: 20px;
+}
+
+
+
 
 /*------ event show ------*/
 
-.event-img img {
-  width: 400px;
-  height: 300px;
-}
 
 .event-date {
   color: #538cc6;
-  margin-top: 30px;
+  margin: 10px auto 10px auto;
 }
 
-.event-date span {
-  color: black;
-  font-size: 20px;
-  margin-left: 90px;
-}
 
-.event-date span .unlike-btn {
-  color: #ff1a75;
-  font-size: 24px;
-  margin-left: 90px;
-}
-
-.event-date span .like-btn {
-  color: gray;
-  font-size: 24px;
-  margin-left: 90px;
-}
 
 .event-title {
   color: orange;
@@ -133,7 +116,7 @@ p {
 }
 
 .piece {
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
 }
 
 
@@ -230,6 +213,11 @@ p {
   .userform {
     max-width: 100%;
     margin: auto;
+  }
+
+  #existing-iframe-example {
+    max-width: 100%;
+    max-height: auto;
   }
 
 }
