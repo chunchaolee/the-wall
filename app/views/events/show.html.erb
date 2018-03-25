@@ -2,16 +2,12 @@
   <div class="col-md-10 offset-md-1">
     <div class="row">
       
+
       <!-- img //start -->
-      <div class="col-lg-6 col-md-12">
-        <div class="img">
-          <% if @event.img %>
-            <%= image_tag(@event.img, width: "400", height: "300", class: 'rounded mx-auto d-block img-fluid') %>
-          <% else %>
-            <%= image_tag("http://via.placeholder.com/400x300",class: 'rounded mx-auto d-block img-fluid') %>
-          <% end %>
-        </div>
-      </div> <!-- img //end -->
+      <div class="col-lg-6 col-md-12 img">
+        <%= image_tag @event.img, width: "400", height: "300",class: "rounded mx-auto d-block img-fluid" if @event.img? %>
+        <%= image_tag "http://via.placeholder.com/400x300", class: "rounded mx-auto d-block img-fluid"  unless @event.img? %> 
+      </div><!-- img //end -->
 
       <div class="col-lg-6 col-md-12 text-center">
         <span class="text-center">
