@@ -3,7 +3,8 @@
     <div class="row">
       
       <div class="col-lg-6 col-md-12 event-img">
-        <img src="http://via.placeholder.com/400x300">
+        <%= image_tag @event.img, class: "img-responsive center-block" if @event.img?%>
+        <%= image_tag "http://via.placeholder.com/400x300", class: "img-responsive center-block img-rounded"  unless @event.img?%> 
       </div>
 
       <div class="col-lg-6 col-md-12">
