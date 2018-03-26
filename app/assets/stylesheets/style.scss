@@ -9,15 +9,26 @@ h5, h6 {
 
 .like-btn {
   color: gray;
-  margin-left: 70px;
+  margin-left: 30px;
   font-size: 25px;
+}
+
+.like-btn:hover, .like-btn:focus {
+  color: #0056b3;
+  text-decoration: none;
 }
 
 .unlike-btn {
   color: #ff1a75;
-  margin-left: 70px;
+  margin-left: 30px;
   font-size: 25px;
 }
+
+.unlike-btn:hover, .unlike-btn:focus {
+  color: #0056b3;
+  text-decoration: none;
+}
+
 
 /*------ event index ------*/
 
@@ -64,7 +75,7 @@ p {
   margin-bottom: 0;
 }
 
-.search-select, .search-search, .search-submit {
+.search-date, .search-select, .search-search, .search-submit {
   margin-bottom: 20px;
 }
 
@@ -80,8 +91,6 @@ p {
   color: #538cc6;
   margin: 10px auto 10px auto;
 }
-
-
 
 .event-title {
   color: orange;
@@ -207,6 +216,71 @@ p {
 }
 
 
+/*------ event posts ------*/
+
+.post {
+  max-width: 100%;
+  min-height: 450px;
+  border: solid 1px lightgray;
+  margin: 30px 20px;
+}
+
+.phead {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.post .pdate {
+  color: #538cc6;
+  font-weight: bold;
+  font-size: 21px;
+}
+
+.ptitle {
+  margin-top: 10px;
+}
+
+.ptitle a {
+  color: orange;
+  font-weight: bold;
+  font-size: 21px;
+}
+
+.interest span{
+  color: white;
+  font-size: 16px;
+}
+
+.musicpiece {
+  max-width: 100%;
+  max-height: 350px;
+}
+
+.post-info {
+  padding: 20px 0 0 50px;
+}
+
+.post-img {
+  height: 100%;
+}
+
+.event-info .interest .like-btn {
+  margin-left: 10px;
+}
+
+.event-info .interest .unlike-btn {
+  margin-left: 10px;
+}
+
+.post .row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.carousel-inner {
+  margin: 10px 10px;
+}
+
 
 /*------ viewport ------*/
 
@@ -222,53 +296,15 @@ p {
     max-height: auto;
   }
 
-}
+  .post {
+    max-width: 100%;
+    min-height: 680px;
+    border: solid 1px lightgray;
+    margin: 20px 0;
+  }
 
-/*------ event posts ------*/
+  .carousel-inner {
+    margin: 0 0;
+  }
 
-.post {
-  width: 730px;
-  height: 440px;
-  border: solid 1px lightgray;
-  margin-bottom: 50px;
-}
-
-.post .pdate {
-  color: #538cc6;
-  font-weight: bold;
-  font-size: 21px;
-  padding: 10px 0 0 30px;
-}
-
-.ptitle {
-  margin-top: 10px;
-}
-
-.ptitle a {
-  color: orange;
-  font-weight: bold;
-  font-size: 21px;
-}
-
-.interest {
-  margin-top: 10px;
-  font-size: 21px;
-}
-
-.post .unlike-btn {
-  color: #ff1a75;
-  font-size: 24px;
-}
-
-.post .like-btn {
-  color: gray;
-  font-size: 25px;
-}
-
-.musicpiece {
-  padding: 20px 0 0 30px;
-}
-
-.post-info {
-  padding: 20px 0 0 50px;
 }
