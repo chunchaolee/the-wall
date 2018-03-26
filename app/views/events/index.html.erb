@@ -9,14 +9,11 @@
           <div class="form-row form-group">
 
             <div class="search-date col-md-4 col-sm-12">
-              <div class="col-sm-12">
-                <%= f.label :date, '日期:' %>
-                <%= f.date_field :date_gteq %>
-              </div>
-              <div class="col-sm-12">
-                <%= f.label :date, '至:' %>
-                <%= f.date_field :date_lteq %>
-              </div>
+              <%= f.label :date, '日期:' %>
+              <%= f.date_field :date_gteq %>
+
+              <%= f.label :date, '至:' %>
+              <%= f.date_field :date_lteq %>
             </div>
 
             <div class="search-search col-md-6 col-sm-12">
