@@ -40,7 +40,7 @@
                 <th scope="row"><%= event.id %></th>
                 <td><%= event.date %></td>
                 <td><%= link_to event.title, event_path(event) %></td>
-                <td><%= event.time.to_s.slice(11..15) %></td>
+                <td><%= event.time.slice(0..4) %></td>
                 <td><%= event.artist_name %></td>
                 <td><%= event.city %></td>
                 <td><%= event.stage %></td>
@@ -62,9 +62,6 @@
         <%= search_form_for @q, url: admin_events_path do |f| %>
           <%= f.label :title, '活動名稱:' %>
           <%= f.search_field :title_cont, class: "form-control" %><br />
-
-          <%= f.label :date, '日期:' %>
-          <%= f.search_field :date_cont, class: "form-control" %><br />
 
           <%= f.label :artist_name, '演出者:' %>
           <%= f.search_field :artist_name_cont, class: "form-control" %><br />

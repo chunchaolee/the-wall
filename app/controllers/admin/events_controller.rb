@@ -9,7 +9,7 @@ class Admin::EventsController < ApplicationController
     @events = Event.all.order(date: :desc)
     # ransack
     @q = Event.ransack(ransack_params)
-    @events = @q.result(distinct: true)
+    @events = @q.result(distinct: true).order(date: :desc)
   end
 
   def update

@@ -4,6 +4,7 @@ class InterestsController < ApplicationController
     @interest = current_user.interests.build(event_id: params[:event_id])
 
     if @interest.save
+      NotificationMailer.event_notification(@interest).deliver_now
       redirect_back(fallback_location: root_path)
     else
       flash[:alert] = @interest.errors.full_messages.to_sentence

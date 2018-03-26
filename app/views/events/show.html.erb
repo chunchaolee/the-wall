@@ -21,55 +21,60 @@
         <h4 class="event-title"><%= @event.title %></h4>
         <div class="event-info">演出者 <span><%= @event.artist_name %></span></div>
         <!-- <div class="event-info">票價 <span></span></div> -->
-        <div class="event-info">地點 <span><%= @event.city %></span></div>
+        <div class="event-info">城市 <span><%= @event.city %></span></div>
+        <div class="event-info">地點 <span><%= @event.stage %></span></div>
         <div class="event-info time">時間 
           <% if @event.time == nil %>
             <span><%= @event.time %></span>
           <% elsif %>
-            <span><%= @event.time.to_s.slice(11..15) %></span>
+            <span><%= @event.time.slice(0..4) %></span>
           <% end %>
         </div>
       </div>
 
       <div class="col-md-12"><hr id="event-hr"></div>
+      <div class="col-md-12"><h3 class="event-artist"><%= @event.artist_name %></h3></div>
       
-      <div class="col-md-12">
-        <h3 class="event-artist"><%= @event.artist_name %></h3>
+      
+      <!-- details //start -->
+      <div class="col-md-7">
         <div class="subtitle"><i>樂團/表演介紹</i></div>
         <p class="event-detail"><%= @event.detail %></p>
       </div>
-      
-      <div class="col-md-12">
+      <!-- details //end -->
+
+      <!-- YT&spotify //start -->
+      <div class="col-md-5">
         <div class="subtitle"><strong><i>作品欣賞</i></strong></div>
         <div class="row">
-          <div class="col-lg-7 col-md-12 piece text-center">
+          <div class="col-md-12 col-sm-12 piece text-center">
             <div class="piece">【Youtube】</div>
             <iframe id="existing-iframe-example"
-                    width="500" height="360"
+                    width="450" height="230"
                     src="<%= @event.video %>"
                     frameborder="0"
                     style="border: none"
             ></iframe>
-          </div>
+          </div><br />
           <!-- spotify //start -->
-          <div class="col-lg-5 col-md-12 piece text-center">
-            <div class="piece">【Spotify】</div>
+          <% if  @spotify_artist_id != nil %> <!-- 辨識有無spotify作品 //start-->
+            <div class="col-md-12 col-sm-12 piece text-center">
+              <div class="piece">【Spotify】</div>
 
-            <% if  @spotify_artist_id != nil %> <!-- 辨識有無spotify作品 //start-->
-              <!-- iframe of spotify follow button -->
-              <iframe src="https://open.spotify.com/follow/1/?uri=spotify:artist:<%= @spotify_artist_id %>&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
-              <hr>
+                <!-- iframe of spotify follow button -->
+                <iframe src="https://open.spotify.com/follow/1/?uri=spotify:artist:<%= @spotify_artist_id %>&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
+                <hr>
 
-              <!-- iframe of spotify playlist -->
-              <iframe src="https://open.spotify.com/embed/artist/<%= @spotify_artist_id %>" width="260" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            <% else %>
-              <div class="piece">-暫無Spotify作品-</div>
-            <% end %><!-- 辨識有無spotify作品 //end-->
-          </div>
+                <!-- iframe of spotify playlist -->
+                <iframe src="https://open.spotify.com/embed/artist/<%= @spotify_artist_id %>" width="260" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+            </div>
+          <% end %><!-- 辨識有無spotify作品 //end-->
           <!-- spotify //end -->
         </div>
       </div>
+      <!-- YT&spotify //end -->
 
-    </div>
+    </div> <!-- .row //end -->
   </div>
 </div>
