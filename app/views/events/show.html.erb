@@ -27,7 +27,7 @@
           <% if @event.time == nil %>
             <span><%= @event.time %></span>
           <% elsif %>
-            <span><%= @event.time.strftime("%H:%M") %></span>
+            <span><%= @event.time.slice(0..4) %></span>
           <% end %>
         </div>
       </div>

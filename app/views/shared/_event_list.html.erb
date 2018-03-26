@@ -22,7 +22,7 @@
         <% if object.time == nil %>
           <span><%= object.time %></span>
         <% else %>
-          <span><%= object.time.strftime("%H:%M") %></span>
+          <span><%= object.time.slice(0..4) %></span>
         <% end %>
       </div>
      <% end %>
