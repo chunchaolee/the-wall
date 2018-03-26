@@ -28,7 +28,7 @@ class Event < ApplicationRecord
     '公館河岸留言': '公館河岸留言'
   }
 
-  def self.get_spotify_data(artist_name)
+  def get_spotify_data(artist_name)
 
     if artist_name != nil
       require 'rspotify'
@@ -39,14 +39,14 @@ class Event < ApplicationRecord
 
   end
 
-  def load_spotify_artist_id
-    if self.spotify_artist_id == nil
-      spotify_data = Event.get_spotify_data(artist_name)
+  def load_spotify_artist_id(event)
+    if event.spotify_artist_id == nil
+      spotify_data = event.get_spotify_data(event.artist_name)
       if spotify_data == nil
-        self.spotify_artist_id = nil
+        event.spotify_artist_id = nil
       else
-        self.spotify_artist_id = spotify_data.id
-        self.save
+        event.spotify_artist_id = spotify_data.id
+        event.save
       end
     end
   end
