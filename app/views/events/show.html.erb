@@ -21,12 +21,13 @@
         <h4 class="event-title"><%= @event.title %></h4>
         <div class="event-info">演出者 <span><%= @event.artist_name %></span></div>
         <!-- <div class="event-info">票價 <span></span></div> -->
-        <div class="event-info">地點 <span><%= @event.city %></span></div>
+        <div class="event-info">城市 <span><%= @event.city %></span></div>
+        <div class="event-info">地點 <span><%= @event.stage %></span></div>
         <div class="event-info time">時間 
           <% if @event.time == nil %>
             <span><%= @event.time %></span>
           <% elsif %>
-            <span><%= @event.time.to_s.slice(11..15) %></span>
+            <span><%= @event.time.strftime("%H:%M") %></span>
           <% end %>
         </div>
       </div>
