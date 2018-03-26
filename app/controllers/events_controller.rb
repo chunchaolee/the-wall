@@ -45,7 +45,7 @@ class EventsController < ApplicationController
   def posts
     # ransack
     @q = Event.ransack(ransack_params)
-    @events = @q.result(distinct: true).order(created_at: :desc)
+    @events = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(5)
     @popular_events = Event.all.order(interests_count: :desc).limit(5)
   end
 
