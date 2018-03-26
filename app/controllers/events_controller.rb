@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  ALLOW_QUERIES = %w[s artist_name_cont title_cont city_cont date_cont time_cont stage_eq stage_cont views_count interests_count detail_cont artist_name_or_title_or_city_or_detail_cont].freeze
+  ALLOW_QUERIES = %w[s artist_name_cont title_cont city_cont date_cont time_cont stage_eq stage_cont views_count interests_count detail_cont artist_name_or_title_or_city_or_detail_cont date_gteq date_lteq].freeze
 
   def index
     @events = Event.all.order(date: :desc)
@@ -28,7 +28,7 @@ class EventsController < ApplicationController
       artist_name = @event.artist_name
       
       if @event.spotify_artist_id == nil
-        @spotify_data = Event.get_spotify_data(artist_name)
+        @spotify_data = @event.get_spotify_data(artist_name)
         if @spotify_data == nil
           @spotify_artist_id = nil
         else
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
   def posts
     # ransack
     @q = Event.ransack(ransack_params)
-    @events = @q.result(distinct: true).order(created_at: :desc)
+    @events = @q.result(distinct: true).order(created_at: :desc).limit(5)
     @popular_events = Event.all.order(interests_count: :desc).limit(5)
   end
 
