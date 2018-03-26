@@ -7,6 +7,10 @@ h5, h6 {
   margin: 0;
 }
 
+.row {
+  margin-bottom: 30px;
+}
+
 .like-btn {
   color: gray;
   margin-left: 30px;
@@ -126,9 +130,11 @@ p {
   word-wrap: break-word;
 }
 
-.piece {
-  margin-bottom: 20px;
+#existing-iframe-example {
+  max-width: 100%;
+  max-height: auto;
 }
+
 
 
 /*------ user login ------*/
