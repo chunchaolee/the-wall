@@ -37,42 +37,57 @@
       
       
       <!-- details //start -->
-      <div class="col-md-7">
-        <div class="subtitle"><i>樂團/表演介紹</i></div>
-        <p class="event-detail"><%= @event.detail %></p>
-      </div>
+      <% if @event.video == nil && @spotify_artist_id == nil %>
+        <div class="col-md-12">
+          <div class="subtitle"><i>樂團/表演介紹</i></div>
+          <p class="event-detail"><%= @event.detail %></p>
+        </div>
+      <% else %>
+        <div class="col-md-7">
+          <div class="subtitle"><i>樂團/表演介紹</i></div>
+          <p class="event-detail"><%= @event.detail %></p>
+        </div>
+      <% end %>
       <!-- details //end -->
 
       <!-- YT&spotify //start -->
-      <div class="col-md-5">
-        <div class="subtitle"><strong><i>作品欣賞</i></strong></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 piece text-center">
-            <div class="piece">【Youtube】</div>
-            <iframe id="existing-iframe-example"
-                    width="450" height="230"
-                    src="<%= @event.video %>"
-                    frameborder="0"
-                    style="border: none"
-            ></iframe>
-          </div><br />
-          <!-- spotify //start -->
-          <% if  @spotify_artist_id != nil %> <!-- 辨識有無spotify作品 //start-->
-            <div class="col-md-12 col-sm-12 piece text-center">
-              <div class="piece">【Spotify】</div>
+      <% if @event.video || @spotify_artist_id != nil %>
+        <div class="col-md-5">
+          <div class="subtitle"><strong><i>作品欣賞</i></strong></div>
+          <div class="row">
 
-                <!-- iframe of spotify follow button -->
-                <iframe src="https://open.spotify.com/follow/1/?uri=spotify:artist:<%= @spotify_artist_id %>&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
-                <hr>
+            <!-- YT //start -->
+            <% if @event.video %>
+              <div class="col-md-12 col-sm-12 piece text-center">
+                <div class="piece">【Youtube】</div>
+                <iframe id="existing-iframe-example"
+                        width="450" height="230"
+                        src="<%= @event.video %>"
+                        frameborder="0"
+                        style="border: none"
+                ></iframe>
+              </div><br />
+            <% end %>
+            <!-- YT //end -->
 
-                <!-- iframe of spotify playlist -->
-                <iframe src="https://open.spotify.com/embed/artist/<%= @spotify_artist_id %>" width="260" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <!-- spotify //start -->
+            <% if  @spotify_artist_id != nil %> <!-- 辨識有無spotify作品 //start-->
+              <div class="col-md-12 col-sm-12 piece text-center">
+                <div class="piece">【Spotify】</div>
 
-            </div>
-          <% end %><!-- 辨識有無spotify作品 //end-->
-          <!-- spotify //end -->
+                  <!-- iframe of spotify follow button -->
+                  <iframe src="https://open.spotify.com/follow/1/?uri=spotify:artist:<%= @spotify_artist_id %>&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
+                  <hr>
+
+                  <!-- iframe of spotify playlist -->
+                  <iframe src="https://open.spotify.com/embed/artist/<%= @spotify_artist_id %>" width="260" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+              </div>
+            <% end %><!-- 辨識有無spotify作品 //end-->
+            <!-- spotify //end -->
+          </div>
         </div>
-      </div>
+      <% end %>
       <!-- YT&spotify //end -->
 
     </div> <!-- .row //end -->
