@@ -1,5 +1,31 @@
 namespace :dev do
 
+  # fetch artists from the wall
+  task fetch_artists: :environment do
+    Artist.destroy_all
+
+    for i in 1..1785 do
+      url = "https://api-staging.thewall.tw/artists/" + "#{i}"
+
+      begin
+       response = RestClient.get(url)
+      rescue RestClient::ExceptionWithResponse => err
+        err.response
+        next
+      end
+      
+      data = JSON.parse(response.body)
+      Artist.create!(
+        name: data["name"],
+        detail: data["profile"] != nil,
+        thewall_artist_id: data["id"]
+      )
+      puts "save artist #{data["id"]}"
+    end
+    
+    puts "now there are #{Artist.all.size} artists"
+  end
+
   # fetch youtube videos
   task fetch_video: :environment do
 

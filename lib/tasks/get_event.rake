@@ -185,4 +185,3 @@ namespace :get_event do
     end
   end
 end
-
