@@ -92,7 +92,7 @@ namespace :get_event do
 
   # add find_artist_name and fetch_video 
   task fb_event_new: :environment do
-    Event.destroy_all
+    # Event.destroy_all
     # access_token and other values aren't required if you set the defaults as described above
     
     # local用
