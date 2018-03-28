@@ -1,5 +1,9 @@
-<h1>Notification#event_notification</h1>
-
 <p>
-  <%= @greeting %>, find me in app/views/notification_mailer/event_notification.html.erb
+  Hi <%= @user.name %>,
+</p>
+<blockquote>
+  The event [<%= @event.title %>] will start at <%= @event.date %>
+</blockquote>
+<p>
+  Hope you enjoy this event!! 
 </p>
