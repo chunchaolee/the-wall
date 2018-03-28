@@ -92,7 +92,7 @@ namespace :get_event do
 
   # add find_artist_name and fetch_video 
   task fb_event_new: :environment do
-    # Event.destroy_all
+    Event.destroy_all
     # access_token and other values aren't required if you set the defaults as described above
     
     # local用
@@ -130,14 +130,38 @@ namespace :get_event do
           # 活動若已存在Event, 則跳過
           next if Event.exists?(special_id: temp["id"])
 
-          # 比對 detail 與 artist name
+          # 比對 title/detail 的 artist name
           temp_name = nil
           Artist.all.each do |artist|
-            if temp["description"].include?(artist.name)
+            match_name = artist.name.strip()
+            title = temp["name"].strip()
+            if artist.name != nil && title.include?(match_name)
               temp_name = artist.name
+              puts temp_name
               break
+            else
+              details = temp["description"].strip().split(/\n/).each do |line|
+                match_name = artist.name.strip()
+                # puts temp["description"]
+                if artist.name != nil && line.include?(match_name)
+                  temp_name = artist.name
+                  puts temp_name
+                  break
+                end
+              end
             end
           end
+
+          # # 比對 detail 與 artist name
+          # temp_name = nil
+          # Artist.all.each do |artist|
+          #   # puts artist.name
+          #   # puts temp["description"]
+          #   if artist.name != nil && temp["description"].include?(artist.name)
+          #     temp_name = artist.name
+          #     break
+          #   end
+          # end
 
           # fetch youtube video
           if temp_name != nil  
@@ -176,6 +200,7 @@ namespace :get_event do
           video: temp_video,
           img: temp["cover"] != nil ?temp["cover"]["source"] : nil
             )
+          puts temp_name
           puts "save to event"  
         end
       puts "Finished for #{page_name}"
