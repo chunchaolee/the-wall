@@ -144,8 +144,9 @@
                 </div>
                 <div class="event-info">收藏 
                   <span class="interest text-center">
-                    <span><%= render partial: "shared/interest", locals: {object: event} %></span>
-                    <span class="badge badge-dark"><%= event.interests_count %></span>
+                    <span id="interest-<%= event.id %>">
+                      <%= render partial: "shared/interest", locals: {object: event} %>
+                    </span>
                   </span>
                 </div>
               </div>

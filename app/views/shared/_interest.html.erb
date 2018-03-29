@@ -1,9 +1,13 @@
 <% if current_user %>
   <% if current_user.is_interested?(object) %>
-    <%= link_to '♥', interest_path(object), method: :delete, class: "unlike-btn" %>
+    <%= link_to interest_path(object),remote: true, method: :delete, class: "unlike-btn" do %>
+      ♥ <%= content_tag :span, object.interested_users.size , class: "badge badge-danger new" %>
+    <% end %>
   <% else %>
-    <%= link_to '♥', interests_path(event_id: object), method: :post, class: "like-btn" %>
-  <% end %>  
+    <%= link_to interests_path(event_id: object), remote: true, method: :post, class: "like-btn" do %>
+      ♥ <%= content_tag :span, object.interested_users.size, class: "badge badge-dark" %>
+    <% end %>
+  <% end %>
 <% else %>
     <%= link_to '♥', new_user_session_path, class: "like-btn" %>
 <% end %>
