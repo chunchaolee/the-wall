@@ -59,7 +59,7 @@
                   <%= event.date %>
                 </span>
                 <span class="col-md-8 ptitle">
-                  <%= link_to event.title, event_path(event)%>
+                  <br /><%= link_to event.title, event_path(event)%>
                 </span>
               </div>
 
@@ -132,7 +132,7 @@
               </div>
 
               <div class="col-md-4 post-info">
-                <div class="event-info">演出者 <span><%= event.artist_name %></span></div>
+                <div class="event-info">演出者 <span><strong><%= event.artist_name %></strong></span></div>
                 <div class="event-info">城市 <span><%= event.city %></span></div>
                 <div class="event-info">地點 <span><%= event.stage %></span></div>
                 <div class="event-info time">時間 

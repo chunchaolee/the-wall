@@ -58,26 +58,27 @@ h5, h6 {
 
 
 
-.event h5 {
+.event h6 {
   margin: 3px 0;
 }
 
-.event h5 a {
+.event h6 a {
   color: orange;
 }
 
 /* 爬蟲資料進來後刪掉 (用上面的即可) */
-.event h5 {
+.event h6 {
   color: orange;
 }
 
-.event .place, .event .time {
+.event .place, .event .time , .event .artist {
   color: gray;
 }
 
-.event .place span, .event .time span {
+.event .place span, .event .time span , .event .artist span {
   color: #79a6d2;
   margin-left: 10px;
+  font-size: 1.3rem;
 }
 
 p {
@@ -138,6 +139,10 @@ p {
 #existing-iframe-example {
   max-width: 100%;
   max-height: auto;
+}
+
+.piece {
+  margin-bottom: 30px;
 }
 
 
@@ -254,7 +259,7 @@ p {
 .ptitle a {
   color: orange;
   font-weight: bold;
-  font-size: 21px;
+  font-size: 18px;
 }
 
 .interest span{
