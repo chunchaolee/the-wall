@@ -48,16 +48,19 @@ Introduction
 
 <h2 id="1">1. 入門</h2>
 首先將Rails專案透過git clone下載到本地端(local)
+
 ```
   $ git clone https://github.com/chunchaolee/the-wall
 ```
- 
+
 接著執行`bundle install`安裝它。
+
 ```
   $ bundle install
 ```
 
 安裝完後，您需要run migration來建立tables
+
 ```
   $ rails db:migrate
 ```
@@ -84,7 +87,7 @@ Introduction
 ```
 
 <h4 id="2.2">2.2 facebook.yml設定</h4>
-接著我們需要先設定`facebook.yml`檔案的內容，請至[facebook for developers](https://developers.facebook.com/apps)申請並取得app_id、seceret及API token，取得後請在 `facebook.yml`檔案內輸入以下內容：
+接著我們需要先設定`facebook.yml`檔案的內容，請至[facebook for developers](https://developers.facebook.com/apps) 申請並取得app_id、seceret及API token，取得後請在 `facebook.yml`檔案內輸入以下內容：
 
 ```
 development:
@@ -94,7 +97,7 @@ development:
 ```
 
 <h4 id="2.3">2.3 spotify.yml設定</h4>
-另外 `spotify.yml` 的設定也一樣，請至[Spotify Developer](https://developer.spotify.com/my-applications/)申請並取得client_id及client_secret，取得後請在 `spotify.yml` 檔案內輸入以下內容：
+另外 `spotify.yml` 的設定也一樣，請至[Spotify Developer](https://developer.spotify.com/my-applications/) 申請並取得client_id及client_secret，取得後請在 `spotify.yml` 檔案內輸入以下內容：
 
 ```
 development:
