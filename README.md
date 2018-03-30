@@ -67,7 +67,7 @@ Introduction
 
 
 <h2 id="2">2. 環境設定</h2>
-<h4 id="2.1">2.1 devise.rb設定</h4>
+<h3 id="2.1">2.1 devise.rb設定</h3>
 
 在本地端使用開發環境時請，請在 `config/` 新增 `facebook.yml` 及 `spotify.ym` 兩個檔案，
 然後開啟 `config/initializers/devise.rb` 檔案，啟用下方程式碼，才能透過 `facebook.yml` 載入串接Facebook API所需要的app_id及secret。
@@ -88,7 +88,7 @@ Introduction
   scope: 'user-read-private playlist-read-private user-read-email user-follow-modify user-library-modify'
 ```
 
-<h4 id="2.2">2.2 facebook.yml設定</h4>
+<h3 id="2.2">2.2 facebook.yml設定</h3>
 
 接著我們需要先設定 `facebook.yml` 檔案的內容，請至[facebook for developers](https://developers.facebook.com/apps) 申請並取得app_id、seceret及API token，取得後請在 `facebook.yml` 檔案內輸入以下內容：
 
@@ -99,7 +99,7 @@ development:
   api_token: 輸入取得的API token
 ```
 
-<h4 id="2.3">2.3 spotify.yml設定</h4>
+<h3 id="2.3">2.3 spotify.yml設定</h3>
 
 另外 `spotify.yml` 的設定也一樣，請至[Spotify Developer](https://developer.spotify.com/my-applications/) 申請並取得client_id及client_secret，取得後請在 `spotify.yml` 檔案內輸入以下內容：
 
@@ -109,16 +109,16 @@ development:
   client_secret: 輸入取得的client_secret
 ```
 
-<h4 id="2.4">2.4 youtube.yml設定</h4>
+<h3 id="2.4">2.4 youtube.yml設定</h3>
 
-由於會需要Youtube影音串流服務，所以請新增 `youtube.yml` ，並請將申請取得的app_id輸入 `youtube.yml` 檔案中，
+由於會需要Youtube影音串流服務，所以請新增 `youtube.yml` ，請至[Youtube Data API v3](https://console.developers.google.com/apis/library/youtube.googleapis.com/?id=125bab65-cfb6-4f25-9826-4dcc309bc508&showFTMessage=false) 申請app_id，並請將申請取得的app_id輸入 `youtube.yml` 檔案中，
 
 ```
 development:
   app_id: 輸入取得的app_id
 ```
 
-<h4 id="2.5">2.5 email.yml設定</h4>
+<h3 id="2.5">2.5 email.yml設定</h3>
 
 平台功能自動執行email notification，需要新增 `email.yml` ，並進行以下設置，
 
@@ -129,7 +129,7 @@ development:
   GMAIL_PASSWORD: "發出通知的email密碼"
 ```
 
-<h4 id="2.6">2.6 callback url設定</h4>
+<h3 id="2.6">2.6 callback url設定</h3>
 
 由於平台提供Facebook & Spotify 登入功能，所以在申請Facebook & Spotify APP Key的同時，
 也請將callback url一併設定好，格式如下，
@@ -147,7 +147,7 @@ http://localhost:3000/users/auth/spotify/callback
 
 
 <h2 id="3">3. Rake設定/使用</h2>
-<h4 id="3.1">3.1 使用dev.rake</h4>
+<h3 id="3.1">3.1 使用dev.rake</h3>
 
 透過 `dev.rake` 內建立的create_artists task自動建立artist table
 
@@ -155,7 +155,7 @@ http://localhost:3000/users/auth/spotify/callback
   $ rails dev:create_artists
 ```
 
-<h4 id="3.2">3.2 設定並執行get_event.rake</h4>
+<h3 id="3.2">3.2 設定並執行get_event.rake</h3>
 在本地端得開發環境需啟用檔案內以下程式碼，
 
 ```
@@ -191,7 +191,7 @@ http://localhost:3000/users/auth/spotify/callback
   $ rails get_event:fb_event_new
 ```
 
-<h4 id="3.3">3.3 使用notification.rake</h4>
+<h3 id="3.3">3.3 使用notification.rake</h3>
 系統中提供進入最後一週黃金決策期時，收藏該活動的所有會員都會再次收到系統自動發送的活動通知就是需要透過該rake執行task自動發送活動日期小於等於7天的活動通知，執行方式如下
 
 ```
