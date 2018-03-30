@@ -30,19 +30,19 @@ Introduction
 
 目錄
 ---
-[1. 入門](#1)
-[2. 環境設定](#2)
-* [2.1 devise.rb設定](#2.1)
-* [2.2 facebook.yml設定](#2.2)
-* [2.3 spotify.yml設定](#2.3)
-* [2.4 youtube.yml設定](#2.4)
-* [2.5 email.yml設定](#2.5)
-* [2.6 callback url設定](#2.6)
-[3. Rake設定](#3)
-* [3.1 使用dev.rake](#3.1)
-* [3.2 設定並執行get_event.rake](#3.2)
-* [3.3 使用notification.rake](#3.3)
-[4. 備註](#4)
+* [1. 入門](#1)
+* [2. 環境設定](#2)
+    * [2.1 devise.rb設定](#2.1)
+    * [2.2 facebook.yml設定](#2.2)
+    * [2.3 spotify.yml設定](#2.3)
+    * [2.4 youtube.yml設定](#2.4)
+    * [2.5 email.yml設定](#2.5)
+    * [2.6 callback url設定](#2.6)
+* [3. Rake設定](#3)
+    * [3.1 使用dev.rake](#3.1)
+    * [3.2 設定並執行get_event.rake](#3.2)
+    * [3.3 使用notification.rake](#3.3)
+* [4. 備註](#4)
 
 
 
@@ -84,7 +84,8 @@ Introduction
 ```
 
 <h4 id="2.2">2.2 facebook.yml設定</h4>
-接著我們需要先設定`facebook.yml`檔案的內容，請至[facebook for developers](https://developers.facebook.com/apps)申請並取得app_id、seceret及API token，取得後請在`facebook.yml`檔案內輸入以下內容：
+接著我們需要先設定`facebook.yml`檔案的內容，請至[facebook for developers](https://developers.facebook.com/apps)申請並取得app_id、seceret及API token，取得後請在 `facebook.yml`檔案內輸入以下內容：
+
 ```
 development:
   app_id: 輸入取得的app_id
@@ -93,7 +94,8 @@ development:
 ```
 
 <h4 id="2.3">2.3 spotify.yml設定</h4>
-另外`spotify.yml`的設定也一樣，請至[Spotify Developer](https://developer.spotify.com/my-applications/)申請並取得client_id及client_secret，取得後請在`spotify.yml`檔案內輸入以下內容：
+另外 `spotify.yml` 的設定也一樣，請至[Spotify Developer](https://developer.spotify.com/my-applications/)申請並取得client_id及client_secret，取得後請在 `spotify.yml` 檔案內輸入以下內容：
+
 ```
 development:
   client_id: 輸入取得的client_id
@@ -101,14 +103,16 @@ development:
 ```
 
 <h4 id="2.4">2.4 youtube.yml設定</h4>
-由於會需要Youtube影音串流服務，所以請新增`youtube.yml`，並請將申請取得的app_id輸入`youtube.yml`檔案中，
+由於會需要Youtube影音串流服務，所以請新增 `youtube.yml`，並請將申請取得的app_id輸入 `youtube.yml` 檔案中，
+
 ```
 development:
   app_id: 輸入取得的app_id
 ```
 
 <h4 id="2.5">2.5 email.yml設定</h4>
-平台功能自動執行email notification，需要新增`email.yml`，並進行以下設置，
+平台功能自動執行email notification，需要新增 `email.yml`，並進行以下設置，
+
 ```
 development:
   URL: "http://localhost:3000"
@@ -119,10 +123,14 @@ development:
 <h4 id="2.6">2.6 callback url設定</h4>
 由於平台提供Facebook & Spotify 登入功能，所以在申請Facebook & Spotify APP Key的同時，
 也請將callback url一併設定好，格式如下，
+
+
 ```
 <your-application-base-url>/<devise-entity>/auth/<provider>/callback
 ```
+
 舉個本地端的spotify callback url作為實際範例：
+
 ```
 http://localhost:3000/users/auth/spotify/callback
 ```
@@ -130,40 +138,51 @@ http://localhost:3000/users/auth/spotify/callback
 
 <h2 id="3">3. Rake設定/使用</h2>
 <h4 id="3.1">3.1 使用dev.rake</h4>
-透過`dev.rake`內建立的create_artists task自動建立artist table
+透過 `dev.rake` 內建立的create_artists task自動建立artist table
+
 ```
   $ rails dev:create_artists
 ```
 
 <h4 id="3.2">3.2 設定並執行get_event.rake</h4>
 在本地端得開發環境需啟用檔案內以下程式碼，
+
 ```
   fb_config = Rails.application.config_for(:facebook)
   @graph = Koala::Facebook::API.new(fb_config["api_token"])
 ```
+
 及
+
 ```
   yt_config = Rails.application.config_for(:youtube)
   url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
 ```
+
 並隱蔽或移除遠端用的程式碼，如下
+
 ```
   # heroku用
   # @graph = Koala::Facebook::API.new(ENV['FACEBOOK_API_TOKEN'])
 ```
+
 以及
+
 ```
   # heroku用
   # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
 
 ```
+
 上述程式碼啟用及隱蔽完成後，即可透過執行rake檔取得指定facebook events資料並自動呈現在平台頁面中，執行方式如下：
+
 ```
   $ rails get_event:fb_event_new
 ```
 
 <h4 id="3.3">3.3 使用notification.rake</h4>
 系統中提供進入最後一週黃金決策期時，收藏該活動的所有會員都會再次收到系統自動發送的活動通知就是需要透過該rake執行task自動發送活動日期小於等於7天的活動通知，執行方式如下
+
 ```
   $ rails notification:event
 ```
