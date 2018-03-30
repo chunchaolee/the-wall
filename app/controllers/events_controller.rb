@@ -6,7 +6,7 @@ class EventsController < ApplicationController
     @events = Event.all.order(date: :desc)
     # ransack
     @q = Event.ransack(ransack_params)
-    @events = @q.result(distinct: true).order(date: :desc).page(params[:page]).per(12)
+    @events = @q.result(distinct: true).order(date: :asc).page(params[:page]).per(12)
 
   end
 
