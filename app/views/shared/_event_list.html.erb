@@ -16,17 +16,11 @@
     </span>
   </div>
 
-  <div class="container-fluid">
-    <h5 class="text-center"><%= link_to object.title, event_path(object) %></h5>
+  <div class="container-fluid text-center">
+    <h6 class="text-center"><%= link_to object.title, event_path(object) %></h6>
+    <div class="artist">演出者 <br /><span><strong><%= object.artist_name %></strong></span></div>
     <% if flag %>
-      <div class="place">地點 <span><%= object.stage %></span></div>
-      <div class="time">時間 
-        <% if object.time == nil %>
-          <span><%= object.time %></span>
-        <% else %>
-          <span><%= object.time.slice(0..4) %></span>
-        <% end %>
-      </div>
+      <div class="place">地點 <br /><span><strong><%= object.stage %></strong></span></div>
      <% end %>
   </div>
 

@@ -2,6 +2,7 @@
 # require 'json'
 namespace :get_event do
   task fb_event: :environment do
+
     # access_token and other values aren't required if you set the defaults as described above
 
     # fb_config = Rails.application.config_for(:facebook)
@@ -92,6 +93,16 @@ namespace :get_event do
 
   # add find_artist_name and fetch_video 
   task fb_event_new: :environment do
+
+    # 刪除過期Event
+    @events = Event.all
+    @events.each do |event|
+      if event.date < Date.today
+        event.destroy
+        puts "Destroy the event"
+      end
+    end
+
     # Event.destroy_all
     # access_token and other values aren't required if you set the defaults as described above
     
@@ -109,7 +120,8 @@ namespace :get_event do
                   "RevolverTW",
                   #"%E5%A5%B3%E5%B7%AB%E5%BA%97-133362243371354", 粉絲團未公開資訊給API
                   "moonromantictw",
-                  "Riverside.Music"
+                  "Riverside.Music",
+                  "Kornertw"
                 ]
     # 獲取資訊: 活動
     node_type = "events?fields=id,name,description,place,start_time,cover" 
@@ -133,20 +145,22 @@ namespace :get_event do
           # 比對 title/detail 的 artist name
           temp_name = nil
           Artist.all.each do |artist|
-            match_name = artist.name.strip()
-            title = temp["name"].strip()
-            if artist.name != nil && title.include?(match_name)
+            match_name = artist.name
+            title = temp["name"].strip() if temp["name"] != nil
+            if artist.name != nil && temp["name"] != nil && title.include?(match_name)
               temp_name = artist.name
-              puts temp_name
+              puts temp_name + "find in title"
               break
             else
-              details = temp["description"].strip().split(/\n/).each do |line|
-                match_name = artist.name.strip()
-                # puts temp["description"]
-                if artist.name != nil && line.include?(match_name)
-                  temp_name = artist.name
-                  puts temp_name
-                  break
+              if temp["description"] != nil 
+                details = temp["description"].strip().split(/\n/).each do |line|
+                  match_name = artist.name.strip()
+                  # puts temp["description"]
+                  if artist.name != nil && line.include?(match_name)
+                    temp_name = artist.name
+                    puts temp_name + "find in detail"
+                    break
+                  end
                 end
               end
             end

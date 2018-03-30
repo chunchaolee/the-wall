@@ -19,7 +19,7 @@
           </h5>
         </span>
         
-        <h4 class="event-title"><%= @event.title %></h4>
+        <h5 class="event-title"><%= @event.title %></h5>
         <div class="event-info">演出者 <span><%= @event.artist_name %></span></div>
         <!-- <div class="event-info">票價 <span></span></div> -->
         <div class="event-info">城市 <span><%= @event.city %></span></div>
@@ -70,7 +70,7 @@
               </div><br />
             <% end %>
             <!-- YT //end -->
-
+            
             <!-- spotify //start -->
             <% if  @spotify_artist_id != nil %> <!-- 辨識有無spotify作品 //start-->
               <div class="col-md-12 col-sm-12 piece text-center">
