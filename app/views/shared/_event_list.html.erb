@@ -11,7 +11,9 @@
 
   <div class="date text-center">
     <%= object.date %>
-    <%= render partial: "shared/interest", locals: {object: object} %>
+    <span id="interest-<%= object.id %>" class="text-center">
+      <%= render partial: "shared/interest", locals: {object: object} %>
+    </span>
   </div>
 
   <div class="container-fluid">

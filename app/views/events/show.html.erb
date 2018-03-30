@@ -13,8 +13,9 @@
         <span class="text-center">
           <h5 class="event-date col-12">
             <span class="text-left"><%= @event.date %></sapn>
-            <%= render partial: "shared/interest", locals: {object: @event} %>
-            <%= @event.interests_count %>
+            <span id="interest-<%= @event.id %>">
+              <%= render partial: "shared/interest", locals: {object: @event} %>
+            </span>
           </h5>
         </span>
         

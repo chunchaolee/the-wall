@@ -1,0 +1,2 @@
+var interest = $("#interest-<%= @event.id %>");
+interest.html("<%= escape_javascript(render partial: 'shared/interest', locals: {object: @event}) %>");
