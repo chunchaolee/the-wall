@@ -68,8 +68,9 @@ Introduction
 
 <h2 id="2">2. 環境設定</h2>
 <h4 id="2.1">2.1 devise.rb設定</h4>
-在本地端使用開發環境時請，請在`config/`新增`facebook.yml`及`spotify.yml`兩個檔案，
-然後開啟`config/initializers/devise.rb`檔案，啟用下方程式碼，才能透過`facebook.yml`載入串接Facebook API所需要的app_id及secret。
+在本地端使用開發環境時請，請在 `config/` 新增 `facebook.yml` 及 `spotify.yml` 兩個檔案，
+然後開啟 `config/initializers/devise.rb` 檔案，啟用下方程式碼，才能透過 `facebook.yml` 載入串接Facebook API所需要的app_id及secret。
+
 ```
   fb_config = Rails.application.config_for(:facebook)
   config.omniauth :facebook,
