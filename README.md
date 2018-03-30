@@ -69,8 +69,8 @@ Introduction
 <h2 id="2">2. 環境設定</h2>
 <h3 id="2.1">2.1 devise.rb設定</h3>
 
-在本地端使用開發環境時請，請在 `config/` 新增 `facebook.yml` 及 `spotify.ym` 兩個檔案，
-然後開啟 `config/initializers/devise.rb` 檔案，啟用下方程式碼，才能透過 `facebook.yml` 載入串接Facebook API所需要的app_id及secret。
+在本地端使用開發環境時，請在rails專案資料夾 `config/` 新增 `facebook.yml` 及 `spotify.ym` 兩個檔案，
+然後開啟 `config/initializers/devise.rb` 檔案，啟用下方程式碼，才能在本地端透過 `facebook.yml` 載入串接Facebook API所需要的app_id及secret。
 
 ```
   fb_config = Rails.application.config_for(:facebook)
@@ -79,7 +79,8 @@ Introduction
   fb_config["secret"]
 ```
 
-一樣在`config/initializers/devise.rb`檔案，啟用下方程式碼，才能透過`spotify.yml`載入串接Spotify API所需要的client_id、client_secret。
+一樣在`config/initializers/devise.rb`檔案，啟用下方程式碼，才能在本地端透過`spotify.yml`載入串接Spotify API所需要的client_id、client_secret。
+
 ```
   spotify_config = Rails.application.config_for(:spotify)
   config.omniauth :spotify,
@@ -149,14 +150,14 @@ http://localhost:3000/users/auth/spotify/callback
 <h2 id="3">3. Rake設定/使用</h2>
 <h3 id="3.1">3.1 使用dev.rake</h3>
 
-透過 `dev.rake` 內建立的create_artists task自動建立artist table
+透過 `dev.rake` 內的create_artists task自動建立artist table
 
 ```
   $ rails dev:create_artists
 ```
 
 <h3 id="3.2">3.2 設定並執行get_event.rake</h3>
-在本地端得開發環境需啟用檔案內以下程式碼，
+在本地端開發環境執行task時，需啟用檔案內以下程式碼，
 
 ```
   fb_config = Rails.application.config_for(:facebook)
@@ -200,5 +201,5 @@ http://localhost:3000/users/auth/spotify/callback
 
 
 <h2 id="4">4. 備註</h2>
-以下提供實際上線的Web Application
+以下提供實際上線的Web Application供參考，
 [The Wall - Indie 音樂資訊平台](https://thewall-indiemusic.herokuapp.com/)
