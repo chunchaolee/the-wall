@@ -43,7 +43,7 @@ class Admin::EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:artist_name, :title, :date, :time, :stage, :video, :detail, :city, :stage)
+    params.require(:event).permit(:artist_name, :title, :date, :time, :stage, :video, :detail, :city, :stage, :spotify_artist_id)
   end
 
 end
