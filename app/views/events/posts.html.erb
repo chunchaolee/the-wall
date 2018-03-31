@@ -149,6 +149,14 @@
                     </span>
                   </span>
                 </div>
+
+                <!-- admin: edit -->
+                <% if current_user %>
+                  <% if current_user.admin? %>
+                    <%= link_to '編輯', edit_admin_event_path(event), class: "btn btn-outline-primary" %>
+                  <% end %>
+                <% end %>
+
               </div>
             </div>
           </div>
