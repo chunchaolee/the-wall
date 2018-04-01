@@ -1,5 +1,6 @@
 class Admin::EventsController < ApplicationController
   # 後台權限認證
+  before_action :authenticate_user!
   before_action :authenticate_admin
   before_action :set_event, only: [:edit, :update, :destroy]
 
