@@ -103,7 +103,7 @@ namespace :get_event do
       end
     end
 
-    Event.destroy_all
+    # Event.destroy_all
     # access_token and other values aren't required if you set the defaults as described above
     
     # local用
