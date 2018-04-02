@@ -103,7 +103,7 @@ namespace :get_event do
       end
     end
 
-    # Event.destroy_all
+    Event.destroy_all
     # access_token and other values aren't required if you set the defaults as described above
     
     # local用
@@ -144,11 +144,13 @@ namespace :get_event do
 
           # 比對 title/detail 的 artist name
           temp_name = nil
+          temp_artist_id = nil
           Artist.all.each do |artist|
             match_name = artist.name
             title = temp["name"].strip() if temp["name"] != nil
             if artist.name != nil && temp["name"] != nil && title.include?(match_name)
               temp_name = artist.name
+              temp_artist_id = artist.id
               puts temp_name + "find in title"
               break
             else
@@ -158,6 +160,7 @@ namespace :get_event do
                   # puts temp["description"]
                   if artist.name != nil && line.include?(match_name)
                     temp_name = artist.name
+                    temp_artist_id = artist.id
                     puts temp_name + "find in detail"
                     break
                   end
@@ -201,19 +204,28 @@ namespace :get_event do
             end
           end
 
-          # 建立活動
-          Event.create!(
-          artist_name: temp_name,
-          special_id: temp["id"],
-          title: temp["name"],
-          date: show_time,
-          time: temp["start_time"].split('T')[1],
-          city: temp["place"]["location"] != nil ? temp["place"]["location"]["city"] : nil,
-          detail: temp["description"] ,
-          stage: temp["place"]["name"],
-          video: temp_video,
-          img: temp["cover"] != nil ?temp["cover"]["source"] : nil
-            )
+          begin
+
+            # 建立活動
+            Event.create!(
+            artist_name: temp_name,
+            # artist_id: temp_artist_id,
+            special_id: temp["id"],
+            title: temp["name"],
+            date: show_time,
+            time: temp["start_time"].split('T')[1],
+            city: temp["place"]["location"] != nil ? temp["place"]["location"]["city"] : nil,
+            detail: temp["description"] ,
+            stage: temp["place"]["name"],
+            video: temp_video,
+            img: temp["cover"] != nil ?temp["cover"]["source"] : nil
+              )
+
+          rescue
+            puts $!
+            next
+          end
+
           puts temp_name
           puts "save to event"  
         end
