@@ -18,6 +18,9 @@ class Event < ApplicationRecord
   # 一個event可以對很多user送出notification
   has_many :notified_users, through: :notifications, source: :user
 
+  # 一個活動目前設定只會顯示一筆藝人資料
+  belongs_to :artist, optional: true
+
   # ransck
   STAGE = {
     'The Wall Live House': 'The Wall Live House',
