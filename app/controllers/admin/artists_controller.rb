@@ -147,6 +147,7 @@ class Admin::ArtistsController < ApplicationController
   def update_relative_events(artist)
     @events = artist.events
     @events.each do |event|
+      event.artist_name = artist.name
       if event.video != nil && event.video != "" && event.spotify_artist_id != nil && event.spotify_artist_id != ""
         event.save!
       elsif  event.video == nil || event.video == ""
@@ -197,6 +198,8 @@ class Admin::ArtistsController < ApplicationController
       else
         check_event_artist(artist)
       end
+      event.save!
+      
     end
   end
 
