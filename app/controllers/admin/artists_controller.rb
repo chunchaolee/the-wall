@@ -29,7 +29,7 @@ class Admin::ArtistsController < ApplicationController
       @artists = Artist.all
       render :index
     end
-    check_event_artist(@artist.name)
+    check_event_artist(@artist)
   end
 
   def update
@@ -71,25 +71,25 @@ class Admin::ArtistsController < ApplicationController
     @events.each do |event|
 
       if event.artist_name == nil || event.artist_name == ""
-        if event.title.include?(artist)
-          event.artist_name = artist
-          
+        if event.title.include?(artist.name)
+          event.artist_name = artist.name
+          event.artist_id = artist.id
           # YT
-          searching = artist
+          searching = artist.name
           # local用
           # yt_config = Rails.application.config_for(:youtube)
-          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
+          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
           # heroku用
-          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
+          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
           response = RestClient.get(URI::encode(url))
           data = JSON.parse(response.body)
           if data["items"] != []
             id = data["items"][0]["id"]["videoId"]
-            event.video = "https://www.youtube.com/embed/" + id + "?enablejsapi=1"
+            event.video = "https://www.youtube.com/embed/#{id}?enablejsapi=1"
           end
 
           # spotify
-          @spotify_data = event.get_spotify_data(artist)
+          @spotify_data = event.get_spotify_data(artist.name)
           if @spotify_data == nil
             @spotify_artist_id = nil
           else
@@ -98,25 +98,25 @@ class Admin::ArtistsController < ApplicationController
 
           event.save!
 
-        elsif event.detail.include?(artist)
-          event.artist_name = artist
-
+        elsif event.detail.include?(artist.name)
+          event.artist_name = artist.name
+          event.artist_id = artist.id
           # YT
-          serching = artist
+          serching = artist.name
           # local用
           # yt_config = Rails.application.config_for(:youtube)
-          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
+          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
           # heroku用
-          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
+          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
           response = RestClient.get(URI::encode(url))
           data = JSON.parse(response.body)
           if data["items"] != []
             id = data["items"][0]["id"]["videoId"]
-            event.video = "https://www.youtube.com/embed/" + id + "?enablejsapi=1"
+            event.video = "https://www.youtube.com/embed/#{id}?enablejsapi=1"
           end
 
           # spotify
-          @spotify_data = event.get_spotify_data(artist)
+          @spotify_data = event.get_spotify_data(artist.name)
           if @spotify_data == nil
             @spotify_artist_id = nil
           else
@@ -124,6 +124,7 @@ class Admin::ArtistsController < ApplicationController
           end
 
           event.save!
+              
         end
       end
 
@@ -134,11 +135,12 @@ class Admin::ArtistsController < ApplicationController
   def update_relative_events(artist)
     @events = artist.events
     @events.each do |event|
-      if event.video != nil && event.video != "" && event.spotify_artist_id != nil && event.spotify_artist_id != ""
+      if (event.video != nil && event.video != "" && event.spotify_artist_id != nil && event.spotify_artist_id != "") || ((event.video != nil && event.video != "") || (event.spotify_artist_id != nil && event.spotify_artist_id != ""))
         event.artist_name = artist.name
+        event.artist_id = artist.id
         event.save!
       else
-        check_event_artist(artist.name)
+        check_event_artist(artist)
       end
     end
   end
