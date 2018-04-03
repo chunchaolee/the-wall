@@ -209,7 +209,7 @@ namespace :get_event do
             # 建立活動
             Event.create!(
             artist_name: temp_name,
-            # artist_id: temp_artist_id,
+            artist_id: temp_artist_id,
             special_id: temp["id"],
             title: temp["name"],
             date: show_time,
