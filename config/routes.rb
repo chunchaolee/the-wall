@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     root "events#index"
     resources :events, except: [:show, :new, :create]
     resources :users, only: [:index, :destroy]
+    resources :artists
   end
   
 end

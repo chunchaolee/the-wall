@@ -52,13 +52,13 @@
       <!-- details //end -->
 
       <!-- YT&spotify //start -->
-      <% if @event.video || @spotify_artist_id != nil %>
+      <% if ( @event.video != nil && @event.video != "" ) || ( @spotify_artist_id != nil && @spotify_artist_id != "" ) %>
         <div class="col-md-5">
           <div class="subtitle"><strong><i>作品欣賞</i></strong></div>
           <div class="row">
 
             <!-- YT //start -->
-            <% if @event.video %>
+            <% if @event.video != nil && @event.video != ""  %>
               <div class="col-md-12 col-sm-12 piece text-center">
                 <div class="piece">【Youtube】</div>
                 <iframe id="existing-iframe-example"
@@ -72,7 +72,7 @@
             <!-- YT //end -->
             
             <!-- spotify //start -->
-            <% if  @spotify_artist_id != nil %> <!-- 辨識有無spotify作品 //start-->
+            <% if  @spotify_artist_id != nil && @spotify_artist_id != "" %> <!-- 辨識有無spotify作品 //start-->
               <div class="col-md-12 col-sm-12 piece text-center">
                 <div class="piece">【Spotify】</div>
 

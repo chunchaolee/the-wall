@@ -69,7 +69,7 @@
                   <div class="carousel-inner">
                     <% i = 0 %>
                     <!-- youtube -->
-                    <% if event.video != nil %>
+                    <% if event.video != nil && event.video != "" %>
                       <div class="carousel-item active">
                         <iframe id="existing-iframe-example"
                                       width="500" height="350"
@@ -86,7 +86,7 @@
                       <% event.load_spotify_artist_id(event) %>
                     <% end %>
 
-                    <% if event.spotify_artist_id != nil %>
+                    <% if event.spotify_artist_id != "" && event.spotify_artist_id != nil %>
                       <div class="carousel-item <%= "active" if i == 0 %>">
                         <iframe src="https://open.spotify.com/embed/artist/<%= event.spotify_artist_id %>" width="500" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media" class="musicpiece d-block w-100"></iframe>
                       </div>
