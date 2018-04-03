@@ -12,6 +12,9 @@
           <li class="nav-item">
             <%= link_to '使用者清單', admin_users_path, class: "nav-link" %>
           </li>
+          <li class="nav-item">
+            <%= link_to '藝人清單', admin_artists_path, class: "nav-link" %>
+          </li>
         </ul>
       
         <!-- Tabs //end -->
@@ -22,6 +25,7 @@
             <tr>
               <th scope="col"><%= sort_link(@q, :id, "#", default_order: :desc)%></th>
               <th scope="col"><%= sort_link(@q, :date, "活動日期", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :updated_at, "更新時間", default_order: :desc)%></th>
               <th scope="col"><%= sort_link(@q, :title, "活動名稱", default_order: :desc)%></th>
               <th scope="col"><%= sort_link(@q, :time, "活動時間", default_order: :desc)%></th>
               <th scope="col"><%= sort_link(@q, :artist_name, "演出者", default_order: :desc)%></th>
@@ -39,6 +43,7 @@
               <tr id="event-<%= event.id %>" >
                 <th scope="row"><%= event.id %></th>
                 <td><%= event.date %></td>
+                <td><%= event.updated_at.localtime.to_s(:db) %></td>
                 <td><%= link_to event.title, event_path(event) %></td>
                 <td><%= event.time.slice(0..4) %></td>
                 <td><%= event.artist_name %></td>
