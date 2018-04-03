@@ -77,10 +77,10 @@ class Admin::ArtistsController < ApplicationController
           # YT
           searching = artist
           # local用
-          yt_config = Rails.application.config_for(:youtube)
-          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
+          # yt_config = Rails.application.config_for(:youtube)
+          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
           # heroku用
-          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
+          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
           response = RestClient.get(URI::encode(url))
           data = JSON.parse(response.body)
           if data["items"] != []
@@ -104,10 +104,10 @@ class Admin::ArtistsController < ApplicationController
           # YT
           serching = artist
           # local用
-          yt_config = Rails.application.config_for(:youtube)
-          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
+          # yt_config = Rails.application.config_for(:youtube)
+          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
           # heroku用
-          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
+          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
           response = RestClient.get(URI::encode(url))
           data = JSON.parse(response.body)
           if data["items"] != []
