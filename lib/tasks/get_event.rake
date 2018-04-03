@@ -187,10 +187,10 @@ namespace :get_event do
 
             # local用
             # yt_config = Rails.application.config_for(:youtube)
-            # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
-
+            # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
+            
             # heroku用
-            url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
+            url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
 
 
             response = RestClient.get(URI::encode(url))
@@ -198,7 +198,7 @@ namespace :get_event do
 
             if data["items"] != []
               id = data["items"][0]["id"]["videoId"]
-              temp_video = "https://www.youtube.com/embed/" + id + "?enablejsapi=1"
+              temp_video = "https://www.youtube.com/embed/#{id}?enablejsapi=1"
             else
               puts "found no video"
             end
