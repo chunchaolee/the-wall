@@ -10,7 +10,7 @@ class Admin::ArtistsController < ApplicationController
   def index
     # ransack
     @q = Artist.ransack(ransack_params)
-    @artists = @q.result(distinct: true).order(created_at: :desc)
+    @artists = @q.result(distinct: true).order(updated_at: :desc)
 
     if params[:id]
       @artist = Artist.find(params[:id])
@@ -76,11 +76,16 @@ class Admin::ArtistsController < ApplicationController
           event.artist_id = artist.id
           # YT
           searching = artist.name
-          # local用
-          # yt_config = Rails.application.config_for(:youtube)
-          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
-          # heroku用
-          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
+
+          if Rails.env.development?
+            # local用
+            yt_config = Rails.application.config_for(:youtube)
+            url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
+          elsif Rails.env.production?
+            # heroku用
+            url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
+          end
+
           response = RestClient.get(URI::encode(url))
           data = JSON.parse(response.body)
           if data["items"] != []
@@ -103,11 +108,16 @@ class Admin::ArtistsController < ApplicationController
           event.artist_id = artist.id
           # YT
           serching = artist.name
-          # local用
-          # yt_config = Rails.application.config_for(:youtube)
-          # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
-          # heroku用
-          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
+
+          if Rails.env.development?
+            # local用
+            yt_config = Rails.application.config_for(:youtube)
+            url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
+          elsif Rails.env.production?
+            # heroku用
+            url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
+          end
+
           response = RestClient.get(URI::encode(url))
           data = JSON.parse(response.body)
           if data["items"] != []
@@ -126,7 +136,9 @@ class Admin::ArtistsController < ApplicationController
           event.save!
               
         end
+
       end
+
 
     end
 
@@ -135,10 +147,53 @@ class Admin::ArtistsController < ApplicationController
   def update_relative_events(artist)
     @events = artist.events
     @events.each do |event|
-      if (event.video != nil && event.video != "" && event.spotify_artist_id != nil && event.spotify_artist_id != "") || ((event.video != nil && event.video != "") || (event.spotify_artist_id != nil && event.spotify_artist_id != ""))
-        event.artist_name = artist.name
-        event.artist_id = artist.id
+      if event.video != nil && event.video != "" && event.spotify_artist_id != nil && event.spotify_artist_id != ""
         event.save!
+      elsif  event.video == nil || event.video == ""
+        event.artist_name = artist.name
+        # YT
+        searching = artist.name
+
+        if Rails.env.development?
+          # local用
+          yt_config = Rails.application.config_for(:youtube)
+          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
+        elsif Rails.env.production?
+          # heroku用
+          url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
+        end
+
+        response = RestClient.get(URI::encode(url))
+        data = JSON.parse(response.body)
+        if data["items"] != []
+          id = data["items"][0]["id"]["videoId"]
+          event.video = "https://www.youtube.com/embed/#{id}?enablejsapi=1"
+        end
+
+        if event.spotify_artist_id == nil || event.spotify_artist_id == ""
+          # spotify
+          @spotify_data = event.get_spotify_data(artist.name)
+          if @spotify_data == nil
+            @spotify_artist_id = nil
+          else
+            event.spotify_artist_id = @spotify_data.id
+          end
+        end
+
+        event.save!
+
+      elsif event.spotify_artist_id == nil || event.spotify_artist_id == ""
+        event.artist_name = artist.name
+        # spotify
+        @spotify_data = event.get_spotify_data(artist.name)
+        if @spotify_data == nil
+          @spotify_artist_id = nil
+        else
+          event.spotify_artist_id = @spotify_data.id
+        end
+
+        event.save!
+          
       else
         check_event_artist(artist)
       end
