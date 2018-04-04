@@ -12,6 +12,9 @@
           <li class="nav-item">
             <%= link_to '使用者清單', admin_users_path, class: "nav-link active" %>
           </li>
+          <li class="nav-item">
+            <%= link_to '藝人清單', admin_artists_path, class: "nav-link" %>
+          </li>
         </ul>
       
         <!-- Tabs //end -->
@@ -83,6 +86,12 @@
 
         <% end %>
       </div><!-- search //end -->
+      
+      <div class="col-md-12"></div>
+        <div class="paginate">
+          <%= paginate @users %>
+        </div>
+      </div>
 
     </div><!-- .row //end -->
 

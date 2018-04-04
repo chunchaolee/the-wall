@@ -18,21 +18,26 @@ class Event < ApplicationRecord
   # 一個event可以對很多user送出notification
   has_many :notified_users, through: :notifications, source: :user
 
-  # ransck
-  STAGE = {
-    'The Wall Live House': 'The Wall Live House',
-    'Korner': 'KORNER',
-    'Revolver': 'Revolver',
-    'PIPE Live Music': 'PIPE Live Music',
-    'Legacy 傳 音樂展演空間': 'Legacy',
-    '公館河岸留言': '公館河岸留言'
-  }
+  # 一個活動目前設定只會顯示一筆藝人資料
+  belongs_to :artist, optional: true
 
   def get_spotify_data(artist_name)
 
     if artist_name != nil
       require 'rspotify'
-      RSpotify.authenticate("54168cbe8372462f9c62d4e58576f6bc", "c92d63e9f81542c1b65a888cfbb55d70")
+
+      if Rails.env.development?
+        # local用
+        spotify_config = Rails.application.config_for(:spotify)
+        client_id = spotify_config["client_id"]
+        client_secret = spotify_config["client_secret"]
+      elsif Rails.env.production?
+        # heroku用
+        client_id = ENV['SPOTIFY_CLIENT_ID']
+        client_secret = ENV['SPOTIFY_CLIENT__SECRET']
+      end
+
+      RSpotify.authenticate("#{client_id}", "#{client_secret}")
       artist = RSpotify::Artist.search(artist_name)
       artist_data = artist.first
     end

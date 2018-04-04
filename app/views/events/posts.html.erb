@@ -59,7 +59,7 @@
                   <%= event.date %>
                 </span>
                 <span class="col-md-8 ptitle">
-                  <%= link_to event.title, event_path(event)%>
+                  <br /><%= link_to event.title, event_path(event)%>
                 </span>
               </div>
 
@@ -69,7 +69,7 @@
                   <div class="carousel-inner">
                     <% i = 0 %>
                     <!-- youtube -->
-                    <% if event.video != nil %>
+                    <% if event.video != nil && event.video != "" %>
                       <div class="carousel-item active">
                         <iframe id="existing-iframe-example"
                                       width="500" height="350"
@@ -86,7 +86,7 @@
                       <% event.load_spotify_artist_id(event) %>
                     <% end %>
 
-                    <% if event.spotify_artist_id != nil %>
+                    <% if event.spotify_artist_id != "" && event.spotify_artist_id != nil %>
                       <div class="carousel-item <%= "active" if i == 0 %>">
                         <iframe src="https://open.spotify.com/embed/artist/<%= event.spotify_artist_id %>" width="500" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media" class="musicpiece d-block w-100"></iframe>
                       </div>
@@ -132,7 +132,7 @@
               </div>
 
               <div class="col-md-4 post-info">
-                <div class="event-info">演出者 <span><%= event.artist_name %></span></div>
+                <div class="event-info">演出者 <span><strong><%= event.artist_name %></strong></span></div>
                 <div class="event-info">城市 <span><%= event.city %></span></div>
                 <div class="event-info">地點 <span><%= event.stage %></span></div>
                 <div class="event-info time">時間 
@@ -149,6 +149,14 @@
                     </span>
                   </span>
                 </div>
+
+                <!-- admin: edit -->
+                <% if current_user %>
+                  <% if current_user.admin? %>
+                    <%= link_to '編輯', edit_admin_event_path(event), class: "btn btn-outline-primary" %>
+                  <% end %>
+                <% end %>
+
               </div>
             </div>
           </div>

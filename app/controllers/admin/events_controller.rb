@@ -1,15 +1,14 @@
-class Admin::EventsController < ApplicationController
-  # 後台權限認證
-  before_action :authenticate_admin
+class Admin::EventsController < Admin::BaseController
+  
   before_action :set_event, only: [:edit, :update, :destroy]
 
-  ALLOW_QUERIES = %w[s artist_name_cont title_cont city_cont date_cont time_cont stage_eq stage_cont views_count interests_count detail_cont artist_name_or_title_or_city_or_detail_cont date_lteq date_gteq views_count_gteq interests_count_gteq].freeze
+  ALLOW_QUERIES = %w[s artist_name_cont title_cont city_cont date_cont time_cont stage_eq stage_cont views_count interests_count detail_cont artist_name_or_title_or_city_or_detail_cont date_lteq date_gteq views_count_gteq interests_count_gteq updated_at].freeze
 
   def index
     @events = Event.all.order(date: :desc)
     # ransack
     @q = Event.ransack(ransack_params)
-    @events = @q.result(distinct: true).order(date: :desc)
+    @events = @q.result(distinct: true).order(updated_at: :desc).page(params[:page]).per(20)
   end
 
   def update
@@ -43,7 +42,7 @@ class Admin::EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:artist_name, :title, :date, :time, :stage, :video, :detail, :city, :stage)
+    params.require(:event).permit(:artist_name, :title, :date, :time, :stage, :video, :detail, :city, :stage, :spotify_artist_id)
   end
 
 end

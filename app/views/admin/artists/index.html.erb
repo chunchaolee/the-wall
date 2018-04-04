@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  
+  <div class="container-fluid">
+    <div class="row">
+      <!-- list //start -->
+      <div class="col-md-8 col-sm-12">
+        <!-- Tabs //start -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <%= link_to '表演活動清單', admin_events_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '使用者清單', admin_users_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '藝人清單', admin_artists_path, class: "nav-link active" %>
+          </li>
+
+        </ul>
+      
+        <!-- Tabs //end -->
+        
+        <!-- artist list //start -->
+        <table class="table table-responsive{sm,md}">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col"><%= sort_link(@q, :id, "#", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :created_at, "建立時間", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :updated_at, "更新時間", default_order: :desc)%></th>
+              <th scope="col"><%= sort_link(@q, :name, "藝人名稱", default_order: :desc)%></th>
+              <th scope="col">功能1</th>
+              <th scope="col">功能2</th>
+            </tr>
+          </thead>
+            
+          <tbody>
+            <% @artists.each do |artist| %>
+              <tr id="artist-<%= artist.id %>" >
+                <th scope="row"><%= artist.id %></th>
+                <td><%= artist.created_at.localtime.to_s(:db) %></td>
+                <td><%= artist.updated_at.localtime.to_s(:db) %></td>
+                <td><%= artist.name %></td>
+                <td><%= link_to '編輯', admin_artists_path(id: artist.id), class: "btn btn-outline-primary" %></td>
+                <td><%= link_to '刪除', admin_artist_path(artist), remote: true, method: :delete, data: {confirm: "ARE YOU SURE?"}, class: "btn btn-outline-danger" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <!-- artist list //end -->
+      </div>
+      <!-- list //end -->
+
+      
+    
+
+      <!-- search & create/update artist //start -->
+      <div class="col-md-4 col-sm-12 text-center">
+        <h5>新增/更新藝人名稱</h5><hr>
+        <% if @artist.errors.any? %>
+          <%= @artist.errors.full_messages.to_sentence %>
+        <% end %>
+        <%= form_for [:admin, @artist] do |f| %>
+          <div class="form-group">
+            <%= f.text_field :name, placeholder: "Artist Name",  class: "form-control" %>
+          </div>
+          <%= f.submit class: "btn btn-outline-secondary" %>
+        <% end %>
+        <br />
+
+        <h5>後台搜尋</h5><hr>
+        <%= search_form_for @q, url: admin_artists_path do |f| %>
+          <%= f.label :name, '藝人名稱:' %>
+          <%= f.search_field :name_cont, class: "form-control" %><br />
+          <%= f.submit '搜尋', class: "btn btn-outline-secondary"%>
+
+        <% end %>
+      </div><!-- search & create/update artist //end -->
+
+      <div class="col-md-12"></div>
+        <div class="paginate">
+          <%= paginate @artists %>
+        </div>
+      </div>
+
+    </div><!-- .row //end -->
+
+  </div><!-- .container-fluid //end -->
+  
+</div><!-- .container-fluid //end -->

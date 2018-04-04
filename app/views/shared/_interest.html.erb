@@ -9,5 +9,7 @@
     <% end %>
   <% end %>
 <% else %>
-    <%= link_to '♥', new_user_session_path, class: "like-btn" %>
+    <%= link_to new_user_session_path, class: "like-btn" do %>
+      ♥ <%= content_tag :span, object.interested_users.size, class: "badge badge-dark" %>
+    <% end %>
 <% end %>

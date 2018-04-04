@@ -2,6 +2,7 @@
 # require 'json'
 namespace :get_event do
   task fb_event: :environment do
+
     # access_token and other values aren't required if you set the defaults as described above
 
     # fb_config = Rails.application.config_for(:facebook)
@@ -92,16 +93,27 @@ namespace :get_event do
 
   # add find_artist_name and fetch_video 
   task fb_event_new: :environment do
-    Event.destroy_all
+
+    # 刪除過期Event
+    @events = Event.all
+    @events.each do |event|
+      if event.date < Date.today
+        event.destroy
+        puts "Destroy the event"
+      end
+    end
+
+    # Event.destroy_all
     # access_token and other values aren't required if you set the defaults as described above
     
-    # local用
-    # fb_config = Rails.application.config_for(:facebook)
-    # @graph = Koala::Facebook::API.new(fb_config["api_token"])
-
-    # heroku用
-    @graph = Koala::Facebook::API.new(ENV['FACEBOOK_API_TOKEN'])
-
+    if Rails.env.development?
+      # local用
+      fb_config = Rails.application.config_for(:facebook)
+      @graph = Koala::Facebook::API.new(fb_config["api_token"])
+    elsif Rails.env.production?
+      # heroku用
+      @graph = Koala::Facebook::API.new(ENV['FACEBOOK_API_TOKEN'])
+    end
 
     page_array = ["LegacyHomePage",
                   "thewall.tw",
@@ -109,7 +121,8 @@ namespace :get_event do
                   "RevolverTW",
                   #"%E5%A5%B3%E5%B7%AB%E5%BA%97-133362243371354", 粉絲團未公開資訊給API
                   "moonromantictw",
-                  "Riverside.Music"
+                  "Riverside.Music",
+                  "Kornertw"
                 ]
     # 獲取資訊: 活動
     node_type = "events?fields=id,name,description,place,start_time,cover" 
@@ -132,21 +145,26 @@ namespace :get_event do
 
           # 比對 title/detail 的 artist name
           temp_name = nil
+          temp_artist_id = nil
           Artist.all.each do |artist|
-            match_name = artist.name.strip()
-            title = temp["name"].strip()
-            if artist.name != nil && title.include?(match_name)
+            match_name = artist.name
+            title = temp["name"].strip() if temp["name"] != nil
+            if artist.name != nil && temp["name"] != nil && title.include?(match_name)
               temp_name = artist.name
-              puts temp_name
+              temp_artist_id = artist.id
+              puts temp_name + "find in title"
               break
             else
-              details = temp["description"].strip().split(/\n/).each do |line|
-                match_name = artist.name.strip()
-                # puts temp["description"]
-                if artist.name != nil && line.include?(match_name)
-                  temp_name = artist.name
-                  puts temp_name
-                  break
+              if temp["description"] != nil 
+                details = temp["description"].strip().split(/\n/).each do |line|
+                  match_name = artist.name.strip()
+                  # puts temp["description"]
+                  if artist.name != nil && line.include?(match_name)
+                    temp_name = artist.name
+                    temp_artist_id = artist.id
+                    puts temp_name + "find in detail"
+                    break
+                  end
                 end
               end
             end
@@ -168,38 +186,48 @@ namespace :get_event do
             temp_video = nil
             searching = temp_name
 
-            # local用
-            # yt_config = Rails.application.config_for(:youtube)
-            # url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + yt_config["app_id"] + "&q=" + searching + "&type=video&maxResults=1"
-
-            # heroku用
-            url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=" + ENV['YOUTUBE_APP_ID'] + "&q=" + searching + "&type=video&maxResults=1"
-
+            if Rails.env.development?
+              # local用
+              yt_config = Rails.application.config_for(:youtube)
+              url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
+            elsif Rails.env.production?
+              # heroku用
+              url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
+            end
 
             response = RestClient.get(URI::encode(url))
             data = JSON.parse(response.body)
 
             if data["items"] != []
               id = data["items"][0]["id"]["videoId"]
-              temp_video = "https://www.youtube.com/embed/" + id + "?enablejsapi=1"
+              temp_video = "https://www.youtube.com/embed/#{id}?enablejsapi=1"
             else
               puts "found no video"
             end
           end
 
-          # 建立活動
-          Event.create!(
-          artist_name: temp_name,
-          special_id: temp["id"],
-          title: temp["name"],
-          date: show_time,
-          time: temp["start_time"].split('T')[1],
-          city: temp["place"]["location"] != nil ? temp["place"]["location"]["city"] : nil,
-          detail: temp["description"] ,
-          stage: temp["place"]["name"],
-          video: temp_video,
-          img: temp["cover"] != nil ?temp["cover"]["source"] : nil
-            )
+          begin
+
+            # 建立活動
+            Event.create!(
+            artist_name: temp_name,
+            artist_id: temp_artist_id,
+            special_id: temp["id"],
+            title: temp["name"],
+            date: show_time,
+            time: temp["start_time"].split('T')[1],
+            city: temp["place"]["location"] != nil ? temp["place"]["location"]["city"] : nil,
+            detail: temp["description"] ,
+            stage: temp["place"]["name"],
+            video: temp_video,
+            img: temp["cover"] != nil ?temp["cover"]["source"] : nil
+              )
+
+          rescue
+            puts $!
+            next
+          end
+
           puts temp_name
           puts "save to event"  
         end
