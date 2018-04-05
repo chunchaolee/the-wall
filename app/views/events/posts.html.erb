@@ -8,26 +8,38 @@
 
         <%= search_form_for @q, url: posts_events_path do |f| %>
 
-          <div class="form-row form-group">
-              
-            <div class="search-date col-md-4 col-sm-12">
-              <%= f.label :date, '日期:' %>
-              <%= f.date_field :date_gteq %>
+          <div class="form-row form-group text-center">
 
-              <%= f.label :date, '至:' %>
-              <%= f.date_field :date_lteq %>
+            <div class="col-md-3 col-sm-12">
+              <div class="input-group mb-3">
+                <%= f.select :stage_eq, Event::STAGE.map(&:reverse), prompt: "活動地點", include_blank: "所有活動地點" %>
+              </div>
             </div>
 
-            <div class="search-search col-md-6 col-sm-12">
+            <div class="col-md-1 col-sm-12">
+              <div class="input-group mb-3">
+                <%= f.select :city_eq, Event::CITY.map(&:reverse), prompt: "城市", include_blank: "所有城市" %>
+              </div>
+            </div>
+
+            <div class="search-date col-md-8 col-sm-12">
+              <%= f.label :date, '起始日期:' %>
+              <%= f.date_field :date_gteq, class: "col-md-4 col-sm-12"%>
+
+              <%= f.label :date, '至:' %>
+              <%= f.date_field :date_lteq, class: "col-md-4 col-sm-12"%>
+            </div>
+
+            <div class="search-search col-md-8 col-sm-12">
               <%= f.search_field :artist_name_or_title_or_city_or_detail_or_stage_cont, placeholder: "搜尋演出的獨立音樂創作者、創作團體、活動、城市、地點或關鍵字", class: "form-control" %>
             </div>
 
-            <div class="search-submit col-md-1 col-sm-12">
+            <div class="search-submit col-md-2 col-sm-12">
               <%= f.submit '搜尋', class: "btn btn-outline-dark form-control" %>
             </div>
 
             <!-- 排序 -->
-            <div class="col-md-1 col-sm-12">
+            <div class="col-md-2 col-sm-12">
               <div class="dropdown show">
                 <a class="btn btn-dark dropdown-toggle form-control text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   排序
@@ -40,6 +52,7 @@
                   <a class="dropdown-item"><%= sort_link(@q, :created_at, "依平台發佈時間排序", default_order: :desc) %></a>
                 </div>
               </div>
+
             </div>
 
           </div>

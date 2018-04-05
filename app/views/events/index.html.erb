@@ -8,10 +8,6 @@
 
           <div class="form-row form-group text-center">
 
-            <div class="search-search col-md-12 col-sm-12">
-              <%= f.search_field :artist_name_or_title_or_city_or_detail_or_stage_cont, placeholder: "搜尋演出的獨立音樂創作者、創作團體、活動、城市、地點或關鍵字", class: "form-control" %>
-            </div>
-
             <div class="col-md-3 col-sm-12">
               <div class="input-group mb-3">
                 <%= f.select :stage_eq, Event::STAGE.map(&:reverse), prompt: "活動地點", include_blank: "所有活動地點" %>
@@ -24,12 +20,16 @@
               </div>
             </div>
 
-            <div class="search-date col-md-4 col-sm-12">
-              <%= f.label :date, '日期:' %>
-              <%= f.date_field :date_gteq %>
+            <div class="search-date col-md-8 col-sm-12">
+              <%= f.label :date, '起始日期:' %>
+              <%= f.date_field :date_gteq, class: "col-md-4 col-sm-12"%>
 
               <%= f.label :date, '至:' %>
-              <%= f.date_field :date_lteq %>
+              <%= f.date_field :date_lteq, class: "col-md-4 col-sm-12"%>
+            </div>
+
+            <div class="search-search col-md-8 col-sm-12">
+              <%= f.search_field :artist_name_or_title_or_city_or_detail_or_stage_cont, placeholder: "搜尋演出的獨立音樂創作者、創作團體、活動、城市、地點或關鍵字", class: "form-control" %>
             </div>
 
             <div class="search-submit col-md-2 col-sm-12">
