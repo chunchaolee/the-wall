@@ -38,15 +38,15 @@
       
       
       <!-- details //start -->
-      <% if @event.video == nil && @spotify_artist_id == nil %>
+      <% if @event.video == nil && @spotify_artist_id == nil && @event.video == "" && @spotify_artist_id == "" %>
         <div class="col-md-12">
           <div class="subtitle"><i>樂團/表演介紹</i></div>
-          <p class="event-detail"><%= @event.detail %></p>
+          <p class="event-detail" id="detail" ><%= @event.detail %></p>
         </div>
       <% else %>
         <div class="col-md-7">
           <div class="subtitle"><i>樂團/表演介紹</i></div>
-          <p class="event-detail"><%= @event.detail %></p>
+          <p class="event-detail" id="detail" ><%= @event.detail %></p>
         </div>
       <% end %>
       <!-- details //end -->
@@ -95,3 +95,10 @@
     </div> <!-- .row //end -->
   </div>
 </div>
+
+<script>
+  // 自動轉換detail中的連結位置為超連結
+  $('p').each(function(){
+   $(this).html( $(this).html().replace(/((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g, '<a href="$1">$1</a> ') );
+  });
+</script>
