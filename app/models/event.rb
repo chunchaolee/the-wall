@@ -21,6 +21,27 @@ class Event < ApplicationRecord
   # 一個活動目前設定只會顯示一筆藝人資料
   belongs_to :artist, optional: true
 
+  # ransck
+  STAGE = {
+    'The Wall Live House': 'The Wall Live House',
+    'Korner': 'Korner',
+    'Revolver': 'Revolver',
+    'PIPE Live Music': 'PIPE Live Music',
+    'Legacy mini @ amba': 'Legacy mini @ amba',
+    'Legacy 傳 音樂展演空間': 'Legacy 傳 音樂展演空間',
+    '永豐 Legacy Taipei 音樂展演空間': '永豐 Legacy Taipei 音樂展演空間',
+    'Legacy Taichung': 'Legacy Taichung',
+    '公館河岸留言': '公館河岸留言',
+    '河岸留言 音樂藝文咖啡': '河岸留言 音樂藝文咖啡',
+    '台北 月見ル君想フ': '台北 月見ル君想フ'
+  }
+
+  CITY = {
+    'Taichung': '台中',
+    'Taipei': '台北',
+  }
+
+
   def get_spotify_data(artist_name)
 
     if artist_name != nil
