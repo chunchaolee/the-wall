@@ -37,6 +37,7 @@
                   <a class="dropdown-item"><%= sort_link(@q, :views_count, "依瀏覽數排序", default_order: :desc)%>
                   <a class="dropdown-item"><%= sort_link(@q, :date, "依活動日期排序", default_order: :desc) %></a>
                   <a class="dropdown-item"><%= sort_link(@q, :interests_count, "依收藏數排序", default_order: :desc) %></a>
+                  <a class="dropdown-item"><%= sort_link(@q, :created_at, "依平台發佈時間排序", default_order: :desc) %></a>
                 </div>
               </div>
             </div>

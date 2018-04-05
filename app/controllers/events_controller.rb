@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  ALLOW_QUERIES = %w[s artist_name_cont title_cont city_cont date_cont time_cont stage_eq stage_cont views_count interests_count detail_cont artist_name_or_title_or_city_or_detail_or_stage_cont date_gteq date_lteq].freeze
+  ALLOW_QUERIES = %w[s artist_name_cont title_cont city_cont date_cont time_cont stage_eq stage_cont views_count interests_count detail_cont artist_name_or_title_or_city_or_detail_or_stage_cont date_gteq date_lteq created_at].freeze
 
   def index
     @events = Event.all.order(date: :desc)
