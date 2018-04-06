@@ -7,7 +7,7 @@ INTRODUCTION
 
 <h2>PRODUCT OBJECTIVES</h2>
 <h3>解決</h3>
-​​* 台灣過度分散的獨立音樂資訊及活動資訊
+* 台灣過度分散的獨立音樂資訊及活動資訊
 * 獨立音樂的社群力侷限在各Live House及特定音樂網路社群
 <h3>整合</h3>
 * 整合獨立創作者在影音串流(Youtube)及數位音樂串流(Spotify)上的創作
