@@ -1,0 +1,13 @@
+<p>
+  <h1>The Wall Weekly Event</h1>
+</p>
+<blockquote>
+  <% @events.each do |event| %>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+
+      <%= render partial: "shared/mail_events", locals: {object: event, flag: true} %>
+
+    </div>
+  <% end %> 
+</blockquote>
+
