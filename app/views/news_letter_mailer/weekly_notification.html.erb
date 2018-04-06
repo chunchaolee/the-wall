@@ -1,5 +1,13 @@
-<h1>NewsLetter#weekly_notification</h1>
-
 <p>
-  <%= @greeting %>, find me in app/views/news_letter_mailer/weekly_notification.html.erb
+  <h1>The Wall Weekly Event</h1>
 </p>
+<blockquote>
+  <% @events.each do |event| %>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+
+      <%= render partial: "shared/mail_events", locals: {object: event, flag: true} %>
+
+    </div>
+  <% end %> 
+</blockquote>
+

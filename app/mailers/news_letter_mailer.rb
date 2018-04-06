@@ -5,9 +5,10 @@ class NewsLetterMailer < ApplicationMailer
   #
   #   en.news_letter_mailer.weekly_notification.subject
   #
-  def weekly_notification
-    @greeting = "Hi"
+  def weekly_notification(newly_events, user)
+    @events = newly_events
+    @user = user
 
-    mail to: "to@example.org"
+    mail to:  @user.email, subject: "The Wall Weekly Event"
   end
 end

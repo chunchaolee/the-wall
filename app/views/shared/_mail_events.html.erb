@@ -1,0 +1,22 @@
+<div class="event">
+
+  <%= link_to event_url(object) do %> 
+    <!-- img //start -->
+    <div class="img">
+      <%= image_tag object.img, width: "300", height: "300", class: "rounded mx-auto d-block img-fluid" if object.img?%>
+      <%= image_tag "http://via.placeholder.com/300x300", class: "rounded mx-auto d-block img-fluid"  unless object.img?%> 
+    </div>
+    <!-- img //end -->
+  <% end %>
+  <div class="container-fluid text-center">
+    <div class="artist">活動名稱 : <span><strong><%= object.title %></strong></span></div>
+    <div class="artist">活動日期 : <span><strong><%= object.date %></strong></span></div>
+    <div class="artist">演出者 : <span><strong><%= object.artist_name %></strong></span></div>
+    
+    <% if flag %>
+      <div class="place">地點 : <span><strong><%= object.stage %></strong></span></div>
+     <% end %>
+  </div>
+
+</div>
+<br/>
