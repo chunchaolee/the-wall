@@ -21,10 +21,10 @@ INTRODUCTION
 
 
 1. Authentication(權限認證)
-  * 3種註冊管道：
-      * 透過email註冊
-      * Facebook Sign Up
-      * Spotify Sign Up
+    * 3種註冊管道：
+        * 透過email註冊
+        * Facebook Sign Up
+        * Spotify Sign Up
     * 3種權限：
       * 訪客：瀏覽網站前台
       * 一般會員：瀏覽網站前台、管理會員中心
