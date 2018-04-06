@@ -131,6 +131,10 @@ namespace :get_event do
       # 限制筆數 limit: 1
       posts_standard = @graph.get_connections(page_name, node_type)
       # posts_standard = @graph.get_connections(page_name, node_type)
+      # default setting,
+      city = 'Taipei'
+      stage = page_name
+
       if posts_standard != nil
         posts_standard.each do |list|
           temp = JSON.parse(list.to_json)
@@ -206,6 +210,12 @@ namespace :get_event do
             end
           end
 
+          # 若無資料則採用default
+          if temp["place"] != nil
+            city = temp["place"]["location"] != nil ? temp["place"]["location"]["city"] : nil
+            stage = temp["place"]["name"]
+          end
+
           begin
 
             # 建立活動
@@ -216,9 +226,9 @@ namespace :get_event do
             title: temp["name"],
             date: show_time,
             time: temp["start_time"].split('T')[1],
-            city: temp["place"]["location"] != nil ? temp["place"]["location"]["city"] : nil,
+            city: city,
             detail: temp["description"] ,
-            stage: temp["place"]["name"],
+            stage: stage,
             video: temp_video,
             img: temp["cover"] != nil ?temp["cover"]["source"] : nil
               )
