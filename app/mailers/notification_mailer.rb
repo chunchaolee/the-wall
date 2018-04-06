@@ -9,6 +9,6 @@ class NotificationMailer < ApplicationMailer
     @event = interest.event
     @user = interest.user
 
-    mail to: @user.email, subject: "The event(#{@event.title}) will start soon!!"
+    mail to: @user.email, subject: "(#{@event.title}) will start soon!!"
   end
 end

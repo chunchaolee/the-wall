@@ -9,6 +9,6 @@ class NewsLetterMailer < ApplicationMailer
     @events = newly_events
     @user = user
 
-    mail to:  @user.email, subject: "The Wall Weekly Event"
+    mail to:  @user.email, subject: "The Wall Weekly Digest"
   end
 end
