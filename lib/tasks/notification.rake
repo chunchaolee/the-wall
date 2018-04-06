@@ -1,20 +1,19 @@
 namespace :notification do
+  # 活動黃金週通知信
   task event: :environment do
-
-    
     today  = (Time.now + 7.days) .to_s
     puts today.split(' ')[0]
 
     events = Event.where(date: today.split(' ')[0])
     if !events.empty?
-      puts "Have record"
+
       events.all.each do |event|
-        puts event.title
-        puts event.date
-        puts event.id
+        # puts event.title
+        # puts event.date
+        # puts event.id
         interests = Interest.where(event_id: event.id)
         if !interests.empty? 
-          puts "record"
+
           interests.all.each do | interest |
             puts interest.user_id
              NotificationMailer.event_notification(interest).deliver_now!
@@ -29,14 +28,44 @@ namespace :notification do
             #   puts "No User"
             # end 
           end
-        else
-          puts "No record"
         end
       end
-    #end
-    else
-      puts "No record"
     end
 
+  end
+
+  # 電子報
+  task weekly: :environment do
+    # for test
+    #user = User.where('email = ?', 'your@email')
+
+    # today  = (Time.now - 7.days) .to_s
+    # puts today.split(' ')[0]
+    
+    # # created_at
+    # # 上週新建立的event, 未來可加入
+    # newly_events = Event.where('created_at > ?' , today.split(' ')[0])
+    # if !newly_events.empty?
+    #   puts "Have record"
+    # end
+
+    # interests_count/views_count 
+    # 熱門event, 先以關注最多挑選五則,  未來可考慮瀏覽次數views
+    hot_events = Event.order('interests_count DESC').limit(5).order('date asc')
+    if !hot_events.empty?
+      # 後續要考慮有認證過的mail才發送, 要篩選過
+      users = User.all
+      if !users.empty?
+        users.all.each do |user|
+          begin
+            NewsLetterMailer.weekly_notification(hot_events, user).deliver_now!
+          rescue
+            puts $!
+            next
+          end
+        end
+        puts "#{users.all.count} users, will get weekly mail"
+      end
+    end
   end
 end
