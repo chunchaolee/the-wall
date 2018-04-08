@@ -21,7 +21,7 @@
         
         <h5 class="event-title"><%= @event.title %></h5>
         <div class="event-info">演出者 
-          <% if @event.artist_name != nil && @event.artist_name != "" %>
+          <% if @event.artist != nil && @event.artist != "" %>
             <span><%= link_to @event.artist_name, artist_path(@event.artist) %></span>
           <% end %>
         </div>
