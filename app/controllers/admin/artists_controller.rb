@@ -20,14 +20,15 @@ class Admin::ArtistsController < Admin::BaseController
   def create
     @artist = Artist.new(artist_params)
     if @artist.save
+      Admin::Stream.create_stream_data(@artist)
+      Admin::Stream.check_event_artist(@artist)
       redirect_back(fallback_location: admin_artists_path)
       flash[:notice] = "成功建立藝人資料"
     else
-      @artists = Artist.all
+      @q = Artist.ransack(ransack_params)
+      @artists = @q.result(distinct: true).order(updated_at: :desc).page(params[:page]).per(20)
       render :index
     end
-    Admin::Stream.create_stream_data(@artist)
-    Admin::Stream.check_event_artist(@artist)
   end
 
   def update
