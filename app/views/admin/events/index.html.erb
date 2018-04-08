@@ -49,6 +49,8 @@
                 <td>
                   <% if event.artist %>
                     <%= link_to event.artist_name, artist_path(event.artist) %>
+                  <% else %>
+                    <%= event.artist_name %>
                   <% end %>
                 </td>
                 <td><%= event.city %></td>
