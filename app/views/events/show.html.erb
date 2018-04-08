@@ -23,6 +23,8 @@
         <div class="event-info">演出者 
           <% if @event.artist != nil && @event.artist != "" %>
             <span><%= link_to @event.artist_name, artist_path(@event.artist) %></span>
+          <% elsif %>
+            <span><%= @event.artist_name %></span>
           <% end %>
         </div>
         <!-- <div class="event-info">票價 <span></span></div> -->
