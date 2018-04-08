@@ -1,11 +1,16 @@
 <div class="text-center">
   <p>
-    <h1>The Wall Weekly Events</h1>
+    <h1>The Wall Weekly Digest</h1>
   </p>
   <% if !@events[0].empty? %>
     <blockquote>
       <div class="container" style="min-width: 100%;" >
         <div class="row">
+
+          <p>
+            <h2>Latest Events Released Last Week</h1>
+          </p>    
+
           <% @events[0].each do |event| %>
             <div class="col-lg-4 col-md-6 col-sm-10">
 
@@ -20,6 +25,11 @@
 
   <% if !@events[1].empty? %>
     <blockquote>
+
+      <p>
+        <h2>Popular Events</h1>
+      </p>   
+
       <div class="container" style="min-width: 100%;" >
         <div class="row">
           <% @events[1].each do |event| %>

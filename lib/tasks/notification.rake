@@ -52,7 +52,7 @@ namespace :notification do
 
      # interests_count/views_count 
      # 熱門event, 先以關注最多挑選五則,  未來可考慮瀏覽次數views
-     hot_events = Event.order('interests_count DESC').limit(5).order('date asc')
+     hot_events = Event.order('interests_count DESC').limit(5)
      events << newly_events
      
      if !newly_events.empty? or !hot_events.empty?
