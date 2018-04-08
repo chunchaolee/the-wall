@@ -20,12 +20,24 @@ Rails.application.routes.draw do
   # setup interest
   resources :interests, only: [:create, :destroy] 
 
+  # setup artist
+  resources :artists, only: [:show] 
+
   # setup admin
   namespace :admin do
     root "events#index"
-    resources :events, except: [:show, :new, :create]
+    resources :events, except: [:show, :new, :create] do 
+      member do
+        get :remove_artist
+      end
+    end
+    
     resources :users, only: [:index, :destroy]
-    resources :artists
+    resources :artists do 
+      member do
+        get :search
+      end
+    end
   end
   
 end
