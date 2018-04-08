@@ -77,6 +77,48 @@ namespace :dev do
 
   end
 
+  # find every artisy of an events
+  task find_all_artist: :environment do
+    Event.all.each do |event|
+      i = 0;
+      Artist.all.each do |artist|
+        match_name = artist.name
+        title = event.title.strip() if event.title != nil
+        if title.include?(match_name)
+          event.artist_array[i] = artist.name
+          event.artists_id_array[i] = artist.id
+          event.save
+          i += 1
+        end
+      end
+
+      Artist.all.each do |artist|
+        flag = true
+        if event.detail != nil 
+          details = event.detail.strip().split(/\n/).each do |line|
+            match_name = artist.name.strip()
+            if artist.name != nil && line.include?(match_name)
+              event.artist_array.each do |found|
+                if artist.name == found # 檢驗是否已記錄過該 artist
+                  flag = false
+                  puts flag
+                end
+              end
+
+              if flag
+                event.artist_array[i] = artist.name
+                event.artists_id_array[i] = artist.id
+                event.save
+                i += 1
+              end
+            end
+          end
+        end
+      end
+      puts "event #{event.id} finished"
+    end
+  end
+
 
   task fake_user: :environment do
     20.times do |i|

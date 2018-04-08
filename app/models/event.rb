@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  serialize :artist_array, Array
+  serialize :artists_id_array, Array
 
   # 欄位驗證 :artist_name待補
   validates_presence_of :title, :date, :time, :stage
