@@ -1,6 +1,6 @@
 class Admin::ArtistsController < Admin::BaseController
 
-  before_action :set_artist, only: [:update, :destroy]
+  before_action :set_artist, only: [:update, :edit, :destroy]
 
   ALLOW_QUERIES = %w[s created_at updated_at name_cont].freeze
 
@@ -20,23 +20,30 @@ class Admin::ArtistsController < Admin::BaseController
   def create
     @artist = Artist.new(artist_params)
     if @artist.save
-      redirect_to admin_artists_path
-      flash[:notice] = "成功建立藝人名稱"
+      redirect_back(fallback_location: admin_artists_path)
+      flash[:notice] = "成功建立藝人資料"
     else
       @artists = Artist.all
       render :index
     end
+    Admin::Stream.create_stream_data(@artist)
     Admin::Stream.check_event_artist(@artist)
   end
 
   def update
+
+    temp_video = @artist.artist_video
+    temp_spotify_id = @artist.artist_spotify_id
+
     if @artist.update(artist_params)
-      redirect_to admin_artists_path
-      flash[:notice] = "成功更新藝人名稱"
+      redirect_back(fallback_location: admin_artists_path)
+      flash[:notice] = "成功更新藝人資料"
     else
       @artists = Artist.all
       render :index
     end
+
+    Admin::Stream.check_stream_data(temp_video, temp_spotify_id, @artist)
     Admin::Stream.update_relative_events(@artist)
     Admin::Stream.check_event_artist(@artist)
   end
@@ -45,7 +52,12 @@ class Admin::ArtistsController < Admin::BaseController
     @artist.destroy
   end
 
-
+  def search
+    @artist = Artist.find(params[:id])
+    Admin::Stream.create_stream_data(@artist)
+    Admin::Stream.update_relative_events(@artist)
+    redirect_back(fallback_location: admin_artists_path)
+  end
 
   private
 
@@ -60,7 +72,7 @@ class Admin::ArtistsController < Admin::BaseController
   end
 
   def artist_params
-    params.require(:artist).permit(:name)
+    params.require(:artist).permit(:name, :artist_video, :artist_spotify_id)
   end
 
 end
