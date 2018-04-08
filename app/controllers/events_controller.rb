@@ -22,23 +22,12 @@ class EventsController < ApplicationController
       current_user.views.create(event_id: params[:id])
     end
 
-    # spotify
-    if @event.artist_name != nil
-      artist_name = @event.artist_name
-      
-      if @event.spotify_artist_id == nil
-        @spotify_data = @event.get_spotify_data(artist_name)
-        if @spotify_data == nil
-          @spotify_artist_id = nil
-        else
-          @spotify_artist_id = @spotify_data.id
-          @event.spotify_artist_id = @spotify_artist_id
-          @event.save
-        end
-      else
-        @spotify_artist_id = @event.spotify_artist_id
-      end
+    if @event.artist
+      @artist = @event.artist
+    else
+      @artist = Artist.new
     end
+
   end
 
   def posts

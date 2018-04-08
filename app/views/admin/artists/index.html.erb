@@ -39,7 +39,7 @@
                 <th scope="row"><%= artist.id %></th>
                 <td><%= artist.created_at.localtime.to_s(:db) %></td>
                 <td><%= artist.updated_at.localtime.to_s(:db) %></td>
-                <td><%= artist.name %></td>
+                <td><%= link_to artist.name, artist_path(artist) %></td>
                 <td><%= link_to '編輯', admin_artists_path(id: artist.id), class: "btn btn-outline-primary" %></td>
                 <td><%= link_to '刪除', admin_artist_path(artist), remote: true, method: :delete, data: {confirm: "ARE YOU SURE?"}, class: "btn btn-outline-danger" %></td>
               </tr>
@@ -61,9 +61,17 @@
         <% end %>
         <%= form_for [:admin, @artist] do |f| %>
           <div class="form-group">
-            <%= f.text_field :name, placeholder: "Artist Name",  class: "form-control" %>
+            <%= f.text_field :name, placeholder: "Artist Name",  class: "form-control" %><br />
+            <% if params[:id] %>
+              <%= f.text_field :artist_video, placeholder: "Artist Youtube Video",  class: "form-control" %><br />
+              <%= f.text_field :artist_spotify_id, placeholder: "Artist Spotify ID",  class: "form-control" %><br />
+            <% end %>
           </div>
-          <%= f.submit class: "btn btn-outline-secondary" %>
+          <%= f.submit class: "btn btn-outline-secondary" %><br />
+          <br />
+          <% if params[:id] %>
+            <%= link_to "重新取得Stream Data", search_admin_artist_path(params[:id]), class: "btn btn-outline-secondary" %><br />
+          <% end %>
         <% end %>
         <br />
 

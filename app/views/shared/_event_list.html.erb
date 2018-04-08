@@ -18,7 +18,11 @@
 
   <div class="container-fluid text-center">
     <h6 class="text-center"><%= link_to object.title, event_path(object) %></h6>
-    <div class="artist">演出者 <br /><span><strong><%= object.artist_name %></strong></span></div>
+    <div class="artist">演出者 <br />
+      <% if object.artist %>
+        <span><strong><%= link_to object.artist_name, artist_path(object.artist) %></strong></span>
+      <% end %>
+    </div>
     <% if flag %>
       <div class="place">地點 <br /><span><strong><%= object.stage %></strong></span></div>
      <% end %>

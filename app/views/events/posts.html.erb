@@ -97,9 +97,6 @@
                       <% i += 1 %>
                     <% end %>
                     <!-- spotify -->
-                    <% if event.spotify_artist_id == nil %>
-                      <% event.load_spotify_artist_id(event) %>
-                    <% end %>
 
                     <% if event.spotify_artist_id != "" && event.spotify_artist_id != nil %>
                       <div class="carousel-item <%= "active" if i == 0 %>">
@@ -147,7 +144,11 @@
               </div>
 
               <div class="col-md-4 post-info">
-                <div class="event-info">演出者 <span><strong><%= event.artist_name %></strong></span></div>
+                <div class="event-info">演出者 
+                  <% if event.artist %>
+                    <span><strong><%= link_to event.artist_name, artist_path(event.artist) %></strong></span>
+                  <% end %>
+                </div>
                 <div class="event-info">城市 <span><%= event.city %></span></div>
                 <div class="event-info">地點 <span><%= event.stage %></span></div>
                 <div class="event-info time">時間 
@@ -164,13 +165,6 @@
                     </span>
                   </span>
                 </div>
-
-                <!-- admin: edit -->
-                <% if current_user %>
-                  <% if current_user.admin? %>
-                    <%= link_to '編輯', edit_admin_event_path(event), class: "btn btn-outline-primary" %>
-                  <% end %>
-                <% end %>
 
               </div>
             </div>

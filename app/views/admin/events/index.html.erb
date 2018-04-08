@@ -46,7 +46,11 @@
                 <td><%= event.updated_at.localtime.to_s(:db) %></td>
                 <td><%= link_to event.title, event_path(event) %></td>
                 <td><%= event.time.slice(0..4) %></td>
-                <td><%= event.artist_name %></td>
+                <td>
+                  <% if event.artist_name %>
+                    <%= link_to event.artist_name, artist_path(event.artist) %>
+                  <% end %>
+                </td>
                 <td><%= event.city %></td>
                 <td><%= event.stage %></td>
                 <td><%= event.views_count %></td>

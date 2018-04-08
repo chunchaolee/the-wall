@@ -20,7 +20,11 @@
         </span>
         
         <h5 class="event-title"><%= @event.title %></h5>
-        <div class="event-info">演出者 <span><%= @event.artist_name %></span></div>
+        <div class="event-info">演出者 
+          <% if @event.artist_name %>
+            <span><%= link_to @event.artist_name, artist_path(@event.artist) %></span>
+          <% end %>
+        </div>
         <!-- <div class="event-info">票價 <span></span></div> -->
         <div class="event-info">城市 <span><%= @event.city %></span></div>
         <div class="event-info">地點 <span><%= @event.stage %></span></div>
@@ -31,6 +35,14 @@
             <span><%= @event.time.slice(0..4) %></span>
           <% end %>
         </div>
+        <!-- admin: edit -->
+        <% if current_user %>
+          <% if current_user.admin? %>
+            <%= link_to '編輯', edit_admin_event_path(@event), class: "btn btn-outline-primary" %>
+            <%= link_to '清除演出者資料', remove_artist_admin_event_path(@event), class: "btn btn-outline-primary" %>
+          <% end %>
+        <% end %>
+
       </div>
 
       <div class="col-md-12"><hr id="event-hr"></div>
@@ -38,7 +50,14 @@
       
       
       <!-- details //start -->
-      <% if @event.video == nil && @spotify_artist_id == nil && @event.video == "" && @spotify_artist_id == "" %>
+      <% if current_user %>
+        <% if current_user.is_admin %>
+          <div class="col-md-7">
+            <div class="subtitle"><i>樂團/表演介紹</i></div>
+            <p class="event-detail" id="detail" ><%= @event.detail %></p>
+          </div>
+        <% end %>
+      <% elsif (@event.video == nil && @event.spotify_artist_id == nil) || (@event.video == "" && @event.spotify_artist_id == "") %>
         <div class="col-md-12">
           <div class="subtitle"><i>樂團/表演介紹</i></div>
           <p class="event-detail" id="detail" ><%= @event.detail %></p>
@@ -52,7 +71,7 @@
       <!-- details //end -->
 
       <!-- YT&spotify //start -->
-      <% if ( @event.video != nil && @event.video != "" ) || ( @spotify_artist_id != nil && @spotify_artist_id != "" ) %>
+      <% if ( @event.video != nil && @event.video != "" ) || ( @event.spotify_artist_id != nil && @event.spotify_artist_id != "" ) %>
         <div class="col-md-5">
           <div class="subtitle"><strong><i>作品欣賞</i></strong></div>
           <div class="row">
@@ -73,24 +92,80 @@
             <!-- YT //end -->
             
             <!-- spotify //start -->
-            <% if  @spotify_artist_id != nil && @spotify_artist_id != "" %> <!-- 辨識有無spotify作品 //start-->
+            <% if  @event.spotify_artist_id != nil && @event.spotify_artist_id != "" %> <!-- 辨識有無spotify作品 //start-->
               <div class="col-md-12 col-sm-12 piece text-center">
                 <div class="piece">【Spotify】</div>
 
                   <!-- iframe of spotify follow button -->
-                  <iframe src="https://open.spotify.com/follow/1/?uri=spotify:artist:<%= @spotify_artist_id %>&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
+                  <iframe src="https://open.spotify.com/follow/1/?uri=spotify:artist:<%= @event.spotify_artist_id %>&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
                   <hr>
 
                   <!-- iframe of spotify playlist -->
-                  <iframe src="https://open.spotify.com/embed/artist/<%= @spotify_artist_id %>" width="260" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                  <iframe src="https://open.spotify.com/embed/artist/<%= @event.spotify_artist_id %>" width="260" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
               </div>
             <% end %><!-- 辨識有無spotify作品 //end-->
             <!-- spotify //end -->
           </div>
+            
+          <!-- admin edit YT & Spotify //start -->
+          <% if current_user %>
+            <% if current_user.is_admin && @event.artist %>
+            
+              <div class="col-12 text-center">
+                <br /><hr>
+                <span class="text-muted"><strong>更新演出者Stream資料</strong></span>
+                <br /><br />
+
+                <%= form_for [:admin, @event.artist ] do |f| %>
+                  <div class="form-group">
+                    <%= f.text_field :name, placeholder: "Artist Name",  class: "form-control" %><br />
+                    <%= f.text_field :artist_video, placeholder: "Artist Youtube Video",  class: "form-control" %><br />
+                    <%= f.text_field :artist_spotify_id, placeholder: "Artist Spotify ID",  class: "form-control" %><br />
+                  </div>
+                  <div class="text-center">
+                    <%= f.submit class: "btn btn-outline-secondary" %><br />
+                    <br />
+                    <%= f.button "取消變更", type: :reset, class: "btn btn-outline-secondary" %><br /><br />
+                    <%= link_to "重新取得Stream Data", search_admin_artist_path(@event.artist), class: "btn btn-outline-secondary" %><br />
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          <% end%>
+          <br />
+          <!-- admin edit YT & Spotify //end -->
+
         </div>
+        <!-- YT&spotify //end -->
+
+      <% else %>
+        <!-- admin edit YT & Spotify //start -->
+        <% if current_user %>
+          
+          <% if current_user.is_admin %>
+            <div class="col-md-5 col-sm-12 text-center">
+              <br /><hr>
+              <span class="text-muted"><strong>新增藝人</strong></span> 
+              <br /><br />
+
+              <%= form_for [:admin, @artist ] do |f| %>
+                <div class="form-group">
+                  <%= f.text_field :name, placeholder: "Artist Name",  class: "form-control" %><br />
+                </div>
+                <div class="text-center">
+                  <%= f.submit class: "btn btn-outline-secondary" %><br />
+                  <br />
+                  <%= f.button "取消變更", type: :reset, class: "btn btn-outline-secondary" %><br /><br />
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+      
+        <% end%>
+        <!-- admin edit YT & Spotify //end -->
+        <br />
       <% end %>
-      <!-- YT&spotify //end -->
 
     </div> <!-- .row //end -->
   </div>
