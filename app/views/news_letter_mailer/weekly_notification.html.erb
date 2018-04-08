@@ -1,13 +1,28 @@
 <p>
   <h1>The Wall Weekly Event</h1>
 </p>
-<blockquote>
-  <% @events.each do |event| %>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+<% if !@events[0].empty? %>
+  <blockquote>
+    <p>
+      <h2>Latest Events Released Last Week</h1>
+    </p>    
+    <% @events[0].each do |event| %>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <%= render partial: "shared/mail_events", locals: {object: event, flag: true} %>
+      </div>
+    <% end %> 
+  </blockquote>
+<% end %>   
 
-      <%= render partial: "shared/mail_events", locals: {object: event, flag: true} %>
-
-    </div>
-  <% end %> 
-</blockquote>
-
+<% if !@events[1].empty? %>
+  <blockquote>
+    <p>
+      <h2>Popular Events</h1>
+    </p>    
+    <% @events[1].each do |event| %>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <%= render partial: "shared/mail_events", locals: {object: event, flag: true} %>
+      </div>
+    <% end %> 
+  </blockquote>
+<% end %>   
