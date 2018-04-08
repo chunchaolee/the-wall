@@ -47,7 +47,7 @@
                 <td><%= link_to event.title, event_path(event) %></td>
                 <td><%= event.time.slice(0..4) %></td>
                 <td>
-                  <% if event.artist_name %>
+                  <% if event.artist %>
                     <%= link_to event.artist_name, artist_path(event.artist) %>
                   <% end %>
                 </td>
