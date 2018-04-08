@@ -1,5 +1,6 @@
 class Artist < ApplicationRecord
   validates_presence_of :name
+  validates_uniqueness_of :name
   # 一個藝人可以有很多活動
   has_many :events
 
