@@ -1,6 +1,6 @@
 class Admin::EventsController < Admin::BaseController
   
-  before_action :set_event, only: [:edit, :update, :destroy]
+  before_action :set_event, only: [:edit, :update, :destroy, :remove_artist]
 
   ALLOW_QUERIES = %w[s artist_name_cont title_cont city_cont date_cont time_cont stage_eq stage_cont views_count interests_count detail_cont artist_name_or_title_or_city_or_detail_cont date_lteq date_gteq views_count_gteq interests_count_gteq updated_at].freeze
 
@@ -27,6 +27,15 @@ class Admin::EventsController < Admin::BaseController
 
   def destroy
     @event.destroy
+  end
+
+  def remove_artist
+    @event.artist_name = nil
+    @event.artist_id = nil
+    @event.video = nil
+    @event.spotify_artist_id = nil
+    @event.save!
+    redirect_back(fallback_location: root_path)
   end
 
   private 
