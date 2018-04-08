@@ -150,23 +150,31 @@ namespace :get_event do
           # 比對 title/detail 的 artist name
           temp_name = nil
           temp_artist_id = nil
+          temp_video = nil
+          temp_spotify_id = nil
           Artist.all.each do |artist|
             match_name = artist.name
             title = temp["name"].strip() if temp["name"] != nil
             if artist.name != nil && temp["name"] != nil && title.include?(match_name)
               temp_name = artist.name
               temp_artist_id = artist.id
+              temp_video = artist.artist_video
+              temp_spotify_id = artist.artist_spotify_id
               puts temp_name + "find in title"
+              # puts temp_spotify_id
               break
             else
-              if temp["description"] != nil 
+              if temp["description"] != nil && temp["description"] != ""
                 details = temp["description"].strip().split(/\n/).each do |line|
-                  match_name = artist.name.strip()
+                  match_name = artist.name
                   # puts temp["description"]
                   if artist.name != nil && line.include?(match_name)
                     temp_name = artist.name
                     temp_artist_id = artist.id
+                    temp_video = artist.artist_video
+                    temp_spotify_id = artist.artist_spotify_id
                     puts temp_name + "find in detail"
+                    # puts temp_spotify_id
                     break
                   end
                 end
@@ -185,31 +193,6 @@ namespace :get_event do
           #   end
           # end
 
-          # fetch youtube video
-          if temp_name != nil  
-            temp_video = nil
-            searching = temp_name
-
-            if Rails.env.development?
-              # local用
-              yt_config = Rails.application.config_for(:youtube)
-              url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{yt_config["app_id"]}&q=#{searching}&type=video&maxResults=1"
-            elsif Rails.env.production?
-              # heroku用
-              url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=#{ENV['YOUTUBE_APP_ID']}&q=#{searching}&type=video&maxResults=1"
-            end
-
-            response = RestClient.get(URI::encode(url))
-            data = JSON.parse(response.body)
-
-            if data["items"] != []
-              id = data["items"][0]["id"]["videoId"]
-              temp_video = "https://www.youtube.com/embed/#{id}?enablejsapi=1"
-            else
-              puts "found no video"
-            end
-          end
-
           # 若無資料則採用default
           if temp["place"] != nil
             city = temp["place"]["location"] != nil ? temp["place"]["location"]["city"] : nil
@@ -222,6 +205,8 @@ namespace :get_event do
             Event.create!(
             artist_name: temp_name,
             artist_id: temp_artist_id,
+            video: temp_video,
+            spotify_artist_id: temp_spotify_id,
             special_id: temp["id"],
             title: temp["name"],
             date: show_time,
@@ -229,7 +214,6 @@ namespace :get_event do
             city: city,
             detail: temp["description"] ,
             stage: stage,
-            video: temp_video,
             img: temp["cover"] != nil ?temp["cover"]["source"] : nil
               )
 
