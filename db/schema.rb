@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180402015327) do
+ActiveRecord::Schema.define(version: 20180407021302) do
 
   create_table "artists", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20180402015327) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "thewall_artist_id"
+    t.string "artist_video"
+    t.string "artist_spotify_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -38,6 +40,8 @@ ActiveRecord::Schema.define(version: 20180402015327) do
     t.string "special_id"
     t.string "spotify_artist_id"
     t.string "artist_id"
+    t.string "artist_array", default: "--- []\n"
+    t.string "artists_id_array", default: "--- []\n"
   end
 
   create_table "interests", force: :cascade do |t|
