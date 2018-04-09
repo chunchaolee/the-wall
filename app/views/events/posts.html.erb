@@ -83,7 +83,7 @@
                   <div class="carousel-inner">
                     <% i = 0 %>
                     <!-- youtube -->
-                    <% if event.video != nil && event.video != "" %>
+                    <% if event.video.present? %>
                       <div class="carousel-item active">
                         <iframe id="existing-iframe-example"
                                       width="500" height="350"
@@ -98,7 +98,7 @@
                     <% end %>
                     <!-- spotify -->
 
-                    <% if event.spotify_artist_id != "" && event.spotify_artist_id != nil %>
+                    <% if event.spotify_artist_id.present? %>
                       <div class="carousel-item <%= "active" if i == 0 %>">
                         <iframe src="https://open.spotify.com/embed/artist/<%= event.spotify_artist_id %>" width="500" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media" class="musicpiece d-block w-100"></iframe>
                       </div>
@@ -106,7 +106,7 @@
                     <% end %>
                     <!-- event picture -->
                     
-                    <% if event.img != nil %>
+                    <% if event.img.present? %>
                       <div class="carousel-item <%= "active" if i == 0 %>">
                         <%= image_tag event.img ,class: "musicpiece rounded mx-auto d-block img-fluid" %>
                       </div>
@@ -147,6 +147,8 @@
                 <div class="event-info">演出者 
                   <% if event.artist %>
                     <span><strong><%= link_to event.artist_name, artist_path(event.artist) %></strong></span>
+                  <% else %>
+                    <span><strong><%= event.artist_name %></strong></span>
                   <% end %>
                 </div>
                 <div class="event-info">城市 <span><%= event.city %></span></div>
