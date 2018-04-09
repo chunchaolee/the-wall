@@ -20,8 +20,8 @@ class Admin::ArtistsController < Admin::BaseController
   def create
     @artist = Artist.new(artist_params)
     if @artist.save
-      Admin::Stream.create_stream_data(@artist)
-      Admin::Stream.check_event_artist(@artist)
+      @artist.create_stream_data
+      @artist.check_event_artist
       redirect_back(fallback_location: admin_artists_path)
       flash[:notice] = "成功建立藝人資料"
     else
@@ -44,9 +44,9 @@ class Admin::ArtistsController < Admin::BaseController
       render :index
     end
 
-    Admin::Stream.check_stream_data(temp_video, temp_spotify_id, @artist)
-    Admin::Stream.update_relative_events(@artist)
-    Admin::Stream.check_event_artist(@artist)
+    @artist.check_stream_data(temp_video, temp_spotify_id)
+    @artist.update_relative_events
+    @artist.check_event_artist
   end
 
   def destroy
@@ -55,8 +55,8 @@ class Admin::ArtistsController < Admin::BaseController
 
   def search
     @artist = Artist.find(params[:id])
-    Admin::Stream.create_stream_data(@artist)
-    Admin::Stream.update_relative_events(@artist)
+    @artist.create_stream_data
+    @artist.update_relative_events
     redirect_back(fallback_location: admin_artists_path)
   end
 
