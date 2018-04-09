@@ -53,7 +53,7 @@ namespace :notification do
      # interests_count/views_count 
      # 熱門event, 先以關注最多挑選五則,  未來可考慮瀏覽次數views
      hot_events = Event.order('interests_count DESC').limit(5)
-     events << newly_events
+     events << hot_events
      
      if !newly_events.empty? or !hot_events.empty?
        # 後續要考慮有認證過的mail才發送, 要篩選過
