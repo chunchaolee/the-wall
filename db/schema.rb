@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180407021302) do
+ActiveRecord::Schema.define(version: 20180409160641) do
 
   create_table "artists", force: :cascade do |t|
     t.string "name"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20180407021302) do
     t.string "artist_id"
     t.string "artist_array", default: "--- []\n"
     t.string "artists_id_array", default: "--- []\n"
+    t.index ["artist_id"], name: "index_events_on_artist_id"
   end
 
   create_table "interests", force: :cascade do |t|
@@ -49,6 +50,8 @@ ActiveRecord::Schema.define(version: 20180407021302) do
     t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_interests_on_event_id"
+    t.index ["user_id"], name: "index_interests_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -91,6 +94,8 @@ ActiveRecord::Schema.define(version: 20180407021302) do
     t.datetime "view_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_views_on_event_id"
+    t.index ["user_id"], name: "index_views_on_user_id"
   end
 
 end
