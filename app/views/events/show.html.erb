@@ -39,7 +39,7 @@
         </div>
         <!-- admin: edit -->
         <% if current_user %>
-          <% if current_user.admin? %>
+          <% if current_user.is_admin %>
             <%= link_to '編輯', edit_admin_event_path(@event), class: "btn btn-outline-primary" %>
             <%= link_to '清除演出者資料', remove_artist_admin_event_path(@event), class: "btn btn-outline-primary" %>
           <% end %>
@@ -59,7 +59,7 @@
             <p class="event-detail" id="detail" ><%= @event.detail %></p>
           </div>
         <% end %>
-      <% elsif (@event.video == nil && @event.spotify_artist_id == nil) || (@event.video == "" && @event.spotify_artist_id == "") %>
+      <% elsif @event.video.blank? && @event.spotify_artist_id.blank? %>
         <div class="col-md-12">
           <div class="subtitle"><i>樂團/表演介紹</i></div>
           <p class="event-detail" id="detail" ><%= @event.detail %></p>
@@ -73,13 +73,13 @@
       <!-- details //end -->
 
       <!-- YT&spotify //start -->
-      <% if ( @event.video != nil && @event.video != "" ) || ( @event.spotify_artist_id != nil && @event.spotify_artist_id != "" ) %>
+      <% if @event.video.present? || @event.spotify_artist_id.present? %>
         <div class="col-md-5">
           <div class="subtitle"><strong><i>作品欣賞</i></strong></div>
           <div class="row">
 
             <!-- YT //start -->
-            <% if @event.video != nil && @event.video != ""  %>
+            <% if @event.video.present? %>
               <div class="col-md-12 col-sm-12 piece text-center">
                 <div class="piece">【Youtube】</div>
                 <iframe id="existing-iframe-example"
@@ -94,7 +94,8 @@
             <!-- YT //end -->
             
             <!-- spotify //start -->
-            <% if  @event.spotify_artist_id != nil && @event.spotify_artist_id != "" %> <!-- 辨識有無spotify作品 //start-->
+            <% if  @event.spotify_artist_id.present? %> 
+            <!-- 辨識有無spotify作品 //start-->
               <div class="col-md-12 col-sm-12 piece text-center">
                 <div class="piece">【Spotify】</div>
 

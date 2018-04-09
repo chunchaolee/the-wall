@@ -21,6 +21,8 @@
     <div class="artist">演出者 <br />
       <% if object.artist %>
         <span><strong><%= link_to object.artist_name, artist_path(object.artist) %></strong></span>
+      <% else %>
+        <span><strong><%= object.artist_name %></strong></span>
       <% end %>
     </div>
     <% if flag %>
