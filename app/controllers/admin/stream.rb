@@ -64,7 +64,7 @@ class Admin::Stream
     end
 
     # spotify
-    spotify_data = artist.get_spotify_data(artist.name)
+    spotify_data = artist.get_spotify_data
     if spotify_data == nil
       artist.artist_spotify_id = nil
     else
@@ -99,7 +99,7 @@ class Admin::Stream
 
         if artist.artist_spotify_id == nil || artist.artist_spotify_id == ""
           # spotify
-          spotify_data = artist.get_spotify_data(artist.name)
+          spotify_data = artist.get_spotify_data
           if spotify_data == nil
             artist.artist_spotify_id = nil
           else
@@ -109,7 +109,7 @@ class Admin::Stream
         artist.save!
       elsif artist.artist_spotify_id == nil || artist.artist_spotify_id == ""
         # spotify
-        spotify_data = artist.get_spotify_data(artist.name)
+        spotify_data = artist.get_spotify_data
         if spotify_data == nil
           artist.artist_spotify_id = nil
         else
