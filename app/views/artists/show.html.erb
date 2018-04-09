@@ -5,13 +5,13 @@
     </div>
     
     <!-- YT&spotify //start -->
-    <% if ( @artist.artist_video != nil && @artist.artist_video != "" ) || ( @artist.artist_spotify_id != nil && @artist.artist_spotify_id != "" ) %>
+    <% if @artist.artist_video.present? || @artist.artist_spotify_id.present? %>
       <div class="col-md-12">
         <div class="subtitle"><strong><i>作品欣賞</i></strong></div>
         <div class="row">
 
           <!-- YT //start -->
-          <% if @artist.artist_video != nil && @artist.artist_video != ""  %>
+          <% if @artist.artist_video.present?  %>
             <div class="col-md-12 col-sm-12 piece text-center">
               <div class="piece">【Youtube】</div>
               <iframe id="existing-iframe-example"
@@ -26,7 +26,7 @@
           <!-- YT //end -->
           
           <!-- spotify //start -->
-          <% if  @artist.artist_spotify_id != nil && @artist.artist_spotify_id != "" %> <!-- 辨識有無spotify作品 //start-->
+          <% if  @artist.artist_spotify_id.present? %> <!-- 辨識有無spotify作品 //start-->
             <div class="col-md-12 col-sm-12 piece text-center">
               <div class="piece">【Spotify】</div>
 
