@@ -1,7 +1,7 @@
 The Wall - Indie 音樂資訊平台
 ===
 
-ALPHACamp Demo day Modify Status
+ALPHACamp Demo day Feature Freeze:Project Modify Status
 ---
 <h3>ihower's suggestion:</h3>
 
