@@ -1,6 +1,20 @@
 The Wall - Indie 音樂資訊平台
 ===
 
+ALPHACamp Demo day Modify Status
+---
+<h3>ihower's suggestion:</h3>
+
+1. <strong>COMPLETED</strong>/ 移除event model中沒有用的get_spotify_data方法。
+2. <strong>COMPLETED</strong>/ 移除stream.rb並把檔案中的方法移至artist model中，修正並重構artist model中的方法。
+3. <strong>COMPLETED</strong>/ 修正artists show.html.erb、partial template event_list.html.erb、events posts.html.erb 和 show.html.erb中if的condition寫法。
+4. <strong>COMPLETED</strong>/ 新增database indexes
+
+
+
+<hr>
+<br>
+
 目錄
 ---
 * [INTRODUCTION](#0)
