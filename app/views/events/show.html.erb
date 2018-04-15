@@ -6,7 +6,7 @@
       <!-- img //start -->
       <div class="col-lg-6 col-md-12 img">
         <%= image_tag @event.img, width: "400", height: "300",class: "rounded mx-auto d-block img-fluid" if @event.img? %>
-        <%= image_tag "http://via.placeholder.com/400x300", class: "rounded mx-auto d-block img-fluid"  unless @event.img? %> 
+        <%= image_tag "https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/10440134_10152691357289305_1073162233428965026_n.png?_nc_cat=0&_nc_eui2=v1%3AAeEbw6x8pNWalSgC4utDLwPFCO9J9EKLN6IKoL1475gucM59_-u2ybhW6o5OeJ6d9kl1bFOc5CX24vmkoOda2HMaAW2F_HaM7LPklDc2LKhCNQ&oh=1fe6caba187d6b7a7d129e301d0d4800&oe=5B6932F1", width: "400", height: "300", class: "rounded mx-auto d-block img-fluid"  unless @event.img? %> 
       </div><!-- img //end -->
 
       <div class="col-lg-6 col-md-12 text-center">
@@ -29,7 +29,7 @@
         </div>
         <!-- <div class="event-info">票價 <span></span></div> -->
         <div class="event-info">城市 <span><%= @event.city %></span></div>
-        <div class="event-info">地點 <span><%= @event.stage %></span></div>
+        <div class="event-info">地點 <span><%= render partial: "shared/location", locals: {object: @event} %></span></div>
         <div class="event-info time">時間 
           <% if @event.time == nil %>
             <span><%= @event.time %></span>
@@ -52,13 +52,16 @@
       
       
       <!-- details //start -->
-      <% if current_user %>
-        <% if current_user.is_admin %>
-          <div class="col-md-7">
-            <div class="subtitle"><i>樂團/表演介紹</i></div>
-            <p class="event-detail" id="detail" ><%= @event.detail %></p>
-          </div>
-        <% end %>
+      <% if current_user && current_user.is_admin == false %>
+        <div class="col-md-7">
+          <div class="subtitle"><i>樂團/表演介紹</i></div>
+          <p class="event-detail" id="detail" ><%= @event.detail %></p>
+        </div>
+      <% elsif current_user && current_user.is_admin %>
+        <div class="col-md-7">
+          <div class="subtitle"><i>樂團/表演介紹</i></div>
+          <p class="event-detail" id="detail" ><%= @event.detail %></p>
+        </div>
       <% elsif @event.video.blank? && @event.spotify_artist_id.blank? %>
         <div class="col-md-12">
           <div class="subtitle"><i>樂團/表演介紹</i></div>

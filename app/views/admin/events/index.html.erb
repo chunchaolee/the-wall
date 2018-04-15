@@ -54,7 +54,7 @@
                   <% end %>
                 </td>
                 <td><%= event.city %></td>
-                <td><%= event.stage %></td>
+                <td><%= render partial: "shared/location", locals: {object: event} %></td>
                 <td><%= event.views_count %></td>
                 <td><%= event.interests_count %></td>
                 <td><%= link_to '編輯', edit_admin_event_path(event), class: "btn btn-outline-primary" %></td>
@@ -85,7 +85,7 @@
           <h5>進階搜尋</h5><hr>
 
           <%= f.label :date, '起始日期:' %>
-          <%= f.date_field :date_gteq, placeholder: "YYYY-MM-DD", class: "form-control" %><br />
+          <%= f.date_field :date_gteq, placeholder: "YYYY-MM-DD", :value => Time.now.strftime("%Y-%m-%d"), class: "form-control" %><br />
 
           <%= f.label :date, '至:' %>
           <%= f.date_field :date_lteq, placeholder: "YYYY-MM-DD", class: "form-control" %><br />
