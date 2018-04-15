@@ -10,7 +10,17 @@ ALPHACamp Demo day Feature Freeze:Project Modify Status
 3. <strong>COMPLETED</strong>/ 修正artists show.html.erb、partial template event_list.html.erb、events posts.html.erb 和 show.html.erb中if的condition寫法。
 4. <strong>COMPLETED</strong>/ 新增database indexes
 
+<h3>Sam's suggestion:</h3>
+1. <strong>COMPLETED</strong>/ 修正登入會員後，活動頁面內活動資訊遺失的問題。
+2. <strong>COMPLETED</strong>/ 針對event cover新增default placeholder。
+3. <strong>COMPLETED</strong>/ 新增表演地點的google map連結。
+4. <strong>COMPLETED</strong>/ 新增default value在start_at time_filed。
 
+<h3>洧杰's suggestion:</h3>
+<strong>in-progress</strong>/ head 加上社群 meta。
+<strong>in-progress</strong>/ 調整頁面HTML headings。
+<strong>in-progress</strong>/ 前台活動列表圖片的調整。
+<strong>in-progress</strong>/ 加入客製化活動標籤。
 
 <hr>
 <br>
