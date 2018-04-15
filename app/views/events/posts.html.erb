@@ -151,7 +151,7 @@
                   <% end %>
                 </div>
                 <div class="event-info">城市 <span><%= event.city %></span></div>
-                <div class="event-info">地點 <span><%= event.stage %></span></div>
+                <div class="event-info">地點 <span><%= render partial: "shared/location", locals: {object: event} %></span></div>
                 <div class="event-info time">時間 
                   <% if event.time == nil %>
                     <span><%= event.time %></span>

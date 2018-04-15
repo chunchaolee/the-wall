@@ -26,7 +26,7 @@
       <% end %>
     </div>
     <% if flag %>
-      <div class="place">地點 <br /><span><strong><%= object.stage %></strong></span></div>
+      <div class="place">地點 <br /><span><strong><%= render partial: "shared/location", locals: {object: object} %></strong></span></div>
      <% end %>
   </div>
 
