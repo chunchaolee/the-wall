@@ -85,7 +85,7 @@
           <h5>進階搜尋</h5><hr>
 
           <%= f.label :date, '起始日期:' %>
-          <%= f.date_field :date_gteq, placeholder: "YYYY-MM-DD", class: "form-control" %><br />
+          <%= f.date_field :date_gteq, placeholder: "YYYY-MM-DD", :value => Time.now.strftime("%Y-%m-%d"), class: "form-control" %><br />
 
           <%= f.label :date, '至:' %>
           <%= f.date_field :date_lteq, placeholder: "YYYY-MM-DD", class: "form-control" %><br />

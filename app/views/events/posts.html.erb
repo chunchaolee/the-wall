@@ -24,7 +24,7 @@
 
             <div class="search-date col-md-8 col-sm-12">
               <%= f.label :date, '起始日期:' %>
-              <%= f.date_field :date_gteq, class: "col-md-4 col-sm-12"%>
+              <%= f.date_field :date_gteq, :value => Time.now.strftime("%Y-%m-%d"), class: "col-md-4 col-sm-12"%>
 
               <%= f.label :date, '至:' %>
               <%= f.date_field :date_lteq, class: "col-md-4 col-sm-12"%>
