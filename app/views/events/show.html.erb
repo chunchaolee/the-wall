@@ -52,13 +52,16 @@
       
       
       <!-- details //start -->
-      <% if current_user %>
-        <% if current_user.is_admin %>
-          <div class="col-md-7">
-            <div class="subtitle"><i>樂團/表演介紹</i></div>
-            <p class="event-detail" id="detail" ><%= @event.detail %></p>
-          </div>
-        <% end %>
+      <% if current_user && current_user.is_admin == false %>
+        <div class="col-md-7">
+          <div class="subtitle"><i>樂團/表演介紹</i></div>
+          <p class="event-detail" id="detail" ><%= @event.detail %></p>
+        </div>
+      <% elsif current_user && current_user.is_admin %>
+        <div class="col-md-7">
+          <div class="subtitle"><i>樂團/表演介紹</i></div>
+          <p class="event-detail" id="detail" ><%= @event.detail %></p>
+        </div>
       <% elsif @event.video.blank? && @event.spotify_artist_id.blank? %>
         <div class="col-md-12">
           <div class="subtitle"><i>樂團/表演介紹</i></div>
