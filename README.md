@@ -1,7 +1,7 @@
 The Wall - Indie 音樂資訊平台
 ===
 
-ALPHACamp Demo day Feature Freeze:Project Modify Status
+ALPHAcamp Demo day Feature Freeze:Project Modify Status
 ---
 <h3>ihower's suggestion:</h3>
 
@@ -24,6 +24,22 @@ ALPHACamp Demo day Feature Freeze:Project Modify Status
 
 <hr>
 <br>
+
+2018/04/19 ALPHAcamp Demo day 評審評價及相關報導
+---
+<strong>Sam(Honestbee Director of Engineering):</strong>
+第一個，我覺得這個專案做得非常完整，身為一個音樂的愛好者，我需要獲取音樂資訊時，可以一目瞭然的知道場地、時間、價位，甚至可以看到MV還有歌單，這對於我來說是一件非常有滿足感的一件事，而且可以在這個網站上得到一切相關的資訊，所以基本上給予這個專案非常高分。
+另外，因為產品願景是推廣獨立音樂締造個大的市場，所以如果可以延伸出個人化的服務，如依據使用者喜好去做歌曲或樂團的推薦，另外如果考量到有商業模式可以朝搭配售票或周邊商品等idea繼續努力下去。
+
+<strong>ihower(Ruby on Rails 實戰聖經作者): </strong>
+我一樣給予的評價也是這產品看起來非常的完整，實際看了後端的邏輯後其實功能上及代碼其實沒有很複雜，但是各種細節都有注意到。實際的commit數也不是很多，可以說是一個小而美最佳的範例。
+
+<strong>INSIDE新創報導</strong>
+[大航道揚帆！ALPHA Camp Demo Day 充滿濃濃實戰味](https://www.inside.com.tw/2018/04/20/alpha-camp-2018-demo-day) 
+
+<hr>
+<br>
+
 
 目錄
 ---
