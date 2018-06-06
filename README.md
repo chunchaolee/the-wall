@@ -106,7 +106,7 @@ ALPHAcamp Demo day Feature Freeze:Project Modify Status
     * 3種註冊及登入管道：
         * 透過email註冊及登入
         * Facebook Sign Up & Sign In
-        * Spotify Sign Up & Sigh In
+        * Spotify Sign Up & Sign In
     * 3種權限：
       * 訪客：瀏覽網站前台
       * 一般會員：瀏覽網站前台、管理會員中心(User Profile)
